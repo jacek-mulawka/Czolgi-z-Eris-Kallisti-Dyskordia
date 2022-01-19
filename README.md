@@ -9,7 +9,7 @@ Gra zawiera tłumaczenia na kilka wersji językowych.
 Wzory na ruch pocisku na podstawie:
 https://www.omnicalculator.com/physics/projectile-motion
 
-Wzory na aktualną wartość x i y na podstawie:
+Wzory na aktualną wartość x i y pocisku na podstawie:
 https://blog.myrank.co.in/projectile-motion-2/
 
 
@@ -23,7 +23,7 @@ The game includes translations into several language versions.
 Projectile motion formulas based on:
 https://www.omnicalculator.com/physics/projectile-motion
 
-Formulas for the current value of x and y based on: 
+Formulas for the current value of x and y of the projectile based on:
 https://blog.myrank.co.in/projectile-motion-2/
 
 
