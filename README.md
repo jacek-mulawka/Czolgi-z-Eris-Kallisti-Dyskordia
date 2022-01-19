@@ -40,6 +40,7 @@ https://blog.myrank.co.in/projectile-motion-2/
 </a>
 
 Wersja sprzed lat (około 2011 roku)
+
 Older version (around 2011)
 <img src="https://github.com/jacek-mulawka/Czolgi-z-Eris-Kallisti-Dyskordia/blob/main/Gallery/M/Czo%C5%82gi%20z%20Eris%20Kallisti%20Dyskordia%2004%20m.jpg">
 
