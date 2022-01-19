@@ -1,0 +1,10 @@
+Czo³gi z Eris Kallisti Dyskordia
+wersja 2022.01.19.
+
+MIT License
+
+Copyright (c) 2022 Jacek Mulawka
+
+j.mulawka@interia.pl
+
+https://github.com/jacek-mulawka

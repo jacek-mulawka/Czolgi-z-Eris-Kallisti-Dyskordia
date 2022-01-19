@@ -1,0 +1,172 @@
+﻿** Komentarz abc
+  ** Komentarz def 123
+
+Gra_TabSheet=Spiel
+Opcje_TabSheet=Optionen
+O_Programie_TabSheet=Über das Programm
+
+Gracz__1__Czołg_Wybrany_GroupBox=Spieler
+Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton=L ü
+Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton=Podpowiedź=Links über.
+Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton=L u
+Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton=Podpowiedź=Links unten.
+Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton=R ü
+Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton=Podpowiedź=Rechts über.
+Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton=R u
+Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton=Podpowiedź=Rechts unten.
+Gracz__1__Czołg_Wybrany__Brak_RadioButton=<keine>
+Gracz__1__Akceptuje_Si_CheckBox=KI
+Gracz__1__Akceptuje_Si_CheckBox=Podpowiedź=Akzeptiert Spiel gegen KI.
+Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Geschwindigkeitseinheit
+Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Podpowiedź=Munitionsgeschwindigkeitseinheit.
+Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Elementy=%;m/s;
+
+Gracz__2__Czołg_Wybrany_GroupBox=Spieler
+Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton=L ü
+Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton=Podpowiedź=Links über.
+Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton=L u
+Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton=Podpowiedź=Links unten.
+Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton=R ü
+Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton=Podpowiedź=Rechts über.
+Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton=R u
+Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton=Podpowiedź=Rechts unte
+Gracz__2__Czołg_Wybrany__Brak_RadioButton=<keine>
+Gracz__2__Akceptuje_Si_CheckBox=KI
+Gracz__2__Akceptuje_Si_CheckBox=Podpowiedź=Akzeptiert Spiel gegen KI.
+Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Geschwindigkeitseinheit
+Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Podpowiedź=Munitionsgeschwindigkeitseinheit.
+Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Elementy=%;m/s;
+
+Celownicza_Linia_CheckBox=Ziellinie
+Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox=Z. Windkorrektur
+Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox=Podpowiedź=Ziellinie der Windstärke anpassen.
+
+Wiatr_Siła_Etykieta_Label=Die Stärke des Windes
+Wiatr_Siła_Etykieta_Label=Podpowiedź=Wie stark ändert sich die Windstärke.
+Wiatr_Siła_SpinEdit=Podpowiedź=Wie stark ändert sich die Windstärke.
+Gra_Współczynnik_Prędkości_Etykieta_Label=Spielgeschwindigkeit
+Pauza_Button=Pause
+Punkty_Zerowanie_BitBtn=0 | 0
+Punkty_Zerowanie_BitBtn=Podpowiedź=Setzen Sie die erzielten Punkte auf Null.
+Dzień_Noc_CheckBox=Tag Nacht
+Ranek_Label=Morgen
+Dzień_Noc__Procent_TrackBar=Podpowiedź=
+Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox=Tag Nacht Systemzeit
+Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox=Podpowiedź=Stellen Sie beim Starten des Spiels die Spielzeit entsprechend der Systemuhr ein.
+Godzina_Label=Podpowiedź=Stunde.
+Si_Linie_Bez_Graczy_CheckBox=KI-Linien ohne Spieler
+Si_Linie_Bez_Graczy_CheckBox=Podpowiedź=Die KI kontrolliert Panzer in Reihen ohne Spieler.
+Trudność_Stopień_GroupBox=Schwierigkeitsgrad
+Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label=Fahrverzögerung [s]
+Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label=Podpowiedź=Korrektur der Standardverzögerung zwischen aufeinanderfolgenden KI-Entscheidungen (in Sekunden).
+Trudność_Stopień__Opóźnienie__Jazda_SpinEdit=Podpowiedź=Korrektur der Standardverzögerung zwischen aufeinanderfolgenden KI-Entscheidungen (in Sekunden).
+Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label=Schussverzögerung [s]
+Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label=Podpowiedź=Korrektur der Standardverzögerung zwischen aufeinanderfolgenden KI-Entscheidungen (in Sekunden).
+Trudność_Stopień__Opóźnienie__Strzał_SpinEdit=Podpowiedź=Korrektur der Standardverzögerung zwischen aufeinanderfolgenden KI-Entscheidungen (in Sekunden).
+
+Klawiatura_Konfiguracja_GroupBox=Tasteneinstellungen
+Klawiatura__Gra_GroupBox=Spiel
+Klawiatura__Kamera_GroupBox=Kamera
+Klawiatura__Gracz__1_GroupBox=Spieler 1
+Klawiatura__Gracz__2_GroupBox=Spieler 2
+
+Celownicza_Linia_Wysokość_Etykieta_Label=Fadenkreuzzeigerhöhe
+Celownicza_Linia_Wysokość_Etykieta_Label=Podpowiedź=-1 - relativ zur Flughöhe der Munition;__#13__> -1 - eingestellter Wert.
+Celownicza_Linia_Wysokość_SpinEdit=Podpowiedź=-1 - relativ zur Flughöhe der Munition;__#13__> -1 - eingestellter Wert.
+Czołgi_Linia__3_CheckBox=Panzer Linie 3
+Czołgi_Linia__4_CheckBox=Panzer Linie 4
+Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Die Größe der Registerkarte erhöhen
+Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Podpowiedź=Wenn von Registerkarten zu Optionen wechseln, die Höhe des Konfigurationsregisterbereichs erhöhen.
+Tłumaczenie_Etykieta_Label=Übersetzung
+Tłumaczenia_ComboBox=Podpowiedź=Eingabetaste - bewerben.
+Ustawienia__Wczytaj_BitBtn=Podpowiedź=Einstellungen laden.
+Ustawienia__Zapisz_BitBtn=Podpowiedź=Einstellungen speichern.
+
+
+Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label=Option. ein-/aus
+Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label=Podpowiedź=Optionen ein-/ausblenden.
+Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label=Opti. aus. / erw.
+Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label=Podpowiedź=Optionen ausblenden / erweitern.
+Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gra__Pauza_Etykieta_Label=Pause
+Klawiatura__Gra__Pauza_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gra__Pełny_Ekran_Etykieta_Label=Vollbildschirm
+Klawiatura__Gra__Pełny_Ekran_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Etykieta_Label=S.geschwin. 1x
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Etykieta_Label=Podpowiedź=Spielgeschwindigkeit 1x.
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Etykieta_Label=S.geschwin. -
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Etykieta_Label=Podpowiedź=Spielgeschwindigkeit -.
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Etykieta_Label=S.geschwin. +
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Etykieta_Label=Podpowiedź=Spielgeschwindigkeit +.
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gra__Wyjście_Etykieta_Label=Spiel verlassen
+Klawiatura__Gra__Wyjście_Edit=Podpowiedź=Strg + Entf - <keine>.
+
+Klawiatura__Kamera__Dół_Etykieta_Label=Unten
+Klawiatura__Kamera__Dół_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Góra_Etykieta_Label=Über
+Klawiatura__Kamera__Góra_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Lewo_Etykieta_Label=Links
+Klawiatura__Kamera__Lewo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label=Mit Maus drehen
+Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label=Podpowiedź=Um den Bildschirm mit der Maus zu drehen, wechseln.
+Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Prawo_Etykieta_Label=Rechts
+Klawiatura__Kamera__Prawo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Przechył_Lewo_Etykieta_Label=Lehnen links
+Klawiatura__Kamera__Przechył_Lewo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Przechył_Prawo_Etykieta_Label=Lehnen rechts
+Klawiatura__Kamera__Przechył_Prawo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Przód_Etykieta_Label=Vorwärts
+Klawiatura__Kamera__Przód_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Tył_Etykieta_Label=Rückwärts
+Klawiatura__Kamera__Tył_Edit=Podpowiedź=Strg + Entf - <keine>.
+
+Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label=M. geschwind. -
+Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label=Podpowiedź=Munitionsgeschwindigkeit -.
+Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label=M. geschwind. +
+Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label=Podpowiedź=Munitionsgeschwindigkeit +.
+Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__1__Jedź_Lewo_Etykieta_Label=Links fahren
+Klawiatura__Gracz__1__Jedź_Lewo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__1__Jedź_Prawo_Etykieta_Label=Rechts fahren
+Klawiatura__Gracz__1__Jedź_Prawo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__1__Lufa_Dół_Etykieta_Label=Lauf unten
+Klawiatura__Gracz__1__Lufa_Dół_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__1__Lufa_Góra_Etykieta_Label=Lauf über
+Klawiatura__Gracz__1__Lufa_Góra_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__1__Strzał_Etykieta_Label=Schuss
+Klawiatura__Gracz__1__Strzał_Edit=Podpowiedź=Strg + Entf - <keine>.
+
+Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label=M. geschwind. -
+Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label=Podpowiedź=Munitionsgeschwindigkeit -.
+Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label=M. geschwind. +
+Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label=Podpowiedź=Munitionsgeschwindigkeit +.
+Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__2__Jedź_Lewo_Etykieta_Label=Links fahren
+Klawiatura__Gracz__2__Jedź_Lewo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__2__Jedź_Prawo_Etykieta_Label=Rechts fahren
+Klawiatura__Gracz__2__Jedź_Prawo_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__2__Lufa_Dół_Etykieta_Label=Lauf unten
+Klawiatura__Gracz__2__Lufa_Dół_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__2__Lufa_Góra_Etykieta_Label=Lauf über
+Klawiatura__Gracz__2__Lufa_Góra_Edit=Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Gracz__2__Strzał_Etykieta_Label=Schuss
+Klawiatura__Gracz__2__Strzał_Edit=Podpowiedź=Strg + Entf - <keine>.
+
+
+t__błąd=Fehler
+t__czy_wyjść_z_gry=Das Spiel benden?
+t__domyślne=Ursprünglich
+t__gracz=Spieler
+t__gracz_skrót=S.
+t__nie_odnaleziono_pliku_tłumaczenia=Übersetzungsdatei nicht gefunden:
+t__pauza=PAUSE
+t__pytanie=Frage
+t__wczytać_ustawienia=Einstellungen laden?
+t__zapisać_ustawienia=Einstellungen speichern?
