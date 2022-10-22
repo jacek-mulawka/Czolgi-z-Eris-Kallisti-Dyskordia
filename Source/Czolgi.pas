@@ -4803,7 +4803,7 @@ begin
       until FindNext( search_rec ) <> 0
 
     end;
-  //---//if FindFirst(  ExtractFilePath( Application.ExeName ) + 'T³umaczenia kostek\*.txt', faAnyFile, search_rec  ) = 0 then
+  //---//if FindFirst(  ExtractFilePath( Application.ExeName ) + 'T³umaczenia\*.txt', faAnyFile, search_rec  ) = 0 then
 
   FindClose( search_rec );
 
