@@ -1,4 +1,4 @@
-# Czolgi-z-Eris-Kallisti-Dyskordia
+# Czołgi-z-Eris-Kallisti-Dyskordia
 
 Po przeciwległych stronach rzeki znajduje się 8 czołgów, 4 z nich są do dyspozycji graczy, każdy może być również kontrolowany przez komputer.
 Na rzece czasami pojawiają się prezenty, które zwiększają szybkość jazdy albo skracają czas przeładowania.
@@ -13,6 +13,7 @@ Wzory na aktualną wartość x i y pocisku na podstawie:
 https://blog.myrank.co.in/projectile-motion-2/
 
 
+## English
 
 On the opposite sides of the river there are 8 tanks, 4 of them are at the players' disposal, each of them can also be controlled by the computer.
 Gifts will sometimes appear on the river to increase your driving speed or reduce your reload time.
@@ -39,10 +40,15 @@ https://blog.myrank.co.in/projectile-motion-2/
   <img src="https://github.com/jacek-mulawka/Czolgi-z-Eris-Kallisti-Dyskordia/blob/main/Gallery/M/Czo%C5%82gi%20z%20Eris%20Kallisti%20Dyskordia%2003%20m.jpg">
 </a>
 
+
+#
 Wersja sprzed lat (około 2011 roku)
 
 Older version (around 2011)
 <img src="https://github.com/jacek-mulawka/Czolgi-z-Eris-Kallisti-Dyskordia/blob/main/Gallery/M/Czo%C5%82gi%20z%20Eris%20Kallisti%20Dyskordia%2004%20m.jpg">
+
+
+#
 
 
 Powered by
