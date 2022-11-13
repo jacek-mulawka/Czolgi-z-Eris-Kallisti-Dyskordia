@@ -59,6 +59,6 @@ Powered by
 
 
 ## Tag
-darmowa gra PC Windows
+darmowa gra PC Windows czołgi
 
-free game PC Windows
+free game PC Windows tanks
