@@ -7,62 +7,62 @@ O_Programie_TabSheet=プログラムについて
 
 Gracz__1__Czołg_Wybrany_GroupBox=プレーヤー
 Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton=左 上
-Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton=Podpowiedź=左 上。
+Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton-->Podpowiedź=左 上。
 Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton=左 下
-Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton=Podpowiedź=左 下。
+Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton-->Podpowiedź=左 下。
 Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton=右 上
-Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton=Podpowiedź=右 上。
+Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton-->Podpowiedź=右 上。
 Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton=右 下
-Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton=Podpowiedź=右 下。
+Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton-->Podpowiedź=右 下。
 Gracz__1__Czołg_Wybrany__Brak_RadioButton=<なし>
 Gracz__1__Akceptuje_Si_CheckBox=エーアイ
-Gracz__1__Akceptuje_Si_CheckBox=Podpowiedź=じんこうちのうとのゲームを受け入れます。
+Gracz__1__Akceptuje_Si_CheckBox-->Podpowiedź=じんこうちのうとのゲームを受け入れます。
 Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=スピードユニット
-Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Podpowiedź=弾薬速度の単位。
-Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Elementy=%;m/s;
+Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Podpowiedź=弾薬速度の単位。
+Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Elementy=%;m/s;
 
 Gracz__2__Czołg_Wybrany_GroupBox=プレーヤー
 Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton=左 上
-Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton=Podpowiedź=左 上。
+Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton-->Podpowiedź=左 上。
 Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton=左 下
-Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton=Podpowiedź=左 下。
+Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton-->Podpowiedź=左 下。
 Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton=右 上
-Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton=Podpowiedź=右 上。
+Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton-->Podpowiedź=右 上。
 Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton=右 下
-Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton=Podpowiedź=右 下。
+Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton-->Podpowiedź=右 下。
 Gracz__2__Czołg_Wybrany__Brak_RadioButton=<なし>
 Gracz__2__Akceptuje_Si_CheckBox=エーアイ
-Gracz__2__Akceptuje_Si_CheckBox=Podpowiedź=じんこうちのうとのゲームを受け入れます。
+Gracz__2__Akceptuje_Si_CheckBox-->Podpowiedź=じんこうちのうとのゲームを受け入れます。
 Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=スピードユニット
-Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Podpowiedź=弾薬速度の単位。
-Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Elementy=%;m/s;
+Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Podpowiedź=弾薬速度の単位。
+Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Elementy=%;m/s;
 
 Celownicza_Linia_CheckBox=照準線
 Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox=照準線風補正
-Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox=Podpowiedź=照準線を風の強さに合わせます。
+Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox-->Podpowiedź=照準線を風の強さに合わせます。
 
 Wiatr_Siła_Etykieta_Label=風の強さ
-Wiatr_Siła_Etykieta_Label=Podpowiedź=風の強さはどの程度変化します。
-Wiatr_Siła_SpinEdit=Podpowiedź=風の強さはどの程度変化します。
+Wiatr_Siła_Etykieta_Label-->Podpowiedź=風の強さはどの程度変化します。
+Wiatr_Siła_SpinEdit-->Podpowiedź=風の強さはどの程度変化します。
 Gra_Współczynnik_Prędkości_Etykieta_Label=ゲームスピード
 Pauza_Button=一時停止
 Punkty_Zerowanie_BitBtn=0 | 0
-Punkty_Zerowanie_BitBtn=Podpowiedź=得点をゼロに設定します。
+Punkty_Zerowanie_BitBtn-->Podpowiedź=得点をゼロに設定します。
 Dzień_Noc_CheckBox=日夜
 Ranek_Label=朝
-Dzień_Noc__Procent_TrackBar=Podpowiedź=
+Dzień_Noc__Procent_TrackBar-->Podpowiedź=
 Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox=日夜システム時刻
-Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox=Podpowiedź=ゲームを開始するときは、システム時計に合わせてゲーム内時間を設定してください。
-Godzina_Label=Podpowiedź=時
+Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox-->Podpowiedź=ゲームを開始するときは、システム時計に合わせてゲーム内時間を設定してください。
+Godzina_Label-->Podpowiedź=時
 Si_Linie_Bez_Graczy_CheckBox=プレーヤーのないじんこうちライン
-Si_Linie_Bez_Graczy_CheckBox=Podpowiedź=じんこうちは、プレイヤーがいない状態で戦車を制御します。
+Si_Linie_Bez_Graczy_CheckBox-->Podpowiedź=じんこうちは、プレイヤーがいない状態で戦車を制御します。
 Trudność_Stopień_GroupBox=難易度
 Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label=運転遅延　[s]
-Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label=Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
-Trudność_Stopień__Opóźnienie__Jazda_SpinEdit=Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
+Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label-->Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
+Trudność_Stopień__Opóźnienie__Jazda_SpinEdit-->Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
 Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label=撮影遅延　[s]
-Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label=Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
-Trudność_Stopień__Opóźnienie__Strzał_SpinEdit=Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
+Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label-->Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
+Trudność_Stopień__Opóźnienie__Strzał_SpinEdit-->Podpowiedź=連続す人工知能決定間のデフォルトの遅延の修正（秒単位）。
 
 Klawiatura_Konfiguracja_GroupBox=ボタンの設定
 Klawiatura__Gra_GroupBox=ゲーム
@@ -71,102 +71,102 @@ Klawiatura__Gracz__1_GroupBox=プレーヤー　1
 Klawiatura__Gracz__2_GroupBox=プレーヤー　2
 
 Celownicza_Linia_Wysokość_Etykieta_Label=十字線ポインタの高さ
-Celownicza_Linia_Wysokość_Etykieta_Label=Podpowiedź=-1　-　弾薬の飛行高度に対する相対;__#13__>　-1　-　設定値.
-Celownicza_Linia_Wysokość_SpinEdit=Podpowiedź=-1　-　弾薬の飛行高度に対する相対;__#13__>　-1　-　設定値。
+Celownicza_Linia_Wysokość_Etykieta_Label-->Podpowiedź=-1　-　弾薬の飛行高度に対する相対;#13#10>　-1　-　設定値.
+Celownicza_Linia_Wysokość_SpinEdit-->Podpowiedź=-1　-　弾薬の飛行高度に対する相対;#13#10>　-1　-　設定値。
 Czołgi_Linia__3_CheckBox=戦車行　3
 Czołgi_Linia__4_CheckBox=戦車行　4
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=タブのサイズを大きくします
-Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Podpowiedź=タブをオプションに切り替えるときは、構成タブパネルの高さを増やしてください。
+Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox-->Podpowiedź=タブをオプションに切り替えるときは、構成タブパネルの高さを増やしてください。
 Tłumaczenie_Etykieta_Label=翻訳
-Tłumaczenia_ComboBox=Podpowiedź=入力-適用します。
-Ustawienia__Wczytaj_BitBtn=Podpowiedź=設定をロードします。
-Ustawienia__Zapisz_BitBtn=Podpowiedź=設定を保存します。
+Tłumaczenia_ComboBox-->Podpowiedź=入力-適用します。
+Ustawienia__Wczytaj_BitBtn-->Podpowiedź=設定をロードします。
+Ustawienia__Zapisz_BitBtn-->Podpowiedź=設定を保存します。
 
 
 Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label=設定表示非表示
-Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label=Podpowiedź=オプションの表示/非表示。
-Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label-->Podpowiedź=オプションの表示/非表示。
+Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label=設定折りたたみ展開します
-Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label=Podpowiedź=オプションを折りたたみ/展開します。
-Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label-->Podpowiedź=オプションを折りたたみ/展開します。
+Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gra__Pauza_Etykieta_Label=一時停止
-Klawiatura__Gra__Pauza_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Pauza_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gra__Pełny_Ekran_Etykieta_Label=全画面表示
-Klawiatura__Gra__Pełny_Ekran_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Pełny_Ekran_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Etykieta_Label=ゲームスピード　1x
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Etykieta_Label=Podpowiedź=ゲームスピード　1x。
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Etykieta_Label-->Podpowiedź=ゲームスピード　1x。
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Etykieta_Label=ゲームスピード　-
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Etykieta_Label=Podpowiedź=ゲームスピード　-。
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Etykieta_Label-->Podpowiedź=ゲームスピード　-。
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Etykieta_Label=ゲームスピード　+
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Etykieta_Label=Podpowiedź=ゲームスピード　+。
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Etykieta_Label-->Podpowiedź=ゲームスピード　+。
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gra__Wyjście_Etykieta_Label=出口
-Klawiatura__Gra__Wyjście_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gra__Wyjście_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 
 Klawiatura__Kamera__Dół_Etykieta_Label=下
-Klawiatura__Kamera__Dół_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Dół_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Góra_Etykieta_Label=上
-Klawiatura__Kamera__Góra_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Góra_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Lewo_Etykieta_Label=左
-Klawiatura__Kamera__Lewo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Lewo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label=マウスでを回転
-Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label=Podpowiedź=マウスで画面を回転させるには、切り替えます。
-Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label-->Podpowiedź=マウスで画面を回転させるには、切り替えます。
+Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Prawo_Etykieta_Label=右
-Klawiatura__Kamera__Prawo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Prawo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Przechył_Lewo_Etykieta_Label=左寄り
-Klawiatura__Kamera__Przechył_Lewo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Przechył_Lewo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Przechył_Prawo_Etykieta_Label=右寄り
-Klawiatura__Kamera__Przechył_Prawo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Przechył_Prawo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Przód_Etykieta_Label=前方
-Klawiatura__Kamera__Przód_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Przód_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Kamera__Tył_Etykieta_Label=後方
-Klawiatura__Kamera__Tył_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Kamera__Tył_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 
 Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label=弾薬速度-
-Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label=Podpowiedź=弾薬速度-。
-Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label-->Podpowiedź=弾薬速度-。
+Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label=弾薬速度+
-Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label=Podpowiedź=弾薬速度+。
-Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label-->Podpowiedź=弾薬速度+。
+Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__1__Jedź_Lewo_Etykieta_Label=左に運転する
-Klawiatura__Gracz__1__Jedź_Lewo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__1__Jedź_Lewo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__1__Jedź_Prawo_Etykieta_Label=右に運転する
-Klawiatura__Gracz__1__Jedź_Prawo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__1__Jedź_Prawo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__1__Lufa_Dół_Etykieta_Label=銃砲身下
-Klawiatura__Gracz__1__Lufa_Dół_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__1__Lufa_Dół_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__1__Lufa_Góra_Etykieta_Label=銃砲身上
-Klawiatura__Gracz__1__Lufa_Góra_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__1__Lufa_Góra_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__1__Strzał_Etykieta_Label=銃声
-Klawiatura__Gracz__1__Strzał_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__1__Strzał_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 
 Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label=弾薬速度-
-Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label=Podpowiedź=弾薬速度-。
-Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label-->Podpowiedź=弾薬速度-。
+Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label=弾薬速度+
-Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label=Podpowiedź=弾薬速度+。
-Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label-->Podpowiedź=弾薬速度+。
+Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__2__Jedź_Lewo_Etykieta_Label=左に運転する
-Klawiatura__Gracz__2__Jedź_Lewo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__2__Jedź_Lewo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__2__Jedź_Prawo_Etykieta_Label=右に運転する
-Klawiatura__Gracz__2__Jedź_Prawo_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__2__Jedź_Prawo_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__2__Lufa_Dół_Etykieta_Label=銃砲身下
-Klawiatura__Gracz__2__Lufa_Dół_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__2__Lufa_Dół_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__2__Lufa_Góra_Etykieta_Label=銃砲身上
-Klawiatura__Gracz__2__Lufa_Góra_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__2__Lufa_Góra_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 Klawiatura__Gracz__2__Strzał_Etykieta_Label=銃声
-Klawiatura__Gracz__2__Strzał_Edit=Podpowiedź=Ctrl + Del- <なし>。
+Klawiatura__Gracz__2__Strzał_Edit-->Podpowiedź=Ctrl + Del- <なし>。
 
 
-t__błąd=誤り
-t__czy_wyjść_z_gry=ゲームを終了しますか？
-t__domyślne=既定
-t__gracz=プレーヤー
-t__gracz_skrót=プ。
-t__nie_odnaleziono_pliku_tłumaczenia=翻訳ファイルが見つかりません：
-t__pauza=一時停止
-t__pytanie=質問
-t__wczytać_ustawienia=設定をロードしますか？
-t__zapisać_ustawienia=設定を保存しますか？
+tłumaczenie_komunikaty_r.ekran_napis__pauza=一時停止
+tłumaczenie_komunikaty_r.komunikat__błąd=誤り
+tłumaczenie_komunikaty_r.komunikat__czy_wyjść_z_gry=ゲームを終了しますか？
+tłumaczenie_komunikaty_r.komunikat__domyślne=既定
+tłumaczenie_komunikaty_r.komunikat__nie_odnaleziono_pliku_tłumaczenia=翻訳ファイルが見つかりません：
+tłumaczenie_komunikaty_r.komunikat__pytanie=質問
+tłumaczenie_komunikaty_r.komunikat__wczytać_ustawienia=設定をロードしますか？
+tłumaczenie_komunikaty_r.komunikat__zapisać_ustawienia=設定を保存しますか？
+tłumaczenie_komunikaty_r.słowo__gracz=プレーヤー
+tłumaczenie_komunikaty_r.słowo__gracz__skrót=プ。
