@@ -7,66 +7,66 @@ O_Programie_TabSheet=O programie PL
 
 Gracz__1__Czołg_Wybrany_GroupBox=Gracz PL
 Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton=L g PL
-Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton=Podpowiedź=Lewo góra. PL
+Gracz__1__Czołg_Wybrany__Lewo__Góra_RadioButton-->Podpowiedź=Lewo góra. PL
 Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton=L d PL
-Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton=Podpowiedź=Lewo dół. PL
+Gracz__1__Czołg_Wybrany__Lewo__Dół_RadioButton-->Podpowiedź=Lewo dół. PL
 Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton=P g PL
-Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton=Podpowiedź=Prawo góra. PL
+Gracz__1__Czołg_Wybrany__Prawo__Góra_RadioButton-->Podpowiedź=Prawo góra. PL
 Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton=P d PL
-Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton=Podpowiedź=Prawo dół. PL
+Gracz__1__Czołg_Wybrany__Prawo__Dół_RadioButton-->Podpowiedź=Prawo dół. PL
 Gracz__1__Czołg_Wybrany__Brak_RadioButton=<brak> PL
 Gracz__1__Akceptuje_Si_CheckBox=SI PL
-Gracz__1__Akceptuje_Si_CheckBox=Podpowiedź=Akceptuj grę przeciwko SI. PL
+Gracz__1__Akceptuje_Si_CheckBox-->Podpowiedź=Akceptuj grę przeciwko SI. PL
 Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Jednostka prędkości PL
-Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Podpowiedź=Jednostka prędkości amunicji. PL
-Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Elementy=% PL;m/s;
+Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Podpowiedź=Jednostka prędkości amunicji. PL
+Gracz__1__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Elementy=% PL;m/s;
 
 Gracz__2__Czołg_Wybrany_GroupBox=Gracz PL
 Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton=L g PL
-Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton=Podpowiedź=Lewo góra. PL
+Gracz__2__Czołg_Wybrany__Lewo__Góra_RadioButton-->Podpowiedź=Lewo góra. PL
 Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton=L d PL
-Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton=Podpowiedź=Lewo dół. PL
+Gracz__2__Czołg_Wybrany__Lewo__Dół_RadioButton-->Podpowiedź=Lewo dół. PL
 Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton=P g PL
-Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton=Podpowiedź=Prawo góra. PL
+Gracz__2__Czołg_Wybrany__Prawo__Góra_RadioButton-->Podpowiedź=Prawo góra. PL
 Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton=P d PL
-Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton=Podpowiedź=Prawo dół. PL
+Gracz__2__Czołg_Wybrany__Prawo__Dół_RadioButton-->Podpowiedź=Prawo dół. PL
 Gracz__2__Czołg_Wybrany__Brak_RadioButton=<brak> PL
 Gracz__2__Akceptuje_Si_CheckBox=SI PL
-Gracz__2__Akceptuje_Si_CheckBox=Podpowiedź=Akceptuj grę przeciwko SI. PL
+Gracz__2__Akceptuje_Si_CheckBox-->Podpowiedź=Akceptuj grę przeciwko SI. PL
 Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Jednostka prędkości PL
-Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Podpowiedź=Jednostka prędkości amunicji. PL
-Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup=Elementy=% PL;m/s;
+Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Podpowiedź=Jednostka prędkości amunicji. PL
+Gracz__2__Amunicja_Prędkość_Ustawiona_Jednostka_RadioGroup-->Elementy=% PL;m/s;
 
 Celownicza_Linia_CheckBox=Celownik PL
 Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox=C. korekta o wiatr PL
-Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox=Podpowiedź=Koryguj celownik o siłę wiatru. PL
+Celownicza_Linia__Koryguj_O_Siłę_Wiatru_CheckBox-->Podpowiedź=Koryguj celownik o siłę wiatru. PL
 
 Wiatr_Siła_Etykieta_Label=Siła wiatru PL
-Wiatr_Siła_Etykieta_Label=Podpowiedź=W jakim zakresie zmienia się siła wiatru. PL
-Wiatr_Siła_SpinEdit=Podpowiedź=W jakim zakresie zmienia się siła wiatru. PL
+Wiatr_Siła_Etykieta_Label-->Podpowiedź=W jakim zakresie zmienia się siła wiatru. PL
+Wiatr_Siła_SpinEdit-->Podpowiedź=W jakim zakresie zmienia się siła wiatru. PL
 Gra_Współczynnik_Prędkości_Etykieta_Label=Prędkość gry PL
-Gra_Współczynnik_Prędkości_Etykieta_Label=Podpowiedź=Prędkość gry. PL
-Gra_Współczynnik_Prędkości_Label=Podpowiedź=Prędkość gry. PL
+Gra_Współczynnik_Prędkości_Etykieta_Label-->Podpowiedź=Prędkość gry. PL
+Gra_Współczynnik_Prędkości_Label-->Podpowiedź=Prędkość gry. PL
 Pauza_Button=Pauza PL
-Pauza_Button=Podpowiedź=Pauza. PL
+Pauza_Button-->Podpowiedź=Pauza. PL
 Punkty_Zerowanie_BitBtn=0 | 0 PL
-Punkty_Zerowanie_BitBtn=Podpowiedź=Wyzeruj uzyskane punkty. PL
+Punkty_Zerowanie_BitBtn-->Podpowiedź=Wyzeruj uzyskane punkty. PL
 Dzień_Noc_CheckBox=Dzień noc PL
 Ranek_Label=ranek PL
-Ranek_Label=Podpowiedź=Ranek. PL
-Dzień_Noc__Procent_TrackBar=Podpowiedź=Dzień noc procent. PL
+Ranek_Label-->Podpowiedź=Ranek. PL
+Dzień_Noc__Procent_TrackBar-->Podpowiedź=Dzień noc procent. PL
 Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox=Dzień noc czas systemowy PL
-Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox=Podpowiedź=Podczas uruchamiania gry ustaw czas w grze według zegara systemowego. PL
-Godzina_Label=Podpowiedź=Godzina. PL
+Dzień_Noc__Czas_Systemowy_Ustaw_CheckBox-->Podpowiedź=Podczas uruchamiania gry ustaw czas w grze według zegara systemowego. PL
+Godzina_Label-->Podpowiedź=Godzina. PL
 Si_Linie_Bez_Graczy_CheckBox=SI linie bez graczy PL
-Si_Linie_Bez_Graczy_CheckBox=Podpowiedź=SI steruje czołgami w liniach, w których nie ma graczy. PL
+Si_Linie_Bez_Graczy_CheckBox-->Podpowiedź=SI steruje czołgami w liniach, w których nie ma graczy. PL
 Trudność_Stopień_GroupBox=Stopnień trudności PL
 Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label=Opóźnienie jazda [s] PL
-Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label=Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
-Trudność_Stopień__Opóźnienie__Jazda_SpinEdit=Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
+Trudność_Stopień__Opóźnienie__Jazda_Etykieta_Label-->Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
+Trudność_Stopień__Opóźnienie__Jazda_SpinEdit-->Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
 Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label=Opóźnienie strzał [s] PL
-Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label=Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
-Trudność_Stopień__Opóźnienie__Strzał_SpinEdit=Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
+Trudność_Stopień__Opóźnienie__Strzał_Etykieta_Label-->Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
+Trudność_Stopień__Opóźnienie__Strzał_SpinEdit-->Podpowiedź=Korekta domyślnego opóźnienia między kolejnymi decyzjami SI (w sekundach). PL
 
 Klawiatura_Konfiguracja_GroupBox=Ustawienia klawiszy PL
 Klawiatura__Gra_GroupBox=Gra PL
@@ -75,99 +75,99 @@ Klawiatura__Gracz__1_GroupBox=Gracz 1 PL
 Klawiatura__Gracz__2_GroupBox=Gracz 2 PL
 
 Celownicza_Linia_Wysokość_Etykieta_Label=Celownik wysokość wskaźnika PL
-Celownicza_Linia_Wysokość_Etykieta_Label=Podpowiedź=-1 - względem wysokości lotu amunicji;__#13__> -1 - zadana wartość. PL
-Celownicza_Linia_Wysokość_SpinEdit=Podpowiedź=-1 - względem wysokości lotu amunicji;__#13__> -1 - zadana wartość. PL
+Celownicza_Linia_Wysokość_Etykieta_Label-->Podpowiedź=-1 - względem wysokości lotu amunicji;#13#10> -1 - zadana wartość. PL
+Celownicza_Linia_Wysokość_SpinEdit-->Podpowiedź=-1 - względem wysokości lotu amunicji;#13#10> -1 - zadana wartość. PL
 Czołgi_Linia__3_CheckBox=Czołgi linia 3 PL
 Czołgi_Linia__4_CheckBox=Czołgi linia 4 PL
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Rozmiar zakładki zwiększ PL
-Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Podpowiedź=Podczas przełączania zakładki na opcje zwiększaj wysokość panelu zakładek konfiguracji. PL
+Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox-->Podpowiedź=Podczas przełączania zakładki na opcje zwiększaj wysokość panelu zakładek konfiguracji. PL
 Tłumaczenie_Etykieta_Label=Tłumaczenie PL
-Tłumaczenia_ComboBox=Podpowiedź=Enter - zastosuj. PL
-Ustawienia__Wczytaj_BitBtn=Podpowiedź=Wczytaj ustawienia. PL
-Ustawienia__Zapisz_BitBtn=Podpowiedź=Zapisz ustawienia. PL
+Tłumaczenia_ComboBox-->Podpowiedź=Enter - zastosuj. PL
+Ustawienia__Wczytaj_BitBtn-->Podpowiedź=Wczytaj ustawienia. PL
+Ustawienia__Zapisz_BitBtn-->Podpowiedź=Zapisz ustawienia. PL
 
 
 Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label=Opcje wyświetl / u. PL
-Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label=Podpowiedź=Opcje wyświetl / ukryj. PL
-Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Etykieta_Label-->Podpowiedź=Opcje wyświetl / ukryj. PL
+Klawiatura__Gra__Opcje__Wyświetl_Ukryj_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label=Opcje zwiń / roz. PL
-Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label=Podpowiedź=Opcje zwiń / rozwiń. PL
-Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Etykieta_Label-->Podpowiedź=Opcje zwiń / rozwiń. PL
+Klawiatura__Gra__Opcje__Zwiń_Rozwiń_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gra__Pauza_Etykieta_Label=Pauza PL
-Klawiatura__Gra__Pauza_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Pauza_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gra__Pełny_Ekran_Etykieta_Label=Pełny ekran PL
-Klawiatura__Gra__Pełny_Ekran_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Pełny_Ekran_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Etykieta_Label=Prędkość gry 1x PL
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__1_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Etykieta_Label=Prędkość gry - PL
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Minus_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Etykieta_Label=Prędkość gry + PL
-Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Współczynnik_Prędkości_Gry__Plus_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gra__Wyjście_Etykieta_Label=Wyjście PL
-Klawiatura__Gra__Wyjście_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gra__Wyjście_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 
 Klawiatura__Kamera__Dół_Etykieta_Label=Dół PL
-Klawiatura__Kamera__Dół_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Dół_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Góra_Etykieta_Label=Góra PL
-Klawiatura__Kamera__Góra_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Góra_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Lewo_Etykieta_Label=Lewo PL
-Klawiatura__Kamera__Lewo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Lewo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label=Obracanie myszą PL
-Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label=Podpowiedź=Obracanie myszą przełącz. PL
-Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Etykieta_Label-->Podpowiedź=Obracanie myszą przełącz. PL
+Klawiatura__Kamera__Obracanie_Myszą_Przełącz_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Prawo_Etykieta_Label=Prawo PL
-Klawiatura__Kamera__Prawo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Prawo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Przechył_Lewo_Etykieta_Label=Przechył lewo PL
-Klawiatura__Kamera__Przechył_Lewo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Przechył_Lewo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Przechył_Prawo_Etykieta_Label=Przechył prawo PL
-Klawiatura__Kamera__Przechył_Prawo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Przechył_Prawo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Przód_Etykieta_Label=Przód PL
-Klawiatura__Kamera__Przód_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Przód_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Tył_Etykieta_Label=Tył PL
-Klawiatura__Kamera__Tył_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Tył_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 
 Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label=Amunicja pręd. - PL
-Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label=Podpowiedź=Amunicja prędkość -. PL
-Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Etykieta_Label-->Podpowiedź=Amunicja prędkość -. PL
+Klawiatura__Gracz__1__Amunicja_Prędkość__Minus_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label=Amunicja pręd. + PL
-Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label=Podpowiedź=Amunicja prędkość +. PL
-Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Etykieta_Label-->Podpowiedź=Amunicja prędkość +. PL
+Klawiatura__Gracz__1__Amunicja_Prędkość__Plus_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__1__Jedź_Lewo_Etykieta_Label=Jedź w lewo PL
-Klawiatura__Gracz__1__Jedź_Lewo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__1__Jedź_Lewo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__1__Jedź_Prawo_Etykieta_Label=Jedź w prawo PL
-Klawiatura__Gracz__1__Jedź_Prawo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__1__Jedź_Prawo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__1__Lufa_Dół_Etykieta_Label=Lufa w dół PL
-Klawiatura__Gracz__1__Lufa_Dół_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__1__Lufa_Dół_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__1__Lufa_Góra_Etykieta_Label=Lufa w górę PL
-Klawiatura__Gracz__1__Lufa_Góra_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__1__Lufa_Góra_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__1__Strzał_Etykieta_Label=Strzał PL
-Klawiatura__Gracz__1__Strzał_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__1__Strzał_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 
 Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label=Amunicja pręd. - PL
-Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label=Podpowiedź=Amunicja prędkość -. PL
-Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Etykieta_Label-->Podpowiedź=Amunicja prędkość -. PL
+Klawiatura__Gracz__2__Amunicja_Prędkość__Minus_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label=Amunicja pręd. + PL
-Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label=Podpowiedź=Amunicja prędkość +. PL
-Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Etykieta_Label-->Podpowiedź=Amunicja prędkość +. PL
+Klawiatura__Gracz__2__Amunicja_Prędkość__Plus_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__2__Jedź_Lewo_Etykieta_Label=Jedź w lewo PL
-Klawiatura__Gracz__2__Jedź_Lewo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__2__Jedź_Lewo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__2__Jedź_Prawo_Etykieta_Label=Jedź w prawo PL
-Klawiatura__Gracz__2__Jedź_Prawo_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__2__Jedź_Prawo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__2__Lufa_Dół_Etykieta_Label=Lufa w dół PL
-Klawiatura__Gracz__2__Lufa_Dół_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__2__Lufa_Dół_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__2__Lufa_Góra_Etykieta_Label=Lufa w górę PL
-Klawiatura__Gracz__2__Lufa_Góra_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__2__Lufa_Góra_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Gracz__2__Strzał_Etykieta_Label=Strzał PL
-Klawiatura__Gracz__2__Strzał_Edit=Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Gracz__2__Strzał_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 
 
-t__błąd=Błąd PL
-t__czy_wyjść_z_gry=Czy wyjść z gry? PL
-t__domyślne=domyślne PL
-t__gracz=Gracz PL
-t__gracz_skrót=G. PL
-t__nie_odnaleziono_pliku_tłumaczenia=Nie odnaleziono pliku tłumaczenia: PL 
-t__pauza=PAUZA PL
-t__pytanie=Pytanie PL
-t__wczytać_ustawienia=Wczytać ustawienia? PL
-t__zapisać_ustawienia=Zapisać ustawienia? PL
+tłumaczenie_komunikaty_r.ekran_napis__pauza=PAUZA PL
+tłumaczenie_komunikaty_r.komunikat__błąd=Błąd PL
+tłumaczenie_komunikaty_r.komunikat__czy_wyjść_z_gry=Czy wyjść z gry? PL
+tłumaczenie_komunikaty_r.komunikat__domyślne=domyślne PL
+tłumaczenie_komunikaty_r.komunikat__nie_odnaleziono_pliku_tłumaczenia=Nie odnaleziono pliku tłumaczenia: PL
+tłumaczenie_komunikaty_r.komunikat__pytanie=Pytanie PL
+tłumaczenie_komunikaty_r.komunikat__wczytać_ustawienia=Wczytać ustawienia? PL
+tłumaczenie_komunikaty_r.komunikat__zapisać_ustawienia=Zapisać ustawienia? PL
+tłumaczenie_komunikaty_r.słowo__gracz=Gracz PL
+tłumaczenie_komunikaty_r.słowo__gracz__skrót=G. PL
