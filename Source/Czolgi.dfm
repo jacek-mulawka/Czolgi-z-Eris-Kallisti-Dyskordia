@@ -46,7 +46,7 @@
     Top = 162
     Width = 984
     Height = 200
-    ActivePage = Gra_TabSheet
+    ActivePage = O_Programie_TabSheet
     Align = alBottom
     TabOrder = 1
     OnChange = PageControl1Change
@@ -1511,7 +1511,7 @@
         Height = 195
         Align = alTop
         Caption = 
-          'Czo'#322'gi z Eris Kallisti Dyskordia'#13#10'wersja 2022.01.19.'#13#10#13#10'MIT Lice' +
+          'Czo'#322'gi z Eris Kallisti Dyskordia'#13#10'wersja 2023.03.13.'#13#10#13#10'MIT Lice' +
           'nse'#13#10#13#10'Copyright (c) 2022 Jacek Mulawka'#13#10#13#10'j.mulawka@interia.pl'#13 +
           #10#13#10'https://github.com/jacek-mulawka'#13#10#13#10#13#10#13#10'Program jest darmowy,' +
           ' udost'#281'pniony w postaci takiej jakiej jest wraz ze wszystkimi b'#322 +

@@ -28,10 +28,24 @@ uses
   GLCollision, GLVectorFileObjects, GLPolyhedron, GLParticleFX, GLPerlinPFX, GLSkydome,
   GLKeyboard, GLGeomObjects, GLVectorGeometry, GLMaterial, GLBitmapFont, GLWindowsFont, GLHUDObjects, GLColor,
   GLBehaviours, GLFireFX,
-  System.Math, System.DateUtils, System.IniFiles, System.StrUtils;
+  System.Math, System.DateUtils, System.IniFiles, System.StrUtils, System.Rtti, System.TypInfo;
 
 type
   TPrezent_Rodzaj = ( pr_Brak, pr_Jazda_Szybsza, pr_Prze³adowanie_Szybsze );
+
+  TT³umaczenie_Komunikaty_r = record
+    ekran_napis__pauza,
+    komunikat__b³¹d,
+    komunikat__czy_wyjœæ_z_gry,
+    komunikat__domyœlne,
+    komunikat__nie_odnaleziono_pliku_t³umaczenia,
+    komunikat__pytanie,
+    komunikat__wczytaæ_ustawienia,
+    komunikat__zapisaæ_ustawienia,
+    s³owo__gracz,
+    s³owo__gracz__skrót
+      : string;
+  end;//---//TT³umaczenie_Komunikaty_r
 
   TAmunicja = class( TGLDummyCube )
   private
@@ -412,23 +426,13 @@ type
     prezenty_list
       : TList;
 
+    t³umaczenie_komunikaty_r : TT³umaczenie_Komunikaty_r;
+
     sosna : TSosna;
 
     sosny_gl_proxy_object_t : array of TGLProxyObject;
 
     czo³gi_t : array [ 1..8 ] of TCzo³g; // Iloœæ czo³gów (wartoœæ powinna byæ parzysta). //???
-
-    t__b³¹d,
-    t__czy_wyjœæ_z_gry,
-    t__domyœlne,
-    t__gracz,
-    t__gracz_skrót,
-    t__nie_odnaleziono_pliku_t³umaczenia,
-    t__pauza,
-    t__pytanie,
-    t__wczytaæ_ustawienia,
-    t__zapisaæ_ustawienia
-      : string;
 
     procedure Kamera_Ruch( const delta_czasu_f : double );
     procedure Gra_Wspó³czynnik_Prêdkoœci_Zmieñ( const zmiana_kierunek_f : smallint );
@@ -2923,7 +2927,7 @@ procedure TCzolgi_Form.Interfejs_WskaŸniki_Ustaw( const oczekiwanie_pomiñ_f : bo
       Exit;
 
 
-    gl_hud_text_f.Text := t__gracz_skrót;
+    gl_hud_text_f.Text := t³umaczenie_komunikaty_r.s³owo__gracz__skrót;
 
     if not czy_gracz_2_f then
       begin
@@ -3011,8 +3015,8 @@ begin//Funkcja Interfejs_WskaŸniki_Ustaw().
   Punkty__Lewo__GLHUDText.Text := Trim(  FormatFloat( '### ### ##0', punkty__lewo )  );
   Punkty__Prawo_GLHUDText.Text := Trim(  FormatFloat( '### ### ##0', punkty__prawo )  );
 
-  Gracz__1__Czo³g_Wybrany_GroupBox.Caption := t__gracz + ' 1: ' + Trim(  FormatFloat( '### ### ##0', punkty__gracz__1 )  );
-  Gracz__2__Czo³g_Wybrany_GroupBox.Caption := t__gracz + ' 2: ' + Trim(  FormatFloat( '### ### ##0', punkty__gracz__2 )  );
+  Gracz__1__Czo³g_Wybrany_GroupBox.Caption := t³umaczenie_komunikaty_r.s³owo__gracz + ' 1: ' + Trim(  FormatFloat( '### ### ##0', punkty__gracz__1 )  );
+  Gracz__2__Czo³g_Wybrany_GroupBox.Caption := t³umaczenie_komunikaty_r.s³owo__gracz + ' 2: ' + Trim(  FormatFloat( '### ### ##0', punkty__gracz__2 )  );
 
   GLWindowsBitmapFont1.EnsureString( Punkty__Lewo__GLHUDText.Text );
   GLWindowsBitmapFont1.EnsureString( Punkty__Prawo_GLHUDText.Text );
@@ -4203,7 +4207,7 @@ begin//Funkcja Ustawienia_Plik().
             tekst_string_list.Text := T³umaczenia_ComboBox.Items[ T³umaczenia_ComboBox.ItemIndex ];
 
           if Trim( tekst_string_list.Text ) = '' then
-            tekst_string_list.Text := '<' + t__domyœlne + '>';
+            tekst_string_list.Text := '<' + t³umaczenie_komunikaty_r.komunikat__domyœlne + '>';
 
           tekst_string_list.SaveToFile( zts, TEncoding.UTF8 );
 
@@ -4291,7 +4295,7 @@ begin
       Punkty__Separator_GLHUDText.Text :=
         '|' +
         #13 +
-        t__pauza;
+        t³umaczenie_komunikaty_r.ekran_napis__pauza;
 
     end;
   //---//if GLCadencer1.Enabled then
@@ -4782,7 +4786,7 @@ begin
 
   t³umaczenie_nazwa_kopia_l := T³umaczenia_ComboBox.Text;
   T³umaczenia_ComboBox.Items.Clear();
-  T³umaczenia_ComboBox.Items.Add( '<' + t__domyœlne + '>' );
+  T³umaczenia_ComboBox.Items.Add( '<' + t³umaczenie_komunikaty_r.komunikat__domyœlne + '>' );
   T³umaczenia_ComboBox.ItemIndex := 0;
 
   // Je¿eli znajdzie plik zwraca 0, je¿eli nie znajdzie zwraca numer b³êdu. Na pocz¹tku znajduje '.' '..' potem listê plików.
@@ -4826,19 +4830,32 @@ end;//---//Funkcja T³umaczenie__Lista_Wczytaj().
 
 //Funkcja T³umaczenie__Wczytaj().
 procedure TCzolgi_Form.T³umaczenie__Wczytaj();
+const
+  t³umaczenie_komunikaty_r_c_l : string = 't³umaczenie_komunikaty_r.';
+  t³umaczenie__nowa_linia_c_l : string = '#13#10';
+  t³umaczenie__wyró¿nik__elementy_c_l : string = '-->Elementy';
+  t³umaczenie__wyró¿nik__podpowiedŸ_c_l : string = '-->PodpowiedŸ';
+
 var
-  tekst_l : TStringList;
-  zt_component : TComponent;
+  czy_elementy, // Czy t³umaczenie dotyczy elementów komponentu (np. pozycje listy rozwijanej).
+  czy_podpowiedŸ // Czy t³umaczenie dotyczy podpowiedzi komponentu.
+    : boolean;
+
   i,
   zti_1,
   zti_2
     : integer;
+
   zts_1,
   zts_2,
   nazwa
-  //t³umaczenie
     : string;
-  czy_podpowiedŸ : boolean;
+
+  rtti_field : TRttiField;
+  rtti_type : TRttiType;
+
+  tekst_l : TStringList;
+  zt_component : TComponent;
 begin
 
   if    ( T³umaczenia_ComboBox.ItemIndex >= 0 )
@@ -4855,7 +4872,7 @@ begin
       T³umaczenie__Domyœlne();
 
       if Pos( '<', zts_1 ) <= 0 then // Nie wyœwietla komunikatu gdy wybrane jest t³umaczenie '<domyœlne>'.
-        Komunikat_Wyœwietl( t__nie_odnaleziono_pliku_t³umaczenia + #13 + #13 + zts_1 + #13 + '.', t__b³¹d, MB_ICONEXCLAMATION + MB_OK );
+        Komunikat_Wyœwietl( t³umaczenie_komunikaty_r.komunikat__nie_odnaleziono_pliku_t³umaczenia + #13 + #13 + zts_1 + #13 + '.', t³umaczenie_komunikaty_r.komunikat__b³¹d, MB_ICONEXCLAMATION + MB_OK );
 
       Exit;
 
@@ -4866,6 +4883,10 @@ begin
 
   tekst_l := TStringList.Create();
   tekst_l.LoadFromFile( zts_1 ); // Je¿eli pliku nie ma to nie trzeba wczytywaæ, mo¿na od razu dodawaæ linie.
+
+  if tekst_l.Count > 0 then //???
+    rtti_type := TRTTIContext.Create.GetType(  TypeInfo( TT³umaczenie_Komunikaty_r )  );
+
 
   for i := 0 to tekst_l.Count - 1 do
     begin
@@ -4882,7 +4903,7 @@ begin
             or (  Pos( 'Obrazki_Kostek__Obrazek_Kostek_', zts_1 ) > 0  )
             or (
                      (  Pos( 'T³umaczenia_Panel', zts_1 ) > 0  ) // Etykieta panelu t³umaczenia nie podlega t³umaczeniu.
-                 and (  Pos( '=PodpowiedŸ=', zts_1 ) <= 0  )
+                 and (  Pos( t³umaczenie__wyró¿nik__podpowiedŸ_c_l + '=', zts_1 ) <= 0  )
 
                ) then
             zti_1 := -1;
@@ -4898,20 +4919,31 @@ begin
           if zti_1 > 1 then
             begin
 
-              if Pos( 't__', zts_1 ) <= 0 then
+              if Pos( t³umaczenie_komunikaty_r_c_l, zts_1 ) <= 0 then
                 begin
 
                   {$region 'Komponenty.'}
-                  if Pos( '=PodpowiedŸ=', zts_1 ) > 0 then
+                  if Pos( t³umaczenie__wyró¿nik__podpowiedŸ_c_l + '=', zts_1 ) > 0 then
                     begin
 
                       czy_podpowiedŸ := true;
-                      zts_1 := StringReplace( zts_1, '=PodpowiedŸ', '', [] );
+                      zts_1 := StringReplace( zts_1, t³umaczenie__wyró¿nik__podpowiedŸ_c_l , '', [] );
                       zti_1 := Pos( '=', zts_1 );
 
                     end
-                  else//if Pos( '=PodpowiedŸ=', zts_1 ) > 0 then
+                  else//if Pos( t³umaczenie__wyró¿nik__podpowiedŸ_c_l + '=', zts_1 ) > 0 then
                     czy_podpowiedŸ := false;
+
+                  if Pos( t³umaczenie__wyró¿nik__elementy_c_l + '=', zts_1 ) > 0 then
+                    begin
+
+                      czy_elementy := true;
+                      zts_1 := StringReplace( zts_1, t³umaczenie__wyró¿nik__elementy_c_l, '', [] );
+                      zti_1 := Pos( '=', zts_1 );
+
+                    end
+                  else//if Pos( t³umaczenie__wyró¿nik__elementy_c_l + '=', zts_1 ) > 0 then
+                    czy_elementy := false;
 
 
                   nazwa := Copy( zts_1, 1, zti_1 - 1 );
@@ -4937,7 +4969,7 @@ begin
                   if zt_component <> nil then
                     begin
 
-                      zts_1 := StringReplace( zts_1, '__#13__', #13, [ rfReplaceAll ] );
+                      zts_1 := StringReplace( zts_1, t³umaczenie__nowa_linia_c_l, #13 + #10, [ rfReplaceAll ] );
 
                       if Pos( '_BitBtn', nazwa ) > 0 then
                         begin
@@ -5021,17 +5053,12 @@ begin
                           if not czy_podpowiedŸ then
                             begin
 
-                              zti_1 := Pos( 'Elementy=', zts_1 );
-
-                              if zti_1 <= 0 then
+                              if not czy_elementy then
                                 TRadioGroup(zt_component).Caption := zts_1
-                              else//if zti_1 <= 0 then
+                              else//if not czy_elementy then
                                 begin
 
                                   zti_2 := TRadioGroup(zt_component).ItemIndex;
-
-                                  zti_1 := Pos( '=', zts_1 );
-                                  Delete( zts_1, 1, zti_1 );
 
                                   TRadioGroup(zt_component).Items.Clear();
 
@@ -5060,7 +5087,7 @@ begin
                               //---//if zti_1 <= 0 then
 
                             end
-                          else//if not czy_podpowiedŸ then
+                          else//if not czy_elementy then
                             TRadioGroup(zt_component).Hint := zts_1;
 
                         end
@@ -5090,50 +5117,31 @@ begin
                   {$endregion 'Komponenty.'}
 
                 end
-              else//if Pos( 't__', zts_1 ) <= 0 then
+              else//if Pos( t³umaczenie_komunikaty_r_c_l, zts_1 ) <= 0 then
                 begin
 
                   {$region 'Komunikaty.'}
                   nazwa := Copy( zts_1, 1, zti_1 - 1 );
                   Delete( zts_1, 1, zti_1 );
 
-                  zts_1 := StringReplace( zts_1, '__#13__', #13, [ rfReplaceAll ] );
+                  nazwa := StringReplace( nazwa, t³umaczenie_komunikaty_r_c_l, '', [ rfReplaceAll ] );
+                  zts_1 := StringReplace( zts_1, t³umaczenie__nowa_linia_c_l, #13 + #10, [ rfReplaceAll ] );
 
-                  if nazwa = 't__b³¹d' then
-                    t__b³¹d := zts_1
-                  else
-                  if nazwa = 't__czy_wyjœæ_z_gry' then
-                    t__czy_wyjœæ_z_gry := zts_1
-                  else
-                  if nazwa = 't__domyœlne' then
-                    t__domyœlne := zts_1
-                  else
-                  if nazwa = 't__gracz' then
-                    t__gracz := zts_1
-                  else
-                  if nazwa = 't__gracz_skrót' then
-                    t__gracz_skrót := zts_1
-                  else
-                  if nazwa = 't__nie_odnaleziono_pliku_t³umaczenia' then
-                    t__nie_odnaleziono_pliku_t³umaczenia := zts_1
-                  else
-                  if nazwa = 't__pauza' then
-                    t__pauza := zts_1
-                  else
-                  if nazwa = 't__pytanie' then
-                    t__pytanie := zts_1
-                  else
-                  if nazwa = 't__wczytaæ_ustawienia' then
-                    t__wczytaæ_ustawienia := zts_1
-                  else
-                  if nazwa = 't__zapisaæ_ustawienia' then
-                    t__zapisaæ_ustawienia := zts_1
-                  else
-                    ;
+                  for rtti_field in rtti_type.GetFields do
+                    if rtti_field.Name = nazwa then
+                      begin
+
+                        if rtti_field.GetValue( @t³umaczenie_komunikaty_r ).Kind in [ System.TypInfo.tkUString, System.TypInfo.tkString, System.TypInfo.tkWString ] then
+                          rtti_field.SetValue( @t³umaczenie_komunikaty_r, zts_1 );
+
+                        Break;
+
+                      end;
+                    //---//if rtti_field.Name = nazwa then
                   {$endregion 'Komunikaty.'}
 
                 end;
-              //---//if Pos( 't__', zts_1 ) <= 0 then
+              //---//if Pos( t³umaczenie_komunikaty_r_c_l, zts_1 ) <= 0 then
 
             end;
           //---//if zti_1 > 1 then
@@ -5147,7 +5155,7 @@ begin
   tekst_l.Free();
 
 
-  T³umaczenie__Lista_Wczytaj(); // Aby zaktualizowaæ treœæ t__domyœlne.
+  T³umaczenie__Lista_Wczytaj(); // Aby zaktualizowaæ treœæ t³umaczenie_komunikaty_r.komunikat__domyœlne.
 
   Interfejs_WskaŸniki_Ustaw( true );
   Informacja_Dodatkowa__Ustaw();
@@ -5159,20 +5167,19 @@ end;//---//Funkcja T³umaczenie__Wczytaj().
 //Funkcja T³umaczenie__Domyœlne().
 procedure TCzolgi_Form.T³umaczenie__Domyœlne();
 var
-  zt_component : TComponent;
   zti : integer;
 begin
 
-  t__b³¹d := 'B³¹d';
-  t__czy_wyjœæ_z_gry := 'Czy wyjœæ z gry?';
-  t__domyœlne := 'domyœlne';
-  t__gracz := 'Gracz';
-  t__gracz_skrót := 'G.';
-  t__nie_odnaleziono_pliku_t³umaczenia := 'Nie odnaleziono pliku t³umaczenia:';
-  t__pauza := 'PAUZA';
-  t__pytanie := 'Pytanie';
-  t__wczytaæ_ustawienia := 'Wczytaæ ustawienia?';
-  t__zapisaæ_ustawienia := 'Zapisaæ ustawienia?';
+  t³umaczenie_komunikaty_r.ekran_napis__pauza := 'PAUZA';
+  t³umaczenie_komunikaty_r.komunikat__b³¹d := 'B³¹d';
+  t³umaczenie_komunikaty_r.komunikat__czy_wyjœæ_z_gry := 'Czy wyjœæ z gry?';
+  t³umaczenie_komunikaty_r.komunikat__domyœlne := 'domyœlne';
+  t³umaczenie_komunikaty_r.komunikat__nie_odnaleziono_pliku_t³umaczenia := 'Nie odnaleziono pliku t³umaczenia:';
+  t³umaczenie_komunikaty_r.komunikat__pytanie := 'Pytanie';
+  t³umaczenie_komunikaty_r.komunikat__wczytaæ_ustawienia := 'Wczytaæ ustawienia?';
+  t³umaczenie_komunikaty_r.komunikat__zapisaæ_ustawienia := 'Zapisaæ ustawienia?';
+  t³umaczenie_komunikaty_r.s³owo__gracz := 'Gracz';
+  t³umaczenie_komunikaty_r.s³owo__gracz__skrót := 'G.';
 
 
   Gra_TabSheet.Caption := 'Gra';
@@ -5395,7 +5402,7 @@ begin
   Klawiatura__Gracz__2__Strza³_Edit.Hint := 'Ctrl + Del - <brak>.';
 
 
-  T³umaczenie__Lista_Wczytaj(); // Aby zaktualizowaæ treœæ t__domyœlne.
+  T³umaczenie__Lista_Wczytaj(); // Aby zaktualizowaæ treœæ t³umaczenie_komunikaty_r.komunikat__domyœlne.
 
   Informacja_Dodatkowa__Ustaw();
 
@@ -5660,14 +5667,14 @@ var
   i : integer;
 begin
 
-  if Komunikat_Wyœwietl( t__czy_wyjœæ_z_gry, t__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
+  if Komunikat_Wyœwietl( t³umaczenie_komunikaty_r.komunikat__czy_wyjœæ_z_gry, t³umaczenie_komunikaty_r.komunikat__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
     begin
 
       Action := caNone;
       Exit;
 
     end;
-  //---//if Komunikat_Wyœwietl( t__czy_wyjœæ_z_gry, t__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
+  //---//if Komunikat_Wyœwietl( t³umaczenie_komunikaty_r.komunikat__czy_wyjœæ_z_gry, t³umaczenie_komunikaty_r.komunikat__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
 
 
   FreeAndNil( sosna );
@@ -6375,7 +6382,7 @@ end;//---//Klawiatura_EditKeyDown().
 procedure TCzolgi_Form.Ustawienia__Wczytaj_BitBtnClick( Sender: TObject );
 begin
 
-  if Komunikat_Wyœwietl( t__wczytaæ_ustawienia, t__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
+  if Komunikat_Wyœwietl( t³umaczenie_komunikaty_r.komunikat__wczytaæ_ustawienia, t³umaczenie_komunikaty_r.komunikat__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
     Exit;
 
 
@@ -6387,7 +6394,7 @@ end;//---//Ustawienia__Wczytaj_BitBtnClick().
 procedure TCzolgi_Form.Ustawienia__Zapisz_BitBtnClick( Sender: TObject );
 begin
 
-  if Komunikat_Wyœwietl( t__zapisaæ_ustawienia, t__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
+  if Komunikat_Wyœwietl( t³umaczenie_komunikaty_r.komunikat__zapisaæ_ustawienia, t³umaczenie_komunikaty_r.komunikat__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
     Exit;
 
   Ustawienia_Plik( true );

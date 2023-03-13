@@ -55,7 +55,7 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>Czolgi_pr</SanitizedProjectName>
         <VerInfo_Locale>1045</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=Jacek Mulawka;FileDescription=Czołgi z Eris Kallisti Dyskordia. MIT License.;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright (c) 2022 Jacek Mulawka;LegalTrademarks=;OriginalFilename=Czołgi z Eris Kallisti Dyskordia;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=Czołgi z Eris Kallisti Dyskordia;ProductVersion=2022.1.19;Comments=j.mulawka@interia.pl https://github.com/jacek-mulawka</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Jacek Mulawka;FileDescription=Czołgi z Eris Kallisti Dyskordia. MIT License.;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright (c) 2022 Jacek Mulawka;LegalTrademarks=;OriginalFilename=Czołgi z Eris Kallisti Dyskordia;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=Czołgi z Eris Kallisti Dyskordia;ProductVersion=2023.3.13;Comments=j.mulawka@interia.pl https://github.com/jacek-mulawka</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
