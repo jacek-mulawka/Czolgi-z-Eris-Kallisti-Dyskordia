@@ -5634,7 +5634,7 @@ begin//FormShow().
       EffectScale := 5;
 
     end;
-  //---//with GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
+  //---//with GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
 
   for i := 1 to 50 do
     with TGLDummyCube.Create( Chmury_GLDummyCube ) do
@@ -5651,7 +5651,7 @@ begin//FormShow().
             EffectScale := 5;
 
           end;
-        //---//with GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
+        //---//with GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
 
       end;
     //---//with TGLDummyCube.Create( Chmury_GLDummyCube ) do
