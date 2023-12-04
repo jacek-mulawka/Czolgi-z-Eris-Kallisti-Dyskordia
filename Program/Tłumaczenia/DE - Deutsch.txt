@@ -77,6 +77,22 @@ Czołgi_Linia__3_CheckBox=Panzer Linie 3
 Czołgi_Linia__4_CheckBox=Panzer Linie 4
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Die Größe der Registerkarte erhöhen
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox-->Podpowiedź=Wenn von Registerkarten zu Optionen wechseln, die Höhe des Konfigurationsregisterbereichs erhöhen.
+
+Efekty_GroupBox=Effekte
+Efekty__Chmury_CheckBox=Wolken
+Efekty__Dym_CheckBox=Rauch
+Efekty__Dym_CheckBox-->Podpowiedź=Rauch nach dem Aufprall auf den Boden.
+Efekty__Lufa_Wystrzał_CheckBox=Schuss
+Efekty__Lufa_Wystrzał_CheckBox-->Podpowiedź=Der Effekt eines Schusses.
+Efekty__Prezent_Zebranie_CheckBox=Geschenk
+Efekty__Prezent_Zebranie_CheckBox-->Podpowiedź=Der Effekt des Sammelns eines Geschenks.
+Efekty__Smuga_CheckBox=Spur
+Efekty__Smuga_CheckBox-->Podpowiedź=Eine Spur hinter einer fliegenden Kugel.
+Efekty__Trafienie_CheckBox=Schlag
+Efekty__Trafienie_CheckBox-->Podpowiedź=Der Effekt eines Panzertreffers.
+Efekty__Trafienie__Alternatywny_CheckBox=Schlag alt.
+Efekty__Trafienie__Alternatywny_CheckBox-->Podpowiedź=Alternativer Effekt eines Panzertreffers.
+
 Tłumaczenie_Etykieta_Label=Übersetzung
 Tłumaczenia_ComboBox-->Podpowiedź=Eingabetaste - bewerben.
 Ustawienia__Wczytaj_BitBtn-->Podpowiedź=Einstellungen laden.
@@ -122,6 +138,9 @@ Klawiatura__Kamera__Przechył_Prawo_Etykieta_Label=Lehnen rechts
 Klawiatura__Kamera__Przechył_Prawo_Edit-->Podpowiedź=Strg + Entf - <keine>.
 Klawiatura__Kamera__Przód_Etykieta_Label=Vorwärts
 Klawiatura__Kamera__Przód_Edit-->Podpowiedź=Strg + Entf - <keine>.
+Klawiatura__Kamera__Reset_Etykieta_Label=Zurücksetzen
+Klawiatura__Kamera__Reset_Etykieta_Label-->Podpowiedź=Kameraposition zurücksetzen.
+Klawiatura__Kamera__Reset_Edit-->Podpowiedź=Ctrl + Del - <keine>.
 Klawiatura__Kamera__Tył_Etykieta_Label=Rückwärts
 Klawiatura__Kamera__Tył_Edit-->Podpowiedź=Strg + Entf - <keine>.
 

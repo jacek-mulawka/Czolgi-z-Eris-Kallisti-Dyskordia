@@ -77,6 +77,22 @@ Czołgi_Linia__3_CheckBox=Tanks line 3
 Czołgi_Linia__4_CheckBox=Tanks line 4
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Increase the size of the tab
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox-->Podpowiedź=When switching tabs to options, increase the height of the configuration tabs panel.
+
+Efekty_GroupBox=Effects
+Efekty__Chmury_CheckBox=Clouds
+Efekty__Dym_CheckBox=Smoke
+Efekty__Dym_CheckBox-->Podpowiedź=Smoke after hitting the ground.
+Efekty__Lufa_Wystrzał_CheckBox=Shot
+Efekty__Lufa_Wystrzał_CheckBox-->Podpowiedź=The effect of a shot.
+Efekty__Prezent_Zebranie_CheckBox=Gift
+Efekty__Prezent_Zebranie_CheckBox-->Podpowiedź=The effect of collecting a gift.
+Efekty__Smuga_CheckBox=Streak
+Efekty__Smuga_CheckBox-->Podpowiedź=A trail behind a flying bullet.
+Efekty__Trafienie_CheckBox=Hit
+Efekty__Trafienie_CheckBox-->Podpowiedź=Effect of hitting a tank.
+Efekty__Trafienie__Alternatywny_CheckBox=Hit alter.
+Efekty__Trafienie__Alternatywny_CheckBox-->Podpowiedź=Alternate effect of hitting a tank.
+
 Tłumaczenie_Etykieta_Label=Translation
 Tłumaczenia_ComboBox-->Podpowiedź=Enter - apply.
 Ustawienia__Wczytaj_BitBtn-->Podpowiedź=Load settings.
@@ -119,6 +135,9 @@ Klawiatura__Kamera__Przechył_Prawo_Etykieta_Label=Lean right
 Klawiatura__Kamera__Przechył_Prawo_Edit-->Podpowiedź=Ctrl + Del - <none>.
 Klawiatura__Kamera__Przód_Etykieta_Label=Forward
 Klawiatura__Kamera__Przód_Edit-->Podpowiedź=Ctrl + Del - <none>.
+Klawiatura__Kamera__Reset_Etykieta_Label=Reset
+Klawiatura__Kamera__Reset_Etykieta_Label-->Podpowiedź=Reset camera position.
+Klawiatura__Kamera__Reset_Edit-->Podpowiedź=Ctrl + Del - <none>.
 Klawiatura__Kamera__Tył_Etykieta_Label=Backwards
 Klawiatura__Kamera__Tył_Edit-->Podpowiedź=Ctrl + Del - <none>.
 
