@@ -46,7 +46,7 @@
     Top = 162
     Width = 984
     Height = 200
-    ActivePage = O_Programie_TabSheet
+    ActivePage = Opcje_TabSheet
     Align = alBottom
     TabOrder = 1
     OnChange = PageControl1Change
@@ -54,6 +54,10 @@
       Caption = 'Gra'
       ParentShowHint = False
       ShowHint = True
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         976
         172)
@@ -498,14 +502,14 @@
       end
       object Tłumaczenie_Etykieta_Label: TLabel
         Left = 815
-        Top = 160
+        Top = 145
         Width = 59
         Height = 13
         Caption = 'T'#322'umaczenie'
       end
       object Tłumaczenia_ComboBox: TComboBox
         Left = 815
-        Top = 180
+        Top = 165
         Width = 145
         Height = 22
         Hint = 'Enter - zastosuj.'
@@ -515,7 +519,7 @@
       end
       object Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox: TCheckBox
         Left = 815
-        Top = 130
+        Top = 115
         Width = 150
         Height = 17
         Hint = 
@@ -532,7 +536,7 @@
         Left = 5
         Top = 5
         Width = 800
-        Height = 270
+        Height = 295
         Caption = 'Ustawienia klawiszy'
         TabOrder = 0
         object Klawiatura__Gra_GroupBox: TGroupBox
@@ -721,7 +725,7 @@
           Left = 205
           Top = 15
           Width = 190
-          Height = 250
+          Height = 275
           Caption = 'Kamera'
           TabOrder = 1
           object Klawiatura__Kamera__Dół_Etykieta_Label: TLabel
@@ -785,10 +789,18 @@
           end
           object Klawiatura__Kamera__Tył_Etykieta_Label: TLabel
             Left = 10
-            Top = 220
+            Top = 245
             Width = 15
             Height = 13
             Caption = 'Ty'#322
+          end
+          object Klawiatura__Kamera__Reset_Etykieta_Label: TLabel
+            Left = 10
+            Top = 220
+            Width = 28
+            Height = 13
+            Hint = 'Resetuj pozycj'#281' kamery.'
+            Caption = 'Reset'
           end
           object Klawiatura__Kamera__Dół_Edit: TEdit
             Tag = 76
@@ -905,6 +917,20 @@
           object Klawiatura__Kamera__Tył_Edit: TEdit
             Tag = 74
             Left = 100
+            Top = 245
+            Width = 80
+            Height = 21
+            Hint = 'Ctrl + Del - <brak>.'
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 9
+            Text = 'J'
+            OnKeyDown = Klawiatura_EditKeyDown
+          end
+          object Klawiatura__Kamera__Reset_Edit: TEdit
+            Tag = 8
+            Left = 100
             Top = 220
             Width = 80
             Height = 21
@@ -913,7 +939,7 @@
             ReadOnly = True
             ShowHint = True
             TabOrder = 8
-            Text = 'J'
+            Text = 'Backspace'
             OnKeyDown = Klawiatura_EditKeyDown
           end
         end
@@ -1361,7 +1387,7 @@
           0000000000000000000000000000000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 7
         OnClick = Ustawienia__Wczytaj_BitBtnClick
       end
       object Ustawienia__Zapisz_BitBtn: TBitBtn
@@ -1472,12 +1498,12 @@
           0000000000000000000000000000000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 7
+        TabOrder = 8
         OnClick = Ustawienia__Zapisz_BitBtnClick
       end
       object Czołgi_Linia__3_CheckBox: TCheckBox
         Left = 815
-        Top = 70
+        Top = 60
         Width = 97
         Height = 17
         Caption = 'Czo'#322'gi linia 3'
@@ -1488,7 +1514,7 @@
       end
       object Czołgi_Linia__4_CheckBox: TCheckBox
         Left = 815
-        Top = 95
+        Top = 85
         Width = 97
         Height = 17
         Caption = 'Czo'#322'gi linia 4'
@@ -1496,6 +1522,92 @@
         State = cbChecked
         TabOrder = 3
         OnClick = Czołgi_Linia_CheckBoxClick
+      end
+      object Efekty_GroupBox: TGroupBox
+        Left = 815
+        Top = 201
+        Width = 150
+        Height = 100
+        Caption = 'Efekty'
+        TabOrder = 6
+        object Efekty__Chmury_CheckBox: TCheckBox
+          Left = 10
+          Top = 15
+          Width = 60
+          Height = 17
+          Caption = 'Chmury'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+          OnClick = Efekty__Chmury_CheckBoxClick
+        end
+        object Efekty__Dym_CheckBox: TCheckBox
+          Left = 75
+          Top = 15
+          Width = 50
+          Height = 17
+          Hint = 'Dym po trafieniu w ziemi'#281'.'
+          Caption = 'Dym'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+        end
+        object Efekty__Smuga_CheckBox: TCheckBox
+          Left = 75
+          Top = 35
+          Width = 60
+          Height = 17
+          Hint = 'Smuga za lec'#261'cym pociskiem.'
+          Caption = 'Smuga'
+          Checked = True
+          State = cbChecked
+          TabOrder = 3
+        end
+        object Efekty__Prezent_Zebranie_CheckBox: TCheckBox
+          Left = 10
+          Top = 35
+          Width = 60
+          Height = 17
+          Hint = 'Efekt zebrania prezentu.'
+          Caption = 'Prezent'
+          Checked = True
+          State = cbChecked
+          TabOrder = 2
+        end
+        object Efekty__Lufa_Wystrzał_CheckBox: TCheckBox
+          Left = 10
+          Top = 75
+          Width = 65
+          Height = 17
+          Hint = 'Efekt wystrza'#322'u z lufy.'
+          Caption = 'Wystrza'#322
+          Checked = True
+          State = cbChecked
+          TabOrder = 6
+          OnClick = Efekty__Czołgi__Utwórz__Zwolnij_CheckBoxClick
+        end
+        object Efekty__Trafienie_CheckBox: TCheckBox
+          Left = 10
+          Top = 55
+          Width = 65
+          Height = 17
+          Hint = 'Efekt trafienia w czo'#322'g.'
+          Caption = 'Trafienie'
+          Checked = True
+          State = cbChecked
+          TabOrder = 4
+        end
+        object Efekty__Trafienie__Alternatywny_CheckBox: TCheckBox
+          Left = 75
+          Top = 55
+          Width = 65
+          Height = 17
+          Hint = 'Alternatywny efekt trafienia w czo'#322'g.'
+          Caption = 'Traf. al.'
+          Checked = True
+          State = cbChecked
+          TabOrder = 5
+        end
       end
     end
     object O_Programie_TabSheet: TTabSheet
@@ -1508,17 +1620,17 @@
         Left = 0
         Top = 0
         Width = 976
-        Height = 195
+        Height = 208
         Align = alTop
         Caption = 
-          'Czo'#322'gi z Eris Kallisti Dyskordia'#13#10'wersja 2023.03.13.'#13#10#13#10'MIT Lice' +
-          'nse'#13#10#13#10'Copyright (c) 2022 Jacek Mulawka'#13#10#13#10'j.mulawka@interia.pl'#13 +
-          #10#13#10'https://github.com/jacek-mulawka'#13#10#13#10#13#10#13#10'Program jest darmowy,' +
-          ' udost'#281'pniony w postaci takiej jakiej jest wraz ze wszystkimi b'#322 +
-          #281'dami. U'#380'ytkownik zyskuje dost'#281'p do programu, u'#380'ywa programu na ' +
-          'w'#322'asne ryzyko i ponosi wy'#322#261'czn'#261' odpowiedzialno'#347#263' za wszelkie szk' +
-          'ody (w'#322'asne i niew'#322'asne) materialne i niematerialne oraz utrat'#281' ' +
-          'danych w zwi'#261'zku z u'#380'ywaniem programu.'
+          'Czo'#322'gi z Eris Kallisti Dyskordia'#13#10'wydanie 1.1.0.0'#13#10'wersja 2023.1' +
+          '2.04.'#13#10#13#10'MIT License'#13#10#13#10'Copyright (c) 2022 Jacek Mulawka'#13#10#13#10'j.mu' +
+          'lawka@interia.pl'#13#10#13#10'https://github.com/jacek-mulawka'#13#10#13#10#13#10#13#10'Prog' +
+          'ram jest darmowy, udost'#281'pniony w postaci takiej jakiej jest wraz' +
+          ' ze wszystkimi b'#322#281'dami. U'#380'ytkownik zyskuje dost'#281'p do programu, u' +
+          #380'ywa programu na w'#322'asne ryzyko i ponosi wy'#322#261'czn'#261' odpowiedzialno'#347 +
+          #263' za wszelkie szkody (w'#322'asne i niew'#322'asne) materialne i niemateri' +
+          'alne oraz utrat'#281' danych w zwi'#261'zku z u'#380'ywaniem programu.'
         WordWrap = True
         ExplicitWidth = 903
       end

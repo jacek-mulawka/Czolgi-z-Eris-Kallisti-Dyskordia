@@ -11,6 +11,9 @@ unit Czolgi;{14.Lis.2021}
   //
 
 
+  // Wydanie 1.1.0.0 - na niektórych komputerach gra ulega 'zamro¿eniu' najprawdopodobniej z powodu, któregoœ z efektów graficznych (chyba efekt__trafienie_gl_fire_fx_manager).
+
+
   // Kierunki wspó³rzêdnych uk³adu g³ównego.
   //
   //     góra y
@@ -22,13 +25,16 @@ unit Czolgi;{14.Lis.2021}
 interface
 
 uses
+  GLFireFX,
+  GLGeomObjects,
+  GLPolyhedron,
+  GLThorFX,
+  GLVectorGeometry,
+
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Buttons,
-  GLWin32Viewer, GLObjects, GLScene, GLCoordinates, GLCrossPlatform, GLBaseClasses, GLNavigator, GLCadencer,
-  GLCollision, GLVectorFileObjects, GLPolyhedron, GLParticleFX, GLPerlinPFX, GLSkydome,
-  GLKeyboard, GLGeomObjects, GLVectorGeometry, GLMaterial, GLBitmapFont, GLWindowsFont, GLHUDObjects, GLColor,
-  GLBehaviours, GLFireFX,
-  System.Math, System.DateUtils, System.IniFiles, System.StrUtils, System.Rtti, System.TypInfo;
+  GLCadencer, GLParticleFX, GLPerlinPFX, GLBitmapFont, GLWindowsFont, GLCollision, GLNavigator, GLHUDObjects,
+  GLObjects, GLScene, GLCoordinates, GLSkydome, GLCrossPlatform, GLBaseClasses, GLWin32Viewer;
 
 type
   TPrezent_Rodzaj = ( pr_Brak, pr_Jazda_Szybsza, pr_Prze³adowanie_Szybsze );
@@ -71,8 +77,8 @@ type
 
     amunicja_prêdkoœæ_pocz¹tkowa : double; // Ustawiona prêdkoœæ wystrzelenia amunicji [metry / sekundê].
 
-    czubek : TGLCone;
-    korpus : TGLCylinder;
+    czubek : GLGeomObjects.TGLCone;
+    korpus : GLGeomObjects.TGLCylinder;
   public
     { Public declarations }
     constructor Create( AParent : TGLBaseSceneObject );
@@ -119,7 +125,7 @@ type
     lufa,
     œwiat³o_obudowa,
     ty³
-      : TGLCylinder;
+      : GLGeomObjects.TGLCylinder;
 
     œwiat³o_szybka,
     wie¿a
@@ -134,33 +140,39 @@ type
 
     efekt__lufa_wystrza³_gl_fire_fx_manager,
     efekt__trafienie_gl_fire_fx_manager
-      : TGLFireFXManager;
+      : GLFireFX.TGLFireFXManager;
 
-    ko³a_t : array [ 1..8 ] of TGLCylinder;
+    efekt__trafienie__alternatywny_gl_thor_fx_manager : GLThorFX.TGLThorFXManager;
+
+    ko³a_t : array [ 1..8 ] of GLGeomObjects.TGLCylinder;
     ko³a_œruby_t : array [ 1..32 ] of TGLSphere; // 4 * 8 = 32.
 
     g¹sienice_elementy_t : array [ 1..48 ] of TGLCube;
   public
     { Public declarations }
-    constructor Create( AParent : TGLBaseSceneObject; gl_collision_manager_f : TGLCollisionManager; gl_cadencer_f : TGLCadencer );
+    constructor Create( AParent : TGLBaseSceneObject; gl_collision_manager_f : TGLCollisionManager; gl_cadencer_f : TGLCadencer; const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
     destructor Destroy(); override;
 
     procedure Amunicja_Prêdkoœæ_Ustaw( const delta_czasu_f, wiatr__si³a_aktualna_f : double; const wysokoœæ_f : single; const zmniejsz_f : boolean = false );
-    procedure JedŸ( const delta_czasu_f : double; const do_ty³u_f : boolean = false );
     procedure Celownik_Wylicz( const wiatr__si³a_aktualna_f : double; const wysokoœæ_f : single );
+    procedure Efekty__Trafienie__Utwórz( gl_cadencer_f : TGLCadencer; const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
+    procedure Efekty__Trafienie__Zwolnij( const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
+    procedure JedŸ( const delta_czasu_f : double; const do_ty³u_f : boolean = false );
     procedure Kolor_Ustaw( const vector_f : GLVectorGeometry.TVector );
-    procedure Lufa_Odrzut_Przesuniêcie_Ustaw();
-    procedure Lufa_Unoœ( const delta_czasu_f, wiatr__si³a_aktualna_f : double; const wysokoœæ_f : single; const w_dó³_f : boolean = false );
+    procedure Lufa__Odrzut_Przesuniêcie_Ustaw();
+    procedure Lufa__Unoœ( const delta_czasu_f, wiatr__si³a_aktualna_f : double; const wysokoœæ_f : single; const w_dó³_f : boolean = false );
     procedure Strza³();
   end;//---//TCzo³g
 
   TKrater = class( TGLDummyCube )
   private
     czy_wodny : boolean; // Czy krater powsta³ na wodzie
-    utworzenie_sekundy_czas_i : Int64; // Czas utworzenia krateru.
-    lej : TGLCylinder;
+
+    utworzenie_sekundy_czas_i__k : Int64; // Czas utworzenia krateru.
+
+    lej : GLGeomObjects.TGLCylinder;
     dym_efekt_gl_dummy_cube : TGLDummyCube;
-    grudy_t : array of TGLIcosahedron;
+    grudy_t : array of GLPolyhedron.TGLIcosahedron;
   public
     { Public declarations }
     constructor Create( AParent : TGLBaseSceneObject; const delta_czas_f : double; const czy_woda_f : boolean = false );
@@ -171,8 +183,8 @@ type
   private
     czy_prezent_zebrany : boolean; // Czy ktoœ trafi³ prezent i go otrzyma³.
 
-    trwanie_czas_sekund, // Ile czasu trwa prezent.
-    utworzenie_sekundy_czas_i // Czas utworzenia prezentu.
+    trwanie_czas_sekund__p, // Ile czasu trwa prezent.
+    utworzenie_sekundy_czas_i__p // Czas utworzenia prezentu.
       : Int64;
 
     prezent_rodzaj : TPrezent_Rodzaj;
@@ -191,7 +203,7 @@ type
     efekt__zebranie_gl_fire_fx_manager : GLFireFX.TGLFireFXManager;
   public
     { Public declarations }
-    constructor Create( AParent : TGLBaseSceneObject; cadencer_f : TGLCadencer );
+    constructor Create( AParent : TGLBaseSceneObject; cadencer_f : TGLCadencer; const efekt__zebranie_f : boolean );
     destructor Destroy(); override;
 
     procedure Wygl¹d_Zebranie_Ustaw();
@@ -201,8 +213,8 @@ type
   private
     ko³ysanie_wychylenie_aktualne : real; // Zakres ko³ysania wyra¿any w stopniach od 0 do 360 dla funkcji sinus.
     ko³ysanie_siê__dummy_cube : TGLDummyCube; // Lekko ko³ysze siê na wietrze.
-    korona : TGLFrustrum;
-    pieñ : TGLCylinder;
+    korona : GLGeomObjects.TGLFrustrum;
+    pieñ : GLGeomObjects.TGLCylinder;
   public
     { Public declarations }
     constructor Create( AParent : TGLBaseSceneObject );
@@ -295,6 +307,7 @@ type
     Klawiatura__Kamera__Obracanie_Mysz¹_Prze³¹cz_Etykieta_Label: TLabel;
     Klawiatura__Kamera__Prawo_Etykieta_Label: TLabel;
     Klawiatura__Kamera__Przód_Etykieta_Label: TLabel;
+    Klawiatura__Kamera__Reset_Etykieta_Label: TLabel;
     Klawiatura__Kamera__Ty³_Etykieta_Label: TLabel;
     Klawiatura__Kamera__Dó³_Edit: TEdit;
     Klawiatura__Kamera__Góra_Edit: TEdit;
@@ -304,6 +317,7 @@ type
     Klawiatura__Kamera__Przechy³_Lewo_Edit: TEdit;
     Klawiatura__Kamera__Przechy³_Prawo_Edit: TEdit;
     Klawiatura__Kamera__Przód_Edit: TEdit;
+    Klawiatura__Kamera__Reset_Edit: TEdit;
     Klawiatura__Kamera__Ty³_Edit: TEdit;
     Klawiatura__Gracz__1_GroupBox: TGroupBox;
     Klawiatura__Gracz__2_GroupBox: TGroupBox;
@@ -365,6 +379,14 @@ type
     Trudnoœæ_Stopieñ__OpóŸnienie__Strza³_SpinEdit: TSpinEdit;
     Czo³gi_Linia__3_CheckBox: TCheckBox;
     Czo³gi_Linia__4_CheckBox: TCheckBox;
+    Efekty_GroupBox: TGroupBox;
+    Efekty__Chmury_CheckBox: TCheckBox;
+    Efekty__Dym_CheckBox: TCheckBox;
+    Efekty__Smuga_CheckBox: TCheckBox;
+    Efekty__Prezent_Zebranie_CheckBox: TCheckBox;
+    Efekty__Lufa_Wystrza³_CheckBox: TCheckBox;
+    Efekty__Trafienie_CheckBox: TCheckBox;
+    Efekty__Trafienie__Alternatywny_CheckBox: TCheckBox;
     procedure FormShow( Sender: TObject );
     procedure FormClose( Sender: TObject; var Action: TCloseAction );
     procedure FormResize( Sender: TObject );
@@ -385,6 +407,8 @@ type
     procedure Informacja_Dodatkowa_TimerTimer( Sender: TObject );
     procedure Czo³gi_Linia_CheckBoxClick( Sender: TObject );
     procedure T³umaczenia_ComboBoxKeyDown( Sender: TObject; var Key: Word; Shift: TShiftState );
+    procedure Efekty__Chmury_CheckBoxClick( Sender: TObject );
+    procedure Efekty__Czo³gi__Utwórz__Zwolnij_CheckBoxClick( Sender: TObject );
   private
     { Private declarations }
     noc_zapada : boolean; // Gdy true œciemnia siê, gdy false rozjaœnia siê.
@@ -419,7 +443,14 @@ type
     napis_odœwie¿__ostatnie_wywo³anie_g
       : TDateTime;
 
+    kamera_kopia__direction_g,
+    kamera_kopia__position_g,
+    kamera_kopia__up_g
+      : GLVectorGeometry.TVector;
+
     informacja_dodatkowa_g : string;
+
+    window_state_kopia_g : TWindowState;
 
     amunicja_wystrzelona_list,
     kratery_list,
@@ -447,6 +478,8 @@ type
     procedure Kratery_Zwolnij_Jeden( krater_f : TKrater );
     procedure Kratery_Zwolnij_Wszystkie();
     procedure Kratery_Trwanie_Czas_SprawdŸ();
+
+    function Pauza__SprawdŸ() : boolean;
 
     procedure Prezent_Utwórz_Jeden();
     procedure Prezent_Zwolnij_Jeden( prezent_f : TPrezent );
@@ -477,7 +510,9 @@ type
 
     procedure SI_Decyduj( const delta_czasu_f : double );
 
-    procedure Chmury_Rozmieœæ_Losowo();
+    procedure Chmury__Dodaj();
+    procedure Chmury__Rozmieœæ_Losowo();
+    procedure Chmury__Usuñ();
 
     procedure T³umaczenie__Lista_Wczytaj();
     procedure T³umaczenie__Wczytaj();
@@ -496,6 +531,8 @@ const
   bonus_czo³gu_trwanie_czas_sekundy_c : Int64 = 60;
   czo³g_jazda_zakres__do_c : single = 200; //Zakres wspó³rzêdnych x do, po których mo¿e jeŸdziæ czo³g.
   czo³g_jazda_zakres__od_c : single = 19; // Zakres wspó³rzêdnych x od, po których mo¿e jeŸdziæ czo³g.
+  efekt__trafienie__alternatywny_gl_thor_fx_manager__maxpoints__disabled_c : integer = 1; // Minimalnie 1 - aby ukryæ efekt.
+  efekt__trafienie__alternatywny_gl_thor_fx_manager__maxpoints__enabled_c : integer = 64;
   lufa_uniesienie_maksymalne_k¹t_c : single = 85;
   si__jazda_cel__wyznaczenie_kolejne__losuj_z_sekundy_c : integer = 5;
   si__prezent_cel__wyznaczenie_kolejne_sekundy_c : Int64 = 2;
@@ -542,6 +579,20 @@ const
   function Pocisk_Ruch__Lot_Wysokoœæ_Najwiêksza( const prêdkoœæ_pocz¹tkowa_y_f, wysokoœæ_pocz¹tkowa_f : single ) : real;
 
 implementation
+
+uses
+  GLBehaviours,
+  GLColor,
+  GLKeyboard,
+  GLMaterial,
+  GLVectorFileObjects,
+
+  System.DateUtils,
+  System.IniFiles,
+  System.Math,
+  System.Rtti,
+  System.StrUtils,
+  System.TypInfo;
 
 {$R *.dfm}
 
@@ -821,13 +872,13 @@ begin
 
   Self.Parent := AParent;
 
-  Self.czubek := TGLCone.Create( Self );
+  Self.czubek := GLGeomObjects.TGLCone.Create( Self );
   Self.czubek.Parent := Self;
   Self.czubek.Scale.SetVector( 0.25, 1, 0.25 );
   Self.czubek.Position.X := 0.6;
   Self.czubek.RollAngle := -90;
 
-  Self.korpus := TGLCylinder.Create( Self );
+  Self.korpus := GLGeomObjects.TGLCylinder.Create( Self );
   Self.korpus.Parent := Self;
   Self.korpus.Scale.SetVector( 0.25, 0.5, 0.25 );
   Self.korpus.RollAngle := 90;
@@ -846,7 +897,7 @@ begin
 end;//---//Destruktor klasy TAmunicja.
 
 //Konstruktor klasy TCzo³g.
-constructor TCzo³g.Create( AParent : TGLBaseSceneObject; gl_collision_manager_f : TGLCollisionManager; gl_cadencer_f : TGLCadencer );
+constructor TCzo³g.Create( AParent : TGLBaseSceneObject; gl_collision_manager_f : TGLCollisionManager; gl_cadencer_f : TGLCadencer; const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
 var
   i,
   j
@@ -859,7 +910,10 @@ begin
   Self.amunicja_prêdkoœæ_ustawiona := 23;
   Self.bonus__jazda_szybsza__zdobycie_sekundy_czas_i := 0;
   Self.bonus__prze³adowanie_szybsze__zdobycie_sekundy_czas_i := 0;
+  Self.efekt__lufa_wystrza³_gl_fire_fx_manager := nil;
+  Self.efekt__trafienie_gl_fire_fx_manager := nil;
   Self.efekt__trafienie_sekundy_czas_i := 0;
+  Self.efekt__trafienie__alternatywny_gl_thor_fx_manager := nil;
   Self.si_decyduje := false;
   Self.si__jazda_cel := 0;
   Self.si__jazda_cel__wyznaczenie_kolejne_sekundy_czas := 0;
@@ -888,7 +942,7 @@ begin
   Self.przód.Position.Y := Self.kad³ub.Position.Y;
   Self.przód.Roll( 45 );
 
-  Self.ty³ := TGLCylinder.Create( Self );
+  Self.ty³ := GLGeomObjects.TGLCylinder.Create( Self );
   Self.ty³.Parent := Self;
   Self.ty³.Scale.SetVector( 1, Self.kad³ub.Scale.Z, Self.kad³ub.Scale.Y );
   Self.ty³.Position.X := -Self.kad³ub.Scale.X * 0.5;
@@ -920,7 +974,7 @@ begin
   Self.lufa_gl_dummy_cube.Parent := Self.wie¿a_dummy_cube;
   Self.lufa_gl_dummy_cube.Position.Y := 0.25;
 
-  Self.lufa := TGLCylinder.Create( Self );
+  Self.lufa := GLGeomObjects.TGLCylinder.Create( Self );
   Self.lufa.Parent := Self.lufa_gl_dummy_cube;
   Self.lufa.Scale.SetVector( 0.3, 5, 0.3 );
   Self.lufa.Roll( 90 );
@@ -931,7 +985,7 @@ begin
   Self.lufa_wylot_pozycja_gl_dummy_cube.Parent := Self.lufa_gl_dummy_cube;
   Self.lufa_wylot_pozycja_gl_dummy_cube.Position.X := Self.lufa.Scale.Y;
 
-  Self.œwiat³o_obudowa := TGLCylinder.Create( Self );
+  Self.œwiat³o_obudowa := GLGeomObjects.TGLCylinder.Create( Self );
   Self.œwiat³o_obudowa.Parent := Self;
   Self.œwiat³o_obudowa.RollAngle := 90;
   Self.œwiat³o_obudowa.Position.X := 1.75;
@@ -955,6 +1009,7 @@ begin
   Self.celownicza_linia.Position.Z := Self.œwiat³o_obudowa.Position.Z; // Aby linie celownicze czo³gów ustawionych naprzeciwko nie nachodzi³y na siebie.
   Self.celownicza_linia.AddNode(  Self.AbsoluteToLocal( Self.lufa_wylot_pozycja_gl_dummy_cube.AbsolutePosition ).X, 0, 0  );
   Self.celownicza_linia.AddNode( 10, 0, 0 );
+  Self.celownicza_linia.NodesAspect := lnaCube;
 
 
   for i := 1 to Length( Self.ko³a_œruby_t ) do
@@ -971,7 +1026,7 @@ begin
   for i := 1 to Length( Self.ko³a_t ) do
     begin
 
-      Self.ko³a_t[ i ] := TGLCylinder.Create( Self );
+      Self.ko³a_t[ i ] := GLGeomObjects.TGLCylinder.Create( Self );
       Self.ko³a_t[ i ].Parent := Self;
       Self.ko³a_t[ i ].PitchAngle := 90;
       //Self.ko³a_t[ i ].BottomRadius := 0.5;
@@ -1139,32 +1194,7 @@ begin
     //---//with TGLBCollision.Create( Self.kad³ub.Behaviours ) do
 
 
-  Self.efekt__lufa_wystrza³_gl_fire_fx_manager := TGLFireFXManager.Create( Self );
-  Self.efekt__lufa_wystrza³_gl_fire_fx_manager.Cadencer := gl_cadencer_f;
-  Self.efekt__lufa_wystrza³_gl_fire_fx_manager.Disabled := true;
-  Self.efekt__lufa_wystrza³_gl_fire_fx_manager.FireDensity := 1;
-  Self.efekt__lufa_wystrza³_gl_fire_fx_manager.FireRadius := 0.1;
-  Self.efekt__lufa_wystrza³_gl_fire_fx_manager.ParticleSize := 0.1;
-
-  // Dodaje efekt ognia z lufy.
-  GetOrCreateFireFX( Self.lufa_wylot_pozycja_gl_dummy_cube ).Manager := Self.efekt__lufa_wystrza³_gl_fire_fx_manager;
-
-
-  Self.efekt__trafienie_gl_fire_fx_manager := TGLFireFXManager.Create( Self );
-  Self.efekt__trafienie_gl_fire_fx_manager.Cadencer := gl_cadencer_f;
-  Self.efekt__trafienie_gl_fire_fx_manager.Disabled := true;
-  Self.efekt__trafienie_gl_fire_fx_manager.FireBurst := 0.75;
-  Self.efekt__trafienie_gl_fire_fx_manager.FireCrown := 0.5;
-  Self.efekt__trafienie_gl_fire_fx_manager.FireDensity := 1;
-  Self.efekt__trafienie_gl_fire_fx_manager.FireDir.Y := 1;
-  Self.efekt__trafienie_gl_fire_fx_manager.FireRadius := 0.25;
-  Self.efekt__trafienie_gl_fire_fx_manager.MaxParticles := 2560;
-  Self.efekt__trafienie_gl_fire_fx_manager.ParticleInterval := 0.025;
-  Self.efekt__trafienie_gl_fire_fx_manager.ParticleLife := 20;
-  Self.efekt__trafienie_gl_fire_fx_manager.ParticleSize := 0.4;
-  Self.efekt__trafienie_gl_fire_fx_manager.Reference := Self;
-
-  GetOrCreateFireFX( Self ).Manager := Self.efekt__trafienie_gl_fire_fx_manager;
+  Self.Efekty__Trafienie__Utwórz( gl_cadencer_f, efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f );
 
 end;//---//Konstruktor klasy TCzo³g.
 
@@ -1174,8 +1204,8 @@ var
   i : integer;
 begin
 
-  FreeAndNil( Self.efekt__lufa_wystrza³_gl_fire_fx_manager );
-  FreeAndNil( Self.efekt__trafienie_gl_fire_fx_manager );
+  Efekty__Trafienie__Zwolnij( true, true, true );
+
   FreeAndNil( Self.b³otnik__lewo );
   FreeAndNil( Self.b³otnik__prawo );
   FreeAndNil( Self.kad³ub );
@@ -1315,6 +1345,97 @@ begin
     Self.celownicza_linia.Scale.Y := wysokoœæ_f;
 
 end;//---//Funkcja Celownik_Wylicz().
+
+//Funkcja Efekty__Trafienie__Utwórz().
+procedure TCzo³g.Efekty__Trafienie__Utwórz( gl_cadencer_f : TGLCadencer; const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
+begin
+
+  if    ( efekt__lufa_wystrza³_f )
+    and ( Self.efekt__lufa_wystrza³_gl_fire_fx_manager = nil ) then
+    begin
+
+      Self.efekt__lufa_wystrza³_gl_fire_fx_manager := GLFireFX.TGLFireFXManager.Create( Self );
+      Self.efekt__lufa_wystrza³_gl_fire_fx_manager.Cadencer := gl_cadencer_f;
+      Self.efekt__lufa_wystrza³_gl_fire_fx_manager.Disabled := true;
+      Self.efekt__lufa_wystrza³_gl_fire_fx_manager.FireDensity := 1;
+      Self.efekt__lufa_wystrza³_gl_fire_fx_manager.FireRadius := 0.1;
+      Self.efekt__lufa_wystrza³_gl_fire_fx_manager.ParticleSize := 0.1;
+
+      // Dodaje efekt ognia z lufy.
+      GetOrCreateFireFX( Self.lufa_wylot_pozycja_gl_dummy_cube ).Manager := Self.efekt__lufa_wystrza³_gl_fire_fx_manager;
+
+    end;
+  //---//if    ( efekt__lufa_wystrza³_f ) (...)
+
+
+  if    ( efekt__trafienie_f )
+    and ( Self.efekt__trafienie_gl_fire_fx_manager = nil ) then
+    begin
+
+      Self.efekt__trafienie_gl_fire_fx_manager := GLFireFX.TGLFireFXManager.Create( Self );
+      Self.efekt__trafienie_gl_fire_fx_manager.Cadencer := gl_cadencer_f;
+      Self.efekt__trafienie_gl_fire_fx_manager.Disabled := true;
+      Self.efekt__trafienie_gl_fire_fx_manager.FireBurst := 0.75;
+      Self.efekt__trafienie_gl_fire_fx_manager.FireCrown := 0.5;
+      Self.efekt__trafienie_gl_fire_fx_manager.FireDensity := 1;
+      Self.efekt__trafienie_gl_fire_fx_manager.FireDir.Y := 1;
+      Self.efekt__trafienie_gl_fire_fx_manager.FireRadius := 0.25;
+      Self.efekt__trafienie_gl_fire_fx_manager.MaxParticles := 2560;
+      Self.efekt__trafienie_gl_fire_fx_manager.ParticleInterval := 0.025;
+      Self.efekt__trafienie_gl_fire_fx_manager.ParticleLife := 20;
+      Self.efekt__trafienie_gl_fire_fx_manager.ParticleSize := 0.4;
+      Self.efekt__trafienie_gl_fire_fx_manager.Reference := Self;
+
+      GetOrCreateFireFX( Self ).Manager := Self.efekt__trafienie_gl_fire_fx_manager;
+
+    end;
+  //---//if    ( efekt__trafienie_f ) (...)
+
+
+  if    ( efekty__trafienie__alternatywny_f )
+    and ( Self.efekt__trafienie__alternatywny_gl_thor_fx_manager = nil ) then
+    begin
+
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager := GLThorFX.TGLThorFXManager.Create( Self );
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Cadencer := gl_cadencer_f;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Core := false;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Disabled := true;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.GlowSize := 0.2;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.InnerColor.Color := GLColor.clrOrange;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.InnerColor.Alpha := 0.91;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Maxpoints := efekt__trafienie__alternatywny_gl_thor_fx_manager__maxpoints__disabled_c;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.OuterColor.Color := GLColor.clrRed;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.OuterColor.Alpha := 0.91;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Target.X := 2;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Target.Y := 1;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Target.Z := 0;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Vibrate := 1.8;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Wildness := 1.8;
+
+      GetOrCreateThorFX( Self ).Manager := Self.efekt__trafienie__alternatywny_gl_thor_fx_manager;
+
+    end;
+  //---//if    ( efekty__trafienie__alternatywny_f ) (...)
+
+end;//---//Funkcja Efekty__Trafienie__Utwórz().
+
+//Funkcja Efekty__Trafienie__Trafienie__Zwolnij().
+procedure TCzo³g.Efekty__Trafienie__Zwolnij( const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
+begin
+
+  if    ( efekt__lufa_wystrza³_f )
+    and ( Self.efekt__lufa_wystrza³_gl_fire_fx_manager <> nil ) then
+    FreeAndNil( Self.efekt__lufa_wystrza³_gl_fire_fx_manager );
+
+  if    ( efekt__trafienie_f )
+    and ( Self.efekt__trafienie_gl_fire_fx_manager <> nil ) then
+    FreeAndNil( Self.efekt__trafienie_gl_fire_fx_manager );
+
+  if    ( efekty__trafienie__alternatywny_f )
+    and ( Self.efekt__trafienie__alternatywny_gl_thor_fx_manager <> nil ) then
+    FreeAndNil( Self.efekt__trafienie__alternatywny_gl_thor_fx_manager );
+
+end;//---//Funkcja Efekty__Trafienie__Zwolnij().
 
 //Funkcja JedŸ().
 procedure TCzo³g.JedŸ( const delta_czasu_f : double; const do_ty³u_f : boolean = false );
@@ -1499,17 +1620,17 @@ begin//Funkcja Kolor_Ustaw().
 
 end;//---//Funkcja Kolor_Ustaw().
 
-//Funkcja Lufa_Odrzut_Przesuniêcie_Ustaw().
-procedure TCzo³g.Lufa_Odrzut_Przesuniêcie_Ustaw();
+//Funkcja Lufa__Odrzut_Przesuniêcie_Ustaw().
+procedure TCzo³g.Lufa__Odrzut_Przesuniêcie_Ustaw();
 begin
 
   //Self.lufa.Position.X := lufa_pozycja_x - 0.5 * ( 100 - Self.strza³_prze³adowanie_procent ) * 0.01;
   Self.lufa.Position.X := lufa_pozycja_x - ( 100 - Self.strza³_prze³adowanie_procent ) * 0.0055; // Uproszczenie obliczeñ.
 
-end;//---//Funkcja Lufa_Odrzut_Przesuniêcie_Ustaw().
+end;//---//Funkcja Lufa__Odrzut_Przesuniêcie_Ustaw().
 
-//Funkcja Lufa_Unoœ().
-procedure TCzo³g.Lufa_Unoœ( const delta_czasu_f, wiatr__si³a_aktualna_f : double; const wysokoœæ_f : single; const w_dó³_f : boolean = false );
+//Funkcja Lufa__Unoœ().
+procedure TCzo³g.Lufa__Unoœ( const delta_czasu_f, wiatr__si³a_aktualna_f : double; const wysokoœæ_f : single; const w_dó³_f : boolean = false );
 var
   ztsi : single;
 begin
@@ -1533,7 +1654,7 @@ begin
 
   Self.Celownik_Wylicz( wiatr__si³a_aktualna_f, wysokoœæ_f );
 
-end;//---//Funkcja Lufa_Unoœ().
+end;//---//Funkcja Lufa__Unoœ().
 
 //Funkcja Strza³().
 procedure TCzo³g.Strza³();
@@ -1547,16 +1668,18 @@ begin
 
   Self.strza³_prze³adowanie_procent := 0;
   Self.strza³_poprzedni_milisekundy_czas_i := Czas_Teraz_W_Milisekundach();
+  Self.celownicza_linia.NodesAspect := lnaCube;
 
-  Self.efekt__lufa_wystrza³_gl_fire_fx_manager.RingExplosion
-    (
-      1,
-      0,
-      0.1,
-      GLVectorGeometry.AffineVectorMake( 0, 1, 1 ),
-      GLVectorGeometry.AffineVectorMake( 0, 1, -1 ),
-      Round( 1000 )
-    );
+  if Self.efekt__lufa_wystrza³_gl_fire_fx_manager <> nil then
+    Self.efekt__lufa_wystrza³_gl_fire_fx_manager.RingExplosion
+      (
+        1,
+        0,
+        0.1,
+        GLVectorGeometry.AffineVectorMake( 0, 1, 1 ),
+        GLVectorGeometry.AffineVectorMake( 0, 1, -1 ),
+        Round( 1000 )
+      );
 
 end;//---//Funkcja Strza³().
 
@@ -1571,13 +1694,13 @@ begin
 
   Self.czy_wodny := czy_woda_f;
   Self.Parent := AParent;
-  Self.utworzenie_sekundy_czas_i := Czas_Teraz_W_Sekundach();
+  Self.utworzenie_sekundy_czas_i__k := Czas_Teraz_W_Sekundach();
 
   Self.dym_efekt_gl_dummy_cube := TGLDummyCube.Create( Self );
   Self.dym_efekt_gl_dummy_cube.Parent := Self;
   Self.dym_efekt_gl_dummy_cube.Position.Y := 2;
 
-  Self.lej := TGLCylinder.Create( Self );
+  Self.lej := GLGeomObjects.TGLCylinder.Create( Self );
   Self.lej.Parent := Self;
   Self.lej.Scale.Y := 0.25;
   Self.lej.Scale.X := 1;
@@ -1598,7 +1721,7 @@ begin
   for i := 0 to Length( Self.grudy_t ) - 1 do
     begin
 
-      Self.grudy_t[ i ] := TGLIcosahedron.Create( Self );
+      Self.grudy_t[ i ] := GLPolyhedron.TGLIcosahedron.Create( Self );
       Self.grudy_t[ i ].Parent := Self;
       Self.grudy_t[ i ].Material.FrontProperties.Diffuse.Color := Self.lej.Material.FrontProperties.Diffuse.Color;
       Self.grudy_t[ i ].Material.FrontProperties.Ambient.RandomColor();
@@ -1651,15 +1774,15 @@ begin
 end;//---//Destruktor klasy TKrater.
 
 //Konstruktor klasy TPrezent.
-constructor TPrezent.Create( AParent : TGLBaseSceneObject; cadencer_f : TGLCadencer );
+constructor TPrezent.Create( AParent : TGLBaseSceneObject; cadencer_f : TGLCadencer; const efekt__zebranie_f : boolean );
 begin
 
   inherited Create( Application );
 
   Self.Parent := AParent;
   Self.czy_prezent_zebrany := false;
-  Self.trwanie_czas_sekund := 30 + Random( 31 );
-  Self.utworzenie_sekundy_czas_i := Czas_Teraz_W_Sekundach();
+  Self.trwanie_czas_sekund__p := 30 + Random( 31 );
+  Self.utworzenie_sekundy_czas_i__p := Czas_Teraz_W_Sekundach();
   //Self.VisibleAtRunTime := true; //???
 
   Self.prezent_rodzaj := TPrezent_Rodzaj(Random( 2 ) + 1);
@@ -1737,15 +1860,22 @@ begin
   Self.RollAngle := Random( 91 ) - 45; // Wychylenie lewo - prawo.
   Self.TurnAngle := Random( 361 ); // Obrót lewo - prawo.
 
-  Self.efekt__zebranie_gl_fire_fx_manager := GLFireFX.TGLFireFXManager.Create( Self );
-  Self.efekt__zebranie_gl_fire_fx_manager.Cadencer := cadencer_f;
-  Self.efekt__zebranie_gl_fire_fx_manager.Disabled := true;
-  Self.efekt__zebranie_gl_fire_fx_manager.FireRadius := 0.75;
-  Self.efekt__zebranie_gl_fire_fx_manager.ParticleInterval := 0.3;
-  Self.efekt__zebranie_gl_fire_fx_manager.ParticleSize := 0.75;
-  Self.efekt__zebranie_gl_fire_fx_manager.InnerColor.RandomColor();
-  Self.efekt__zebranie_gl_fire_fx_manager.OuterColor.RandomColor();
-  TGLBFireFX(Self.AddNewEffect(TGLBFireFX)).Manager := efekt__zebranie_gl_fire_fx_manager;
+  if efekt__zebranie_f then
+    begin
+
+      Self.efekt__zebranie_gl_fire_fx_manager := GLFireFX.TGLFireFXManager.Create( Self );
+      Self.efekt__zebranie_gl_fire_fx_manager.Cadencer := cadencer_f;
+      Self.efekt__zebranie_gl_fire_fx_manager.Disabled := true;
+      Self.efekt__zebranie_gl_fire_fx_manager.FireRadius := 0.75;
+      Self.efekt__zebranie_gl_fire_fx_manager.ParticleInterval := 0.3;
+      Self.efekt__zebranie_gl_fire_fx_manager.ParticleSize := 0.75;
+      Self.efekt__zebranie_gl_fire_fx_manager.InnerColor.RandomColor();
+      Self.efekt__zebranie_gl_fire_fx_manager.OuterColor.RandomColor();
+      TGLBFireFX(Self.AddNewEffect(TGLBFireFX)).Manager := efekt__zebranie_gl_fire_fx_manager;
+
+    end
+  else//---//if efekt__zebranie_f then
+    Self.efekt__zebranie_gl_fire_fx_manager := nil;
 
 end;//---//Konstruktor klasy TPrezent.
 
@@ -1753,7 +1883,8 @@ end;//---//Konstruktor klasy TPrezent.
 destructor TPrezent.Destroy();
 begin
 
-  FreeAndNil( Self.efekt__zebranie_gl_fire_fx_manager );
+  if Self.efekt__zebranie_gl_fire_fx_manager <> nil then
+    FreeAndNil( Self.efekt__zebranie_gl_fire_fx_manager );
 
   FreeAndNil( Self.kszta³t );
   FreeAndNil( Self.wst¹¿ka_x );
@@ -1778,31 +1909,39 @@ begin
 
 
   Self.ResetRotations();
-  Self.efekt__zebranie_gl_fire_fx_manager.Disabled := false;
 
 
-  Self.efekt__zebranie_gl_fire_fx_manager.IsotropicExplosion
-    (
-      0.5,
-      0.5,
-      1,
-      100
-    );
+  if Self.efekt__zebranie_gl_fire_fx_manager <> nil then
+    begin
 
-  Self.efekt__zebranie_gl_fire_fx_manager.RingExplosion
-    (
-      1,
-      0,
-      1,
-      GLVectorGeometry.AffineVectorMake( 2, 0, 1 ),
-      GLVectorGeometry.AffineVectorMake( 2, 0, 1 ),
-      50
-    );
+      Self.efekt__zebranie_gl_fire_fx_manager.Disabled := false;
+
+
+      Self.efekt__zebranie_gl_fire_fx_manager.IsotropicExplosion
+        (
+          0.5,
+          0.5,
+          1,
+          100
+        );
+
+      Self.efekt__zebranie_gl_fire_fx_manager.RingExplosion
+        (
+          1,
+          0,
+          1,
+          GLVectorGeometry.AffineVectorMake( 2, 0, 1 ),
+          GLVectorGeometry.AffineVectorMake( 2, 0, 1 ),
+          50
+        );
+
+    end;
+  //---//if Self.efekt__zebranie_gl_fire_fx_manager <> nil then
 
 
   // Po zebraniu prezentu efekt utrzymuje siê pewien czas.
-  Self.trwanie_czas_sekund := 5;
-  Self.utworzenie_sekundy_czas_i := Czas_Teraz_W_Sekundach();
+  Self.trwanie_czas_sekund__p := 5;
+  Self.utworzenie_sekundy_czas_i__p := Czas_Teraz_W_Sekundach();
 
 end;//---//Funkcja Wygl¹d_Zebranie_Ustaw().
 
@@ -1820,7 +1959,7 @@ begin
   Self.ko³ysanie_siê__dummy_cube := TGLDummyCube.Create( Self );
   Self.ko³ysanie_siê__dummy_cube.Parent := Self;
 
-  Self.korona := TGLFrustrum.Create( Self );
+  Self.korona := GLGeomObjects.TGLFrustrum.Create( Self );
   Self.korona.Parent := Self.ko³ysanie_siê__dummy_cube;
   Self.korona.Height := 1;
   Self.korona.Scale.Scale( 4 );
@@ -1828,7 +1967,7 @@ begin
   Self.korona.Position.Y := 11.5;
   Self.korona.Material.FrontProperties.Diffuse.Color := GLColor.clrDkGreenCopper;
 
-  Self.pieñ := TGLCylinder.Create( Self );
+  Self.pieñ := GLGeomObjects.TGLCylinder.Create( Self );
   Self.pieñ.Parent := Self.ko³ysanie_siê__dummy_cube;
   Self.pieñ.Material.FrontProperties.Emission.Color := GLColor.clrBrown;
   Self.pieñ.Scale.Y := 5;
@@ -1867,37 +2006,37 @@ const
   ruch_c_l : single = 5;
 begin
 
-  if IsKeyDown( Klawiatura__Kamera__Przód_Edit.Tag ) then // uses GLKeyboard.
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Przód_Edit.Tag ) then
     Gra_GLCamera.Move( ruch_c_l * delta_czasu_f );
 
-  if IsKeyDown( Klawiatura__Kamera__Ty³_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Ty³_Edit.Tag ) then
     Gra_GLCamera.Move( -ruch_c_l * delta_czasu_f );
 
-  if IsKeyDown( Klawiatura__Kamera__Lewo_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Lewo_Edit.Tag ) then
     Gra_GLCamera.Slide( -ruch_c_l * delta_czasu_f );
 
-  if IsKeyDown( Klawiatura__Kamera__Prawo_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Prawo_Edit.Tag ) then
     Gra_GLCamera.Slide( ruch_c_l * delta_czasu_f );
 
 
-  if IsKeyDown( Klawiatura__Kamera__Góra_Edit.Tag ) then // Góra.
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Góra_Edit.Tag ) then // Góra.
     Gra_GLCamera.Lift( ruch_c_l * delta_czasu_f );
 
-  if IsKeyDown( Klawiatura__Kamera__Dó³_Edit.Tag ) then // Dó³.
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Dó³_Edit.Tag ) then // Dó³.
     Gra_GLCamera.Lift( -ruch_c_l * delta_czasu_f );
 
 
-  if IsKeyDown( Klawiatura__Kamera__Przechy³_Lewo_Edit.Tag ) then // Beczka w lewo.
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Przechy³_Lewo_Edit.Tag ) then // Beczka w lewo.
     Gra_GLCamera.Roll( ruch_c_l * delta_czasu_f * 10 );
 
-  if IsKeyDown( Klawiatura__Kamera__Przechy³_Prawo_Edit.Tag ) then // Beczka w prawo.
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Przechy³_Prawo_Edit.Tag ) then // Beczka w prawo.
     Gra_GLCamera.Roll( -ruch_c_l * delta_czasu_f * 10 );
 
 
-  //if IsKeyDown( 'Z' ) then
+  //if GLKeyboard.IsKeyDown( 'Z' ) then
   //  Lewo_GLCube.Slide( ruch_c_l * delta_czasu_f );
   //
-  //if IsKeyDown( 'X' ) then
+  //if GLKeyboard.IsKeyDown( 'X' ) then
   //  Lewo_GLCube.Slide( -ruch_c_l * delta_czasu_f );
 
 end;//---//Funkcja Kamera_Ruch().
@@ -2014,7 +2153,7 @@ begin
     gra_wspó³czynnik_prêdkoœci_g := 0.0001;
 
 
-  if GLCadencer1.Enabled then // Je¿eli zmienia siê GLCadencer1.TimeMultiplier podczas pauzy to po wy³¹czeniu pauzy nastêpuje skok w przeliczaniu.
+  if not Pauza__SprawdŸ() then // Je¿eli zmienia siê GLCadencer1.TimeMultiplier podczas pauzy to po wy³¹czeniu pauzy nastêpuje skok w przeliczaniu.
     GLCadencer1.TimeMultiplier := gra_wspó³czynnik_prêdkoœci_g; // 0 - zatrzymany, (0..1) - spowalnia, 1 - prêdkoœæ normalna gry, 1 > - przyœpiesza.
 
 
@@ -2038,42 +2177,42 @@ begin
   if zti <> -99 then
     begin
 
-      if IsKeyDown( Klawiatura__Gracz__1__Strza³_Edit.Tag ) then
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Strza³_Edit.Tag ) then
         czo³gi_t[ zti ].Strza³();
 
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f, true );
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f );
 
 
-      if IsKeyDown( Klawiatura__Gracz__1__Lufa_Dó³_Edit.Tag ) then
-        czo³gi_t[ zti ].Lufa_Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Lufa_Dó³_Edit.Tag ) then
+        czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
-      if IsKeyDown( Klawiatura__Gracz__1__Lufa_Góra_Edit.Tag ) then
-        czo³gi_t[ zti ].Lufa_Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Lufa_Góra_Edit.Tag ) then
+        czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
 
-      if IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
-      if IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
     end;
@@ -2085,42 +2224,42 @@ begin
   if zti <> -99 then
     begin
 
-      if IsKeyDown( Klawiatura__Gracz__2__Strza³_Edit.Tag ) then
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Strza³_Edit.Tag ) then
         czo³gi_t[ zti ].Strza³();
 
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f, true );
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f );
 
 
-      if IsKeyDown( Klawiatura__Gracz__2__Lufa_Dó³_Edit.Tag ) then
-        czo³gi_t[ zti ].Lufa_Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Lufa_Dó³_Edit.Tag ) then
+        czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
-      if IsKeyDown( Klawiatura__Gracz__2__Lufa_Góra_Edit.Tag ) then
-        czo³gi_t[ zti ].Lufa_Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Lufa_Góra_Edit.Tag ) then
+        czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
 
-      if IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
-      if IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
+      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
     end;
@@ -2222,15 +2361,16 @@ begin
   //---//with TGLBCollision.Create( zt_amunicja.kad³ub.Behaviours ) do
 
   // Dodaje efekt smugi za amunicj¹.
-  with GetOrCreateSourcePFX( zt_amunicja.korpus ) do // uses GLParticleFX.
-    begin
+  if Efekty__Smuga_CheckBox.Checked then
+    with GLParticleFX.GetOrCreateSourcePFX( zt_amunicja.korpus ) do
+      begin
 
-      Manager := Efekt__Smuga_GLPerlinPFXManager;
-      ParticleInterval := 0.01;
-      //MoveUp();
+        Manager := Efekt__Smuga_GLPerlinPFXManager;
+        ParticleInterval := 0.01;
+        //MoveUp();
 
-    end;
-  //---//with GetOrCreateSourcePFX( zt_amunicja.korpus ) do
+      end;
+    //---//with GLParticleFX.GetOrCreateSourcePFX( zt_amunicja.korpus ) do
 
 
   zt_amunicja.wystrza³_milisekundy__czas_i := Czas_Teraz_W_Milisekundach();
@@ -2478,15 +2618,16 @@ begin
   zt_krater.Position.SetPoint( x_f, y_f, z_f );
 
   // Dodaje efekt dymu nad kraterem.
-  if not zt_krater.czy_wodny then
-    with GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do // uses GLParticleFX.
+  if    ( not zt_krater.czy_wodny )
+    and ( Efekty__Dym_CheckBox.Checked ) then
+    with GLParticleFX.GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
       begin
 
         Manager := Efekt__Dym_GLPerlinPFXManager;
         ParticleInterval := 0.01;
 
       end;
-    //---//with GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
+    //---//with GLParticleFX.GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
 
 end;//---//Funkcja Kratery_Utwórz_Jeden().
 
@@ -2542,16 +2683,16 @@ begin
     begin
 
       if    ( TKrater(kratery_list[ i ]).dym_efekt_gl_dummy_cube.Effects.Count > 0 )
-        and (  Czas_Miêdzy_W_Sekundach( TKrater(kratery_list[ i ]).utworzenie_sekundy_czas_i ) > 6  ) then
+        and (  Czas_Miêdzy_W_Sekundach( TKrater(kratery_list[ i ]).utworzenie_sekundy_czas_i__k ) > 6  ) then
         TKrater(kratery_list[ i ]).dym_efekt_gl_dummy_cube.Effects.Clear();
 
       if   (
                  ( TKrater(kratery_list[ i ]).czy_wodny )
-             and (  Czas_Miêdzy_W_Sekundach( TKrater(kratery_list[ i ]).utworzenie_sekundy_czas_i ) > 2  )
+             and (  Czas_Miêdzy_W_Sekundach( TKrater(kratery_list[ i ]).utworzenie_sekundy_czas_i__k ) > 2  )
            )
         or (
                  ( not TKrater(kratery_list[ i ]).czy_wodny )
-             and (  Czas_Miêdzy_W_Sekundach( TKrater(kratery_list[ i ]).utworzenie_sekundy_czas_i ) > 60  )
+             and (  Czas_Miêdzy_W_Sekundach( TKrater(kratery_list[ i ]).utworzenie_sekundy_czas_i__k ) > 60  )
            ) then
         begin
 
@@ -2567,6 +2708,20 @@ begin
 
 end;//---//Funkcja Kratery_Trwanie_Czas_SprawdŸ().
 
+//Funkcja Pauza__SprawdŸ().
+function TCzolgi_Form.Pauza__SprawdŸ() : boolean;
+begin
+
+  //
+  // Funkcja sprawdza czy jest aktywna pauza.
+  //
+  // Zwraca prawdê gdy jest aktywna pauza.
+  //
+
+  Result := not GLCadencer1.Enabled;
+
+end;//---//Funkcja Pauza__SprawdŸ().
+
 //Funkcja Prezent_Utwórz_Jeden().
 procedure TCzolgi_Form.Prezent_Utwórz_Jeden();
 
@@ -2577,7 +2732,7 @@ procedure TCzolgi_Form.Prezent_Utwórz_Jeden();
     zt_prezent : TPrezent;
   begin
 
-    zt_prezent := TPrezent.Create( Gra_Obiekty_GLDummyCube, GLCadencer1 );
+    zt_prezent := TPrezent.Create( Gra_Obiekty_GLDummyCube, GLCadencer1, Efekty__Prezent_Zebranie_CheckBox.Checked );
     prezenty_list.Add( zt_prezent );
 
     x := Random( 21 ) - 10;
@@ -2691,13 +2846,13 @@ begin
   for i := prezenty_list.Count - 1 downto 0 do
     begin
 
-      if Czas_Miêdzy_W_Sekundach( TPrezent(prezenty_list[ i ]).utworzenie_sekundy_czas_i ) > TPrezent(prezenty_list[ i ]).trwanie_czas_sekund then
+      if Czas_Miêdzy_W_Sekundach( TPrezent(prezenty_list[ i ]).utworzenie_sekundy_czas_i__p ) > TPrezent(prezenty_list[ i ]).trwanie_czas_sekund__p then
         begin
 
           Prezent_Zwolnij_Jeden( TPrezent(prezenty_list[ i ]) );
 
         end;
-      //---//if Czas_Miêdzy_W_Sekundach( TPrezent(prezenty_list[ i ]).utworzenie_sekundy_czas_i ) > TPrezent(prezenty_list[ i ]).trwanie_czas_sekund then
+      //---//if Czas_Miêdzy_W_Sekundach( TPrezent(prezenty_list[ i ]).utworzenie_sekundy_czas_i__p ) > TPrezent(prezenty_list[ i ]).trwanie_czas_sekund__p then
 
     end;
   //---//for i := prezenty_list.Count - 1 downto 0 do
@@ -2738,15 +2893,37 @@ begin
     if czo³gi_t[ i ] <> nil then
       begin
 
-        if not czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled then
-          czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.InitialDir.X := -Wiatr_Si³a_Modyfikacja_O_Ko³ysanie() * 0.1;
+        if czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager <> nil then
+          begin
 
-        if    ( not czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled )
-          and (  Czas_Miêdzy_W_Sekundach( czo³gi_t[ i ].efekt__trafienie_sekundy_czas_i ) > 6  ) then
-          czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled := true;
+            if not czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled then
+              czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.InitialDir.X := -Wiatr_Si³a_Modyfikacja_O_Ko³ysanie() * 0.1;
+
+            if    ( not czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled )
+              and (  Czas_Miêdzy_W_Sekundach( czo³gi_t[ i ].efekt__trafienie_sekundy_czas_i ) > 6  ) then
+              czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled := true;
+
+          end;
+        //---//if czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager <> nil then
 
 
-        if czo³gi_t[ i ].strza³_prze³adowanie_procent <= 100 then
+        if czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager <> nil then
+          begin
+
+            if    ( not czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager.Disabled )
+              and (  Czas_Miêdzy_W_Sekundach( czo³gi_t[ i ].efekt__trafienie_sekundy_czas_i ) > 6  ) then
+              begin
+
+                czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager.Maxpoints := efekt__trafienie__alternatywny_gl_thor_fx_manager__maxpoints__disabled_c;
+                czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager.Disabled := true;
+
+              end;
+
+          end;
+        //---//if czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager <> nil then
+
+
+        if czo³gi_t[ i ].strza³_prze³adowanie_procent < 100 then
           begin
 
             czo³gi_t[ i ].strza³_prze³adowanie_procent :=
@@ -2762,11 +2939,16 @@ begin
             if czo³gi_t[ i ].strza³_prze³adowanie_procent > 100 then
               czo³gi_t[ i ].strza³_prze³adowanie_procent := 100;
 
+
+            if    ( czo³gi_t[ i ].strza³_prze³adowanie_procent >= 100 )
+              and ( czo³gi_t[ i ].celownicza_linia.NodesAspect <> lnaAxes ) then
+              czo³gi_t[ i ].celownicza_linia.NodesAspect := lnaAxes;
+
           end;
-        //---//if czo³gi_t[ i ].strza³_prze³adowanie_procent <= 100 then
+        //---//if czo³gi_t[ i ].strza³_prze³adowanie_procent < 100 then
 
 
-        czo³gi_t[ i ].Lufa_Odrzut_Przesuniêcie_Ustaw();
+        czo³gi_t[ i ].Lufa__Odrzut_Przesuniêcie_Ustaw();
 
 
         // Bonusy czo³gu.
@@ -3543,7 +3725,7 @@ procedure TCzolgi_Form.Ustawienia_Plik( const zapisuj_ustawienia_f : boolean = f
   end;//---//Funkcja Boolean_W__Tak_Nie() w Ustawienia_Plik().
 
 var
-  plik_ini : TIniFile; // uses IniFiles.
+  plik_ini : System.IniFiles.TIniFile;
   zti : integer;
   zts : string;
   tekst_string_list : TStringList;
@@ -3667,6 +3849,126 @@ begin//Funkcja Ustawienia_Plik().
 
   if not zapisuj_ustawienia_f then
     noc_zapada := zts = Boolean_W__Tak_Nie( true );
+
+
+  zts := Boolean_W__Tak_Nie( Efekty__Chmury_CheckBox.Checked );
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'GRA', 'efekty__chmury' )  ) then
+    plik_ini.WriteString( 'GRA', 'efekty__chmury', zts )
+  else
+    zts := plik_ini.ReadString( 'GRA', 'efekty__chmury', zts ); // Je¿eli nie znajdzie to podstawia wartoœæ zts.
+
+  if not zapisuj_ustawienia_f then
+    begin
+
+      Efekty__Chmury_CheckBox.OnClick := nil; // Aby nie wywo³ywaæ w tym momencie zdarzenia.
+
+      Efekty__Chmury_CheckBox.Checked := zts = Boolean_W__Tak_Nie( true );
+
+      Efekty__Chmury_CheckBox.OnClick := Efekty__Chmury_CheckBoxClick;
+
+    end;
+  //---//if not zapisuj_ustawienia_f then
+
+
+  zts := Boolean_W__Tak_Nie( Efekty__Dym_CheckBox.Checked );
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'GRA', 'efekty__dym' )  ) then
+    plik_ini.WriteString( 'GRA', 'efekty__dym', zts )
+  else
+    zts := plik_ini.ReadString( 'GRA', 'efekty__dym', zts ); // Je¿eli nie znajdzie to podstawia wartoœæ zts.
+
+  if not zapisuj_ustawienia_f then
+    Efekty__Dym_CheckBox.Checked := zts = Boolean_W__Tak_Nie( true );
+
+
+  zts := Boolean_W__Tak_Nie( Efekty__Lufa_Wystrza³_CheckBox.Checked );
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'GRA', 'efekty__lufa_wystrza³' )  ) then
+    plik_ini.WriteString( 'GRA', 'efekty__lufa_wystrza³', zts )
+  else
+    zts := plik_ini.ReadString( 'GRA', 'efekty__lufa_wystrza³', zts ); // Je¿eli nie znajdzie to podstawia wartoœæ zts.
+
+  if not zapisuj_ustawienia_f then
+    begin
+
+      Efekty__Lufa_Wystrza³_CheckBox.OnClick := nil; // Aby nie wywo³ywaæ w tym momencie zdarzenia.
+
+      Efekty__Lufa_Wystrza³_CheckBox.Checked := zts = Boolean_W__Tak_Nie( true );
+
+      Efekty__Lufa_Wystrza³_CheckBox.OnClick := Efekty__Czo³gi__Utwórz__Zwolnij_CheckBoxClick;
+
+    end;
+  //---//if not zapisuj_ustawienia_f then
+
+
+  zts := Boolean_W__Tak_Nie( Efekty__Prezent_Zebranie_CheckBox.Checked );
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'GRA', 'efekty__prezent_zebranie' )  ) then
+    plik_ini.WriteString( 'GRA', 'efekty__prezent_zebranie', zts )
+  else
+    zts := plik_ini.ReadString( 'GRA', 'efekty__prezent_zebranie', zts ); // Je¿eli nie znajdzie to podstawia wartoœæ zts.
+
+  if not zapisuj_ustawienia_f then
+    Efekty__Prezent_Zebranie_CheckBox.Checked := zts = Boolean_W__Tak_Nie( true );
+
+
+  zts := Boolean_W__Tak_Nie( Efekty__Smuga_CheckBox.Checked );
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'GRA', 'efekty__smuga' )  ) then
+    plik_ini.WriteString( 'GRA', 'efekty__smuga', zts )
+  else
+    zts := plik_ini.ReadString( 'GRA', 'efekty__smuga', zts ); // Je¿eli nie znajdzie to podstawia wartoœæ zts.
+
+  if not zapisuj_ustawienia_f then
+    Efekty__Smuga_CheckBox.Checked := zts = Boolean_W__Tak_Nie( true );
+
+
+  zts := Boolean_W__Tak_Nie( Efekty__Trafienie_CheckBox.Checked );
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'GRA', 'efekty__trafienie' )  ) then
+    plik_ini.WriteString( 'GRA', 'efekty__trafienie', zts )
+  else
+    zts := plik_ini.ReadString( 'GRA', 'efekty__trafienie', zts ); // Je¿eli nie znajdzie to podstawia wartoœæ zts.
+
+  if not zapisuj_ustawienia_f then
+    begin
+
+      Efekty__Trafienie_CheckBox.OnClick := nil; // Aby nie wywo³ywaæ w tym momencie zdarzenia.
+
+      Efekty__Trafienie_CheckBox.Checked := zts = Boolean_W__Tak_Nie( true );
+
+      Efekty__Trafienie_CheckBox.OnClick := Efekty__Czo³gi__Utwórz__Zwolnij_CheckBoxClick;
+
+    end;
+  //---//if not zapisuj_ustawienia_f then
+
+
+  zts := Boolean_W__Tak_Nie( Efekty__Trafienie__Alternatywny_CheckBox.Checked );
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'GRA', 'efekty__trafienie__alternatywny' )  ) then
+    plik_ini.WriteString( 'GRA', 'efekty__trafienie__alternatywny', zts )
+  else
+    zts := plik_ini.ReadString( 'GRA', 'efekty__trafienie__alternatywny', zts ); // Je¿eli nie znajdzie to podstawia wartoœæ zts.
+
+  if not zapisuj_ustawienia_f then
+    begin
+
+      Efekty__Trafienie__Alternatywny_CheckBox.OnClick := nil; // Aby nie wywo³ywaæ w tym momencie zdarzenia.
+
+      Efekty__Trafienie__Alternatywny_CheckBox.Checked := zts = Boolean_W__Tak_Nie( true );
+
+      Efekty__Trafienie__Alternatywny_CheckBox.OnClick := Efekty__Czo³gi__Utwórz__Zwolnij_CheckBoxClick;
+
+    end;
+  //---//if not zapisuj_ustawienia_f then
 
 
   zts := Boolean_W__Tak_Nie( Gracz__1__Akceptuje_Si_CheckBox.Checked );
@@ -4071,6 +4373,18 @@ begin//Funkcja Ustawienia_Plik().
   Klawiatura__Kamera__Przód_Edit.Text := Nazwa_Klawisza( Klawiatura__Kamera__Przód_Edit.Tag );
 
 
+  zti := Klawiatura__Kamera__Reset_Edit.Tag;
+
+  if   (  zapisuj_ustawienia_f )
+    or (  not plik_ini.ValueExists( 'KLAWIATURA_KONFIGURACJA', 'kamera__reset' )  ) then
+    plik_ini.WriteInteger( 'KLAWIATURA_KONFIGURACJA', 'kamera__reset', zti )
+  else
+    zti := plik_ini.ReadInteger( 'KLAWIATURA_KONFIGURACJA', 'kamera__reset', zti ); // Je¿eli nie znajdzie to podstawia wartoœæ zti.
+
+  Klawiatura__Kamera__Reset_Edit.Tag := zti;
+  Klawiatura__Kamera__Reset_Edit.Text := Nazwa_Klawisza( Klawiatura__Kamera__Reset_Edit.Tag );
+
+
   zti := Klawiatura__Kamera__Ty³_Edit.Tag;
 
   if   (  zapisuj_ustawienia_f )
@@ -4245,16 +4559,16 @@ end;//---//Funkcja Ustawienia_Plik().
 //Funkcja Komunikat_Wyœwietl().
 function TCzolgi_Form.Komunikat_Wyœwietl( const text_f, caption_f : string; const flags_f : integer ) : integer;
 var
-  czy_pauza,
+  czy_pauza_l,
   gl_user_interface__mouse_look_active
     : boolean;
 begin
 
-  czy_pauza := not GLCadencer1.Enabled;
+  czy_pauza_l := Pauza__SprawdŸ();
   gl_user_interface__mouse_look_active := GLUserInterface1.MouseLookActive;
 
 
-  if not czy_pauza then
+  if not czy_pauza_l then
     Pauza_ButtonClick( nil );
 
   if GLUserInterface1.MouseLookActive then
@@ -4264,7 +4578,7 @@ begin
   Result := Application.MessageBox( PChar(text_f), PChar(caption_f), flags_f );
 
 
-  if not czy_pauza then
+  if not czy_pauza_l then
     Pauza_ButtonClick( nil );
 
   if gl_user_interface__mouse_look_active then
@@ -4279,7 +4593,7 @@ var
   zts : string;
 begin
 
-  if GLCadencer1.Enabled then
+  if not Pauza__SprawdŸ() then
     begin
 
       // Nie pauza.
@@ -4287,7 +4601,7 @@ begin
       Punkty__Separator_GLHUDText.Text := '|';
 
     end
-  else//if GLCadencer1.Enabled then
+  else//if not Pauza__SprawdŸ() then
     begin
 
       // Pauza.
@@ -4298,7 +4612,7 @@ begin
         t³umaczenie_komunikaty_r.ekran_napis__pauza;
 
     end;
-  //---//if GLCadencer1.Enabled then
+  //---//if not Pauza__SprawdŸ() then
 
 
   if Trim( napis_f ) <> '' then
@@ -4714,9 +5028,9 @@ begin
           begin
 
             if czo³gi_t[ i ].lufa_gl_dummy_cube.RollAngle > czo³gi_t[ i ].si__lufa_uniesienie_k¹t then
-              czo³gi_t[ i ].Lufa_Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value )
+              czo³gi_t[ i ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value )
             else//if czo³gi_t[ i ].lufa_gl_dummy_cube.RollAngle > czo³gi_t[ i ].si__lufa_uniesienie_k¹t then
-              czo³gi_t[ i ].Lufa_Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
+              czo³gi_t[ i ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
           end;
         //---//if Abs( czo³gi_t[ i ].lufa_gl_dummy_cube.RollAngle - czo³gi_t[ i ].si__lufa_uniesienie_k¹t ) > 0.1 then
@@ -4746,8 +5060,52 @@ begin
 
 end;//---//Funkcja SI_Decyduj().
 
-//Funkcja Chmury_Rozmieœæ_Losowo().
-procedure TCzolgi_Form.Chmury_Rozmieœæ_Losowo();
+//Funkcja Chmury__Dodaj().
+procedure TCzolgi_Form.Chmury__Dodaj();
+var
+  i : integer;
+begin
+
+  if Chmury_GLDummyCube.Effects.Count <= 0 then
+    with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
+      begin
+
+        Manager := Efekt__Chmury_GLPerlinPFXManager;
+        ParticleInterval := 0.1;
+        EffectScale := 5;
+
+      end;
+    //---//with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
+
+
+  if Chmury_GLDummyCube.Count <= 0 then
+    for i := 1 to 50 do
+      with TGLDummyCube.Create( Chmury_GLDummyCube ) do
+        begin
+
+          Parent := Chmury_GLDummyCube;
+          //VisibleAtRunTime := true; //???
+
+          with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
+            begin
+
+              Manager := Efekt__Chmury_GLPerlinPFXManager;
+              ParticleInterval := 0.1;
+              EffectScale := 5;
+
+            end;
+          //---//with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
+
+        end;
+      //---//with TGLDummyCube.Create( Chmury_GLDummyCube ) do
+
+
+  Chmury__Rozmieœæ_Losowo();
+
+end;//---//Funkcja Chmury__Dodaj().
+
+//Funkcja Chmury__Rozmieœæ_Losowo().
+procedure TCzolgi_Form.Chmury__Rozmieœæ_Losowo();
 var
   i : integer;
 begin
@@ -4772,7 +5130,22 @@ begin
   chmury_rozmieœæ_losowo__wyznaczenie_kolejne_sekundy_czas := Random( 4 ); //3 + Random( 11 ) //???
   chmury_rozmieœæ_losowo__wyznaczenie_sekundy_czas_i := Czas_Teraz_W_Sekundach();
 
-end;//---//Funkcja Chmury_Rozmieœæ_Losowo().
+end;//---//Funkcja Chmury__Rozmieœæ_Losowo().
+
+//Funkcja Chmury__Usuñ().
+procedure TCzolgi_Form.Chmury__Usuñ();
+var
+  i : integer;
+begin
+
+  for i := Chmury_GLDummyCube.Count - 1 downto 0 do
+    Chmury_GLDummyCube.Children[ i ].Free();
+
+
+  if Chmury_GLDummyCube.Effects.Count > 0 then
+    Chmury_GLDummyCube.Effects.Clear();
+
+end;//---//Funkcja Chmury__Usuñ().
 
 //Funkcja T³umaczenie__Lista_Wczytaj().
 procedure TCzolgi_Form.T³umaczenie__Lista_Wczytaj();
@@ -4790,7 +5163,7 @@ begin
   T³umaczenia_ComboBox.ItemIndex := 0;
 
   // Je¿eli znajdzie plik zwraca 0, je¿eli nie znajdzie zwraca numer b³êdu. Na pocz¹tku znajduje '.' '..' potem listê plików.
-  if FindFirst(  ExtractFilePath( Application.ExeName ) + 'T³umaczenia\*.txt', faAnyFile, search_rec  ) = 0 then // Application potrzebuje w uses Forms.
+  if FindFirst(  ExtractFilePath( Vcl.Forms.Application.ExeName ) + 'T³umaczenia\*.txt', faAnyFile, search_rec  ) = 0 then
     begin
 
       repeat
@@ -4798,16 +5171,16 @@ begin
         // Dodaje nazwy plików bez rozszerzenia.
 
         zts := search_rec.Name;
-        zts := ReverseString( zts ); //uses StrUtils.
+        zts := System.StrUtils.ReverseString( zts );
         Delete(  zts, 1, Pos( '.', zts )  );
-        zts := ReverseString( zts ); //uses StrUtils.
+        zts := System.StrUtils.ReverseString( zts );
 
         T³umaczenia_ComboBox.Items.Add( zts );
 
       until FindNext( search_rec ) <> 0
 
     end;
-  //---//if FindFirst(  ExtractFilePath( Application.ExeName ) + 'T³umaczenia\*.txt', faAnyFile, search_rec  ) = 0 then
+  //---//if FindFirst(  ExtractFilePath( Vcl.Forms.Application.ExeName ) + 'T³umaczenia\*.txt', faAnyFile, search_rec  ) = 0 then
 
   FindClose( search_rec );
 
@@ -5295,6 +5668,24 @@ begin
   Czo³gi_Linia__4_CheckBox.Hint := '';
   Opcje__Rozmiar_Zak³adki_Zwiêksz_CheckBox.Caption := 'Rozmiar zak³adki zwiêksz';
   Opcje__Rozmiar_Zak³adki_Zwiêksz_CheckBox.Hint := 'Podczas prze³¹czania zak³adki na opcje zwiêkszaj wysokoœæ panelu zak³adek konfiguracji.';
+
+  Efekty_GroupBox.Caption := 'Efekty';
+  Efekty_GroupBox.Hint := '';
+  Efekty__Chmury_CheckBox.Caption := 'Chmury';
+  Efekty__Chmury_CheckBox.Hint := '';
+  Efekty__Dym_CheckBox.Caption := 'Dym';
+  Efekty__Dym_CheckBox.Hint := 'Dym po trafieniu w ziemiê.';
+  Efekty__Lufa_Wystrza³_CheckBox.Caption := 'Wystrza³';
+  Efekty__Lufa_Wystrza³_CheckBox.Hint := 'Efekt wystrza³u z lufy.';
+  Efekty__Prezent_Zebranie_CheckBox.Caption := 'Prezent';
+  Efekty__Prezent_Zebranie_CheckBox.Hint := 'Efekt zebrania prezentu.';
+  Efekty__Smuga_CheckBox.Caption := 'Smuga';
+  Efekty__Smuga_CheckBox.Hint := 'Smuga za lec¹cym pociskiem.';
+  Efekty__Trafienie_CheckBox.Caption := 'Trafienie';
+  Efekty__Trafienie_CheckBox.Hint := 'Efekt trafienia w czo³g.';
+  Efekty__Trafienie__Alternatywny_CheckBox.Caption := 'Traf. al.';
+  Efekty__Trafienie__Alternatywny_CheckBox.Hint := 'Alternatywny efekt trafienia w czo³g.';
+
   T³umaczenie_Etykieta_Label.Caption := 'T³umaczenie';
   T³umaczenie_Etykieta_Label.Hint := '';
   T³umaczenia_ComboBox.Hint := 'Enter - zastosuj.';
@@ -5353,6 +5744,9 @@ begin
   Klawiatura__Kamera__Przód_Etykieta_Label.Caption := 'Przód';
   Klawiatura__Kamera__Przód_Etykieta_Label.Hint := '';
   Klawiatura__Kamera__Przód_Edit.Hint := 'Ctrl + Del - <brak>.';
+  Klawiatura__Kamera__Reset_Etykieta_Label.Caption := 'Reset';
+  Klawiatura__Kamera__Reset_Etykieta_Label.Hint := 'Resetuj pozycjê kamery.';
+  Klawiatura__Kamera__Reset_Edit.Hint := 'Ctrl + Del - <brak>.';
   Klawiatura__Kamera__Ty³_Etykieta_Label.Caption := 'Ty³';
   Klawiatura__Kamera__Ty³_Etykieta_Label.Hint := '';
   Klawiatura__Kamera__Ty³_Edit.Hint := 'Ctrl + Del - <brak>.';
@@ -5435,10 +5829,10 @@ procedure TCzolgi_Form.FormShow( Sender: TObject );
   //Funkcja Wa³_Dekoracja_Utwórz() w FormShow().
   procedure Wa³_Dekoracja_Utwórz( const i_f : integer; gl_cube_f : TGLCube );
   var
-    zt_gl_icosahedron : TGLIcosahedron;
+    zt_gl_icosahedron : GLPolyhedron.TGLIcosahedron;
   begin
 
-    zt_gl_icosahedron := TGLIcosahedron.Create( Gra_GLScene.Objects ); // Zwolni siê razem ze scen¹.
+    zt_gl_icosahedron := GLPolyhedron.TGLIcosahedron.Create( Gra_GLScene.Objects ); // Zwolni siê razem ze scen¹.
     zt_gl_icosahedron.Parent := Gra_GLScene.Objects;
     zt_gl_icosahedron.MoveFirst();
 
@@ -5473,6 +5867,11 @@ var
 begin//FormShow().
 
   sosna := nil;
+
+  kamera_kopia__direction_g := Gra_GLCamera.AbsoluteDirection;
+  kamera_kopia__position_g := Gra_GLCamera.AbsolutePosition;
+  kamera_kopia__up_g := Gra_GLCamera.AbsoluteUp;
+
 
   for i := 1 to Length( czo³gi_t ) do
     czo³gi_t[ i ] := nil;
@@ -5516,10 +5915,18 @@ begin//FormShow().
   Self.WindowState := wsMaximized;
 
 
+  T³umaczenie__Domyœlne();
+  T³umaczenie__Lista_Wczytaj();
+
+  Ustawienia_Plik();
+
+  T³umaczenie__Wczytaj();
+
+
   for i := 1 to Length( czo³gi_t ) do
     begin
 
-      czo³gi_t[ i ] := TCzo³g.Create( Gra_Obiekty_GLDummyCube, GLCollisionManager1, GLCadencer1 );
+      czo³gi_t[ i ] := TCzo³g.Create( Gra_Obiekty_GLDummyCube, GLCollisionManager1, GLCadencer1, Efekty__Lufa_Wystrza³_CheckBox.Checked, Efekty__Trafienie_CheckBox.Checked, Efekty__Trafienie__Alternatywny_CheckBox.Checked );
       czo³gi_t[ i ].Position.X := -30;
       czo³gi_t[ i ].Position.Y := 0.515;
 
@@ -5595,13 +6002,6 @@ begin//FormShow().
   Punkty_Zerowanie_BitBtnClick( Sender );
   Gracz_Czo³g_Wybrany_RadioButtonClick( Gracz__1__Czo³g_Wybrany__Lewo__Dó³_RadioButton ); // Wed³ug ustawienia pocz¹tkowego.
 
-  T³umaczenie__Domyœlne();
-  T³umaczenie__Lista_Wczytaj();
-
-  Ustawienia_Plik();
-
-  T³umaczenie__Wczytaj();
-
   if Dzieñ_Noc__Czas_Systemowy_Ustaw_CheckBox.Checked then
     Dzieñ_Noc_Zmieñ__Procent_Wed³ug_Czasu_Systemowego_Ustaw()
   else//if Dzieñ_Noc__Czas_Systemowy_Ustaw_CheckBox.Checked then
@@ -5625,39 +6025,8 @@ begin//FormShow().
   //---// Dodaje dekoracje do wa³ów.
 
 
-  // Dodaje chmury.
-  with GetOrCreateSourcePFX( Chmury_GLDummyCube ) do // uses GLParticleFX.
-    begin
-
-      Manager := Efekt__Chmury_GLPerlinPFXManager;
-      ParticleInterval := 0.1;
-      EffectScale := 5;
-
-    end;
-  //---//with GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
-
-  for i := 1 to 50 do
-    with TGLDummyCube.Create( Chmury_GLDummyCube ) do
-      begin
-
-        Parent := Chmury_GLDummyCube;
-        //VisibleAtRunTime := true; //???
-
-        with GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do // uses GLParticleFX.
-          begin
-
-            Manager := Efekt__Chmury_GLPerlinPFXManager;
-            ParticleInterval := 0.1;
-            EffectScale := 5;
-
-          end;
-        //---//with GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
-
-      end;
-    //---//with TGLDummyCube.Create( Chmury_GLDummyCube ) do
-
-  Chmury_Rozmieœæ_Losowo();
-  //---// Dodaje chmury.
+  if Efekty__Chmury_CheckBox.Checked then
+    Efekty__Chmury_CheckBoxClick( Sender );
 
 end;//---//FormShow().
 
@@ -5675,6 +6044,9 @@ begin
 
     end;
   //---//if Komunikat_Wyœwietl( t³umaczenie_komunikaty_r.komunikat__czy_wyjœæ_z_gry, t³umaczenie_komunikaty_r.komunikat__pytanie, MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION ) <> IDYES then
+
+
+  Chmury__Usuñ();
 
 
   FreeAndNil( sosna );
@@ -5760,7 +6132,7 @@ begin
   SI_Decyduj( deltaTime );
 
 
-  Chmury_Rozmieœæ_Losowo();
+  Chmury__Rozmieœæ_Losowo();
 
 end;//---//GLCadencer1Progress().
 
@@ -5794,15 +6166,15 @@ end;//---//Gra_GLSceneViewerMouseMove().
 procedure TCzolgi_Form.Gra_GLSceneViewerKeyDown( Sender: TObject; var Key: Word; Shift: TShiftState );
 begin
 
-  if IsKeyDown( Klawiatura__Gra__Wyjœcie_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wyjœcie_Edit.Tag ) then
     Close();
 
 
-  if IsKeyDown( Klawiatura__Kamera__Obracanie_Mysz¹_Prze³¹cz_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Obracanie_Mysz¹_Prze³¹cz_Edit.Tag ) then
     GLUserInterface1.MouseLookActive := not GLUserInterface1.MouseLookActive;
 
 
-  if IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then // W GLCadencer1Progress() nie dzia³a podczas pauzy.
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then // W GLCadencer1Progress() nie dzia³a podczas pauzy.
     begin
 
       // Pe³ny ekran.
@@ -5812,7 +6184,9 @@ begin
 
           // Pe³ny ekran.
 
-          // Po ustawieniu pe³nego ekranu mog¹ znikaæ elementy po³o¿one na formie (jak panel), które nie s¹ wyrównywane do boków okna..
+          // Po ustawieniu pe³nego ekranu mog¹ znikaæ elementy po³o¿one na formie (jak panel), które nie s¹ wyrównywane do boków okna.
+
+          window_state_kopia_g := Self.WindowState;
 
           Czolgi_Form.BorderStyle := bsNone;
 
@@ -5828,29 +6202,29 @@ begin
           // Normalny ekran.
 
           Czolgi_Form.BorderStyle := bsSizeable;
-          Czolgi_Form.WindowState := wsNormal;
+          Czolgi_Form.WindowState := window_state_kopia_g;
 
         end;
       //---//if Czolgi_Form.BorderStyle <> bsNone then
 
     end;
-  //---//if IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then
+  //---//if GLKeyboard.IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then
 
 
-  if IsKeyDown( Klawiatura__Gra__Pauza_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Pauza_Edit.Tag ) then
     Pauza_ButtonClick( Sender );
 
 
-  if IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Plus_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Plus_Edit.Tag ) then
     Gra_Wspó³czynnik_Prêdkoœci_Zmieñ( 1 )
   else
-  if IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Minus_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Minus_Edit.Tag ) then
     Gra_Wspó³czynnik_Prêdkoœci_Zmieñ( -1 )
   else
-  if IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__1_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__1_Edit.Tag ) then
     Gra_Wspó³czynnik_Prêdkoœci_Zmieñ( 0 )
   else
-  if IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
     begin
 
       if PageControl1.Height <> page_control_1_height_pocz¹tkowe then
@@ -5862,8 +6236,8 @@ begin
         Opcje_Splitter.Visible := true;
 
     end
-  else//if IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
-  if IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
+  else//if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
+  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
     begin
 
       if PageControl1.Height <> page_control_1_height_pocz¹tkowe then
@@ -5874,10 +6248,22 @@ begin
       Opcje_Splitter.Visible := PageControl1.Height > 0;
 
     end;
-  //---//if IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
+  //---//if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
 
 
-  if not GLCadencer1.Enabled then // Gdy pauza jest aktywna.
+  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Reset_Edit.Tag ) then
+    begin
+
+      Gra_GLCamera.ResetRotations();
+      Gra_GLCamera.AbsoluteUp := kamera_kopia__up_g;
+      Gra_GLCamera.AbsoluteDirection := kamera_kopia__direction_g;
+      Gra_GLCamera.AbsolutePosition := kamera_kopia__position_g;
+
+    end;
+  //---//if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Reset_Edit.Tag ) then
+
+
+  if Pauza__SprawdŸ() then // Gdy pauza jest aktywna.
     Kamera_Ruch( 0.03 );
 
 end;//---//Gra_GLSceneViewerKeyDown().
@@ -5970,18 +6356,37 @@ procedure TCzolgi_Form.GLCollisionManager1Collision( Sender: TObject; object1, o
               //---//if trafienie_prawid³owe then
 
 
+              if czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager <> nil then
+                begin
 
-              czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled := false;
+                  czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.Disabled := false;
 
-              czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.IsotropicExplosion
-                (
-                  1.1,
-                  0,
-                  1.1,
-                  Round( 500 )
-                );
+                  czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager.IsotropicExplosion
+                    (
+                      1.1,
+                      0,
+                      1.1,
+                      Round( 500 )
+                    );
 
-              czo³gi_t[ i ].efekt__trafienie_sekundy_czas_i := Czas_Teraz_W_Sekundach();
+                end;
+              //---//if czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager <> nil then
+
+
+              if czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager <> nil then
+                begin
+
+                  czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager.Maxpoints := efekt__trafienie__alternatywny_gl_thor_fx_manager__maxpoints__enabled_c;
+
+                  czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager.Disabled := false;
+
+                end;
+              //---//if czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager <> nil then
+
+
+              if   ( czo³gi_t[ i ].efekt__trafienie_gl_fire_fx_manager <> nil )
+                or ( czo³gi_t[ i ].efekt__trafienie__alternatywny_gl_thor_fx_manager <> nil ) then
+                czo³gi_t[ i ].efekt__trafienie_sekundy_czas_i := Czas_Teraz_W_Sekundach();
 
 
               Break;
@@ -6078,8 +6483,8 @@ begin
 
       // Przy zmianie zak³adki na Opcje_TabSheet zapamiêtuje aktualny rozmiar i zwiêksza wysokoœæ.
 
-      if Self.Height >= 400 then
-        zti := 300
+      if Self.Height >= 430 then
+        zti := 330
       else//if Self.Height >= 1050 then
       if Self.Height >= 350 then
         zti := Self.Height - 50
@@ -6476,5 +6881,58 @@ begin
   //---//if Key = 13 then
 
 end;//---//T³umaczenia_ComboBoxKeyDown().
+
+//Efekty__Chmury_CheckBoxClick().
+procedure TCzolgi_Form.Efekty__Chmury_CheckBoxClick( Sender: TObject );
+var
+  czy_pauza_l : boolean;
+begin
+
+  czy_pauza_l := Pauza__SprawdŸ();
+
+  if not czy_pauza_l then
+    Pauza_ButtonClick( Sender );
+
+
+  if Efekty__Chmury_CheckBox.Checked then
+    Chmury__Dodaj()
+  else
+    Chmury__Usuñ();
+
+
+  if not czy_pauza_l then
+    Pauza_ButtonClick( Sender );
+
+end;//---//Efekty__Chmury_CheckBoxClick().
+
+//Efekty__Czo³gi__Utwórz__Zwolnij_CheckBoxClick().
+procedure TCzolgi_Form.Efekty__Czo³gi__Utwórz__Zwolnij_CheckBoxClick( Sender: TObject );
+var
+  czy_pauza_l : boolean;
+
+  i : integer;
+begin
+
+  czy_pauza_l := Pauza__SprawdŸ();
+
+  if not czy_pauza_l then
+    Pauza_ButtonClick( Sender );
+
+
+  for i := 1 to Length( czo³gi_t ) do
+    if czo³gi_t[ i ] <> nil then
+      begin
+
+        czo³gi_t[ i ].Efekty__Trafienie__Zwolnij( not Efekty__Lufa_Wystrza³_CheckBox.Checked, not Efekty__Trafienie_CheckBox.Checked, not Efekty__Trafienie__Alternatywny_CheckBox.Checked );
+        czo³gi_t[ i ].Efekty__Trafienie__Utwórz( GLCadencer1, Efekty__Lufa_Wystrza³_CheckBox.Checked, Efekty__Trafienie_CheckBox.Checked, Efekty__Trafienie__Alternatywny_CheckBox.Checked );
+
+      end;
+    //---//if czo³gi_t[ i ] <> nil then
+
+
+  if not czy_pauza_l then
+    Pauza_ButtonClick( Sender );
+
+end;//---//Efekty__Czo³gi__Utwórz__Zwolnij_CheckBoxClick().
 
 end.
