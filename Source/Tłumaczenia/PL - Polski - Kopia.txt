@@ -81,6 +81,22 @@ Czołgi_Linia__3_CheckBox=Czołgi linia 3 PL
 Czołgi_Linia__4_CheckBox=Czołgi linia 4 PL
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox=Rozmiar zakładki zwiększ PL
 Opcje__Rozmiar_Zakładki_Zwiększ_CheckBox-->Podpowiedź=Podczas przełączania zakładki na opcje zwiększaj wysokość panelu zakładek konfiguracji. PL
+
+Efekty_GroupBox=Efekty PL
+Efekty__Chmury_CheckBox=Chmury PL
+Efekty__Dym_CheckBox=Dym PL
+Efekty__Dym_CheckBox-->Podpowiedź=Dym po trafieniu w ziemię. PL
+Efekty__Lufa_Wystrzał_CheckBox=Wystrzał PL
+Efekty__Lufa_Wystrzał_CheckBox-->Podpowiedź=Efekt wystrzału z lufy. PL
+Efekty__Prezent_Zebranie_CheckBox=Prezent PL
+Efekty__Prezent_Zebranie_CheckBox-->Podpowiedź=Efekt zebrania prezentu. PL
+Efekty__Smuga_CheckBox=Smuga PL
+Efekty__Smuga_CheckBox-->Podpowiedź=Smuga za lecącym pociskiem. PL
+Efekty__Trafienie_CheckBox=Trafienie PL
+Efekty__Trafienie_CheckBox-->Podpowiedź=Efekt trafienia w czołg. PL
+Efekty__Trafienie__Alternatywny_CheckBox=Traf. al. PL
+Efekty__Trafienie__Alternatywny_CheckBox-->Podpowiedź=Alternatywny efekt trafienia w czołg. PL
+
 Tłumaczenie_Etykieta_Label=Tłumaczenie PL
 Tłumaczenia_ComboBox-->Podpowiedź=Enter - zastosuj. PL
 Ustawienia__Wczytaj_BitBtn-->Podpowiedź=Wczytaj ustawienia. PL
@@ -123,6 +139,9 @@ Klawiatura__Kamera__Przechył_Prawo_Etykieta_Label=Przechył prawo PL
 Klawiatura__Kamera__Przechył_Prawo_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Przód_Etykieta_Label=Przód PL
 Klawiatura__Kamera__Przód_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
+Klawiatura__Kamera__Reset_Etykieta_Label=Reset PL
+Klawiatura__Kamera__Reset_Etykieta_Label-->Podpowiedź=Resetuj pozycję kamery. PL
+Klawiatura__Kamera__Reset_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 Klawiatura__Kamera__Tył_Etykieta_Label=Tył PL
 Klawiatura__Kamera__Tył_Edit-->Podpowiedź=Ctrl + Del - <brak>. PL
 
