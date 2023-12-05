@@ -13,6 +13,10 @@ Wzory na aktualną wartość x i y pocisku na podstawie:
 https://blog.myrank.co.in/projectile-motion-2/
 
 
+Znane błędy.
+* Na niektórych komputerach gra ulega 'zamrożeniu'. Najprawdopodobniej przyczyną jest jeden z efektów graficznych (GLFireFX.TGLFireFXManager.IsotropicExplosion). Jeżeli tak się dzieje należy w opcjach wyłączyć niektóre efekty graficzne.
+
+
 ## English
 
 On the opposite sides of the river there are 8 tanks, 4 of them are at the players' disposal, each of them can also be controlled by the computer.
@@ -26,6 +30,9 @@ https://www.omnicalculator.com/physics/projectile-motion
 
 Formulas for the current value of x and y of the projectile based on:
 https://blog.myrank.co.in/projectile-motion-2/
+
+Known issues.
+* On some computers the game gets 'frozen'. Most likely the cause is one of the graphic effects (GLFireFX.TGLFireFXManager.IsotropicExplosion). If this happens, turn off some graphic effects in the options.
 
 
 <a href="https://github.com/jacek-mulawka/Czolgi-z-Eris-Kallisti-Dyskordia/blob/main/Gallery/Czo%C5%82gi%20z%20Eris%20Kallisti%20Dyskordia%2001.jpg">
