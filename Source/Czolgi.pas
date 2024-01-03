@@ -11,6 +11,7 @@ unit Czolgi;{14.Lis.2021}
   //
 
 
+  // Wydanie 2.0.0.0 - aktualizacja GLScene z 1.6.0.7082 na 2.2 2023.
   // Wydanie 1.1.0.0 - na niektórych komputerach gra ulega 'zamro¿eniu' najprawdopodobniej z powodu, któregoœ z efektów graficznych (chyba efekt__trafienie_gl_fire_fx_manager).
 
 
@@ -25,16 +26,17 @@ unit Czolgi;{14.Lis.2021}
 interface
 
 uses
-  GLFireFX,
-  GLGeomObjects,
-  GLPolyhedron,
-  GLThorFX,
-  GLVectorGeometry,
+  GLS.FireFX,
+  GLS.GeomObjects,
+  GLS.ThorFX,
+  GLS.VectorGeometry,
+  GLS.VectorTypes,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Buttons,
-  GLCadencer, GLParticleFX, GLPerlinPFX, GLBitmapFont, GLWindowsFont, GLCollision, GLNavigator, GLHUDObjects,
-  GLObjects, GLScene, GLCoordinates, GLSkydome, GLCrossPlatform, GLBaseClasses, GLWin32Viewer;
+
+  GLS.Cadencer, GLS.ParticleFX, GLS.PerlinPFX, GLS.BitmapFont, GLS.WindowsFont, GLS.Collision, GLS.Navigator, GLS.HUDObjects,
+  GLS.Objects, GLS.Scene, GLS.Coordinates, GLS.SkyDome, GLS.BaseClasses, GLS.SceneViewer;
 
 type
   TPrezent_Rodzaj = ( pr_Brak, pr_Jazda_Szybsza, pr_Prze³adowanie_Szybsze );
@@ -77,8 +79,8 @@ type
 
     amunicja_prêdkoœæ_pocz¹tkowa : double; // Ustawiona prêdkoœæ wystrzelenia amunicji [metry / sekundê].
 
-    czubek : GLGeomObjects.TGLCone;
-    korpus : GLGeomObjects.TGLCylinder;
+    czubek : GLS.GeomObjects.TGLCone;
+    korpus : GLS.GeomObjects.TGLCylinder;
   public
     { Public declarations }
     constructor Create( AParent : TGLBaseSceneObject );
@@ -125,7 +127,7 @@ type
     lufa,
     œwiat³o_obudowa,
     ty³
-      : GLGeomObjects.TGLCylinder;
+      : GLS.GeomObjects.TGLCylinder;
 
     œwiat³o_szybka,
     wie¿a
@@ -140,11 +142,11 @@ type
 
     efekt__lufa_wystrza³_gl_fire_fx_manager,
     efekt__trafienie_gl_fire_fx_manager
-      : GLFireFX.TGLFireFXManager;
+      : GLS.FireFX.TGLFireFXManager;
 
-    efekt__trafienie__alternatywny_gl_thor_fx_manager : GLThorFX.TGLThorFXManager;
+    efekt__trafienie__alternatywny_gl_thor_fx_manager : GLS.ThorFX.TGLThorFXManager;
 
-    ko³a_t : array [ 1..8 ] of GLGeomObjects.TGLCylinder;
+    ko³a_t : array [ 1..8 ] of GLS.GeomObjects.TGLCylinder;
     ko³a_œruby_t : array [ 1..32 ] of TGLSphere; // 4 * 8 = 32.
 
     g¹sienice_elementy_t : array [ 1..48 ] of TGLCube;
@@ -158,7 +160,7 @@ type
     procedure Efekty__Trafienie__Utwórz( gl_cadencer_f : TGLCadencer; const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
     procedure Efekty__Trafienie__Zwolnij( const efekt__lufa_wystrza³_f, efekt__trafienie_f, efekty__trafienie__alternatywny_f : boolean );
     procedure JedŸ( const delta_czasu_f : double; const do_ty³u_f : boolean = false );
-    procedure Kolor_Ustaw( const vector_f : GLVectorGeometry.TVector );
+    procedure Kolor_Ustaw( const vector_f : GLS.VectorTypes.TVector4f );
     procedure Lufa__Odrzut_Przesuniêcie_Ustaw();
     procedure Lufa__Unoœ( const delta_czasu_f, wiatr__si³a_aktualna_f : double; const wysokoœæ_f : single; const w_dó³_f : boolean = false );
     procedure Strza³();
@@ -170,9 +172,9 @@ type
 
     utworzenie_sekundy_czas_i__k : Int64; // Czas utworzenia krateru.
 
-    lej : GLGeomObjects.TGLCylinder;
+    lej : GLS.GeomObjects.TGLCylinder;
     dym_efekt_gl_dummy_cube : TGLDummyCube;
-    grudy_t : array of GLPolyhedron.TGLIcosahedron;
+    grudy_t : array of GLS.GeomObjects.TGLIcosahedron;
   public
     { Public declarations }
     constructor Create( AParent : TGLBaseSceneObject; const delta_czas_f : double; const czy_woda_f : boolean = false );
@@ -200,7 +202,7 @@ type
 
     kokardka_œrodek : TGLSphere;
 
-    efekt__zebranie_gl_fire_fx_manager : GLFireFX.TGLFireFXManager;
+    efekt__zebranie_gl_fire_fx_manager : GLS.FireFX.TGLFireFXManager;
   public
     { Public declarations }
     constructor Create( AParent : TGLBaseSceneObject; cadencer_f : TGLCadencer; const efekt__zebranie_f : boolean );
@@ -213,8 +215,8 @@ type
   private
     ko³ysanie_wychylenie_aktualne : real; // Zakres ko³ysania wyra¿any w stopniach od 0 do 360 dla funkcji sinus.
     ko³ysanie_siê__dummy_cube : TGLDummyCube; // Lekko ko³ysze siê na wietrze.
-    korona : GLGeomObjects.TGLFrustrum;
-    pieñ : GLGeomObjects.TGLCylinder;
+    korona : GLS.GeomObjects.TGLFrustrum;
+    pieñ : GLS.GeomObjects.TGLCylinder;
   public
     { Public declarations }
     constructor Create( AParent : TGLBaseSceneObject );
@@ -446,7 +448,7 @@ type
     kamera_kopia__direction_g,
     kamera_kopia__position_g,
     kamera_kopia__up_g
-      : GLVectorGeometry.TVector;
+      : GLS.VectorTypes.TVector4f;
 
     informacja_dodatkowa_g : string;
 
@@ -581,11 +583,10 @@ const
 implementation
 
 uses
-  GLBehaviours,
-  GLColor,
-  GLKeyboard,
-  GLMaterial,
-  GLVectorFileObjects,
+  GLS.Behaviours,
+  GLS.Color,
+  GLS.Keyboard,
+  GLS.Material,
 
   System.DateUtils,
   System.IniFiles,
@@ -872,13 +873,13 @@ begin
 
   Self.Parent := AParent;
 
-  Self.czubek := GLGeomObjects.TGLCone.Create( Self );
+  Self.czubek := GLS.GeomObjects.TGLCone.Create( Self );
   Self.czubek.Parent := Self;
   Self.czubek.Scale.SetVector( 0.25, 1, 0.25 );
   Self.czubek.Position.X := 0.6;
   Self.czubek.RollAngle := -90;
 
-  Self.korpus := GLGeomObjects.TGLCylinder.Create( Self );
+  Self.korpus := GLS.GeomObjects.TGLCylinder.Create( Self );
   Self.korpus.Parent := Self;
   Self.korpus.Scale.SetVector( 0.25, 0.5, 0.25 );
   Self.korpus.RollAngle := 90;
@@ -942,7 +943,7 @@ begin
   Self.przód.Position.Y := Self.kad³ub.Position.Y;
   Self.przód.Roll( 45 );
 
-  Self.ty³ := GLGeomObjects.TGLCylinder.Create( Self );
+  Self.ty³ := GLS.GeomObjects.TGLCylinder.Create( Self );
   Self.ty³.Parent := Self;
   Self.ty³.Scale.SetVector( 1, Self.kad³ub.Scale.Z, Self.kad³ub.Scale.Y );
   Self.ty³.Position.X := -Self.kad³ub.Scale.X * 0.5;
@@ -974,7 +975,7 @@ begin
   Self.lufa_gl_dummy_cube.Parent := Self.wie¿a_dummy_cube;
   Self.lufa_gl_dummy_cube.Position.Y := 0.25;
 
-  Self.lufa := GLGeomObjects.TGLCylinder.Create( Self );
+  Self.lufa := GLS.GeomObjects.TGLCylinder.Create( Self );
   Self.lufa.Parent := Self.lufa_gl_dummy_cube;
   Self.lufa.Scale.SetVector( 0.3, 5, 0.3 );
   Self.lufa.Roll( 90 );
@@ -985,7 +986,7 @@ begin
   Self.lufa_wylot_pozycja_gl_dummy_cube.Parent := Self.lufa_gl_dummy_cube;
   Self.lufa_wylot_pozycja_gl_dummy_cube.Position.X := Self.lufa.Scale.Y;
 
-  Self.œwiat³o_obudowa := GLGeomObjects.TGLCylinder.Create( Self );
+  Self.œwiat³o_obudowa := GLS.GeomObjects.TGLCylinder.Create( Self );
   Self.œwiat³o_obudowa.Parent := Self;
   Self.œwiat³o_obudowa.RollAngle := 90;
   Self.œwiat³o_obudowa.Position.X := 1.75;
@@ -1001,7 +1002,7 @@ begin
   Self.œwiat³o_szybka.Scale.X := 0.1;
   Self.œwiat³o_szybka.Scale.Y := 0.2;
   Self.œwiat³o_szybka.Scale.Z := 0.2;
-  Self.œwiat³o_szybka.Material.FrontProperties.Emission.Color := GLColor.clrWhite;
+  Self.œwiat³o_szybka.Material.FrontProperties.Emission.Color := GLS.Color.clrWhite;
 
   Self.celownicza_linia := TGLLines.Create( Self );
   Self.celownicza_linia.Parent := Self;
@@ -1026,7 +1027,7 @@ begin
   for i := 1 to Length( Self.ko³a_t ) do
     begin
 
-      Self.ko³a_t[ i ] := GLGeomObjects.TGLCylinder.Create( Self );
+      Self.ko³a_t[ i ] := GLS.GeomObjects.TGLCylinder.Create( Self );
       Self.ko³a_t[ i ].Parent := Self;
       Self.ko³a_t[ i ].PitchAngle := 90;
       //Self.ko³a_t[ i ].BottomRadius := 0.5;
@@ -1088,7 +1089,7 @@ begin
       Self.g¹sienice_elementy_t[ i ].Position.Z := Self.ko³a_t[ 1 ].Position.Z + 0.1; // 0.2 * 0.5.
       Self.g¹sienice_elementy_t[ i ].Position.Y := -Self.ko³a_t[ 1 ].BottomRadius - Self.g¹sienice_elementy_t[ i ].Scale.Y * 0.5;
 
-      Self.g¹sienice_elementy_t[ i ].Material.FrontProperties.Diffuse.Color := GLVectorGeometry.VectorMake( 0.2, 0.1, 0 );
+      Self.g¹sienice_elementy_t[ i ].Material.FrontProperties.Diffuse.Color := GLS.VectorGeometry.VectorMake( 0.2, 0.1, 0 );
 
 
       if i = 25 then // G¹sienica lewa.
@@ -1136,7 +1137,7 @@ begin
             end;
           //---//if i <= 24 then
 
-          Self.g¹sienice_elementy_t[ i ].AbsoluteUp := GLVectorGeometry.VectorMake( 0, 1, 0 );
+          Self.g¹sienice_elementy_t[ i ].AbsoluteUp := GLS.VectorGeometry.VectorMake( 0, 1, 0 );
           Self.g¹sienice_elementy_t[ i ].AbsoluteDirection := Self.g¹sienice_elementy_t[ 1 ].AbsoluteDirection;
 
           if i <= 24 then
@@ -1166,7 +1167,7 @@ begin
             end;
           //---//if i <= 24 then
 
-          Self.g¹sienice_elementy_t[ i ].AbsoluteUp := GLVectorGeometry.VectorMake( 0, 1, 0 );
+          Self.g¹sienice_elementy_t[ i ].AbsoluteUp := GLS.VectorGeometry.VectorMake( 0, 1, 0 );
           Self.g¹sienice_elementy_t[ i ].AbsoluteDirection := Self.g¹sienice_elementy_t[ 1 ].AbsoluteDirection;
 
           if i <= 24 then
@@ -1354,7 +1355,7 @@ begin
     and ( Self.efekt__lufa_wystrza³_gl_fire_fx_manager = nil ) then
     begin
 
-      Self.efekt__lufa_wystrza³_gl_fire_fx_manager := GLFireFX.TGLFireFXManager.Create( Self );
+      Self.efekt__lufa_wystrza³_gl_fire_fx_manager := GLS.FireFX.TGLFireFXManager.Create( Self );
       Self.efekt__lufa_wystrza³_gl_fire_fx_manager.Cadencer := gl_cadencer_f;
       Self.efekt__lufa_wystrza³_gl_fire_fx_manager.Disabled := true;
       Self.efekt__lufa_wystrza³_gl_fire_fx_manager.FireDensity := 1;
@@ -1372,7 +1373,7 @@ begin
     and ( Self.efekt__trafienie_gl_fire_fx_manager = nil ) then
     begin
 
-      Self.efekt__trafienie_gl_fire_fx_manager := GLFireFX.TGLFireFXManager.Create( Self );
+      Self.efekt__trafienie_gl_fire_fx_manager := GLS.FireFX.TGLFireFXManager.Create( Self );
       Self.efekt__trafienie_gl_fire_fx_manager.Cadencer := gl_cadencer_f;
       Self.efekt__trafienie_gl_fire_fx_manager.Disabled := true;
       Self.efekt__trafienie_gl_fire_fx_manager.FireBurst := 0.75;
@@ -1396,15 +1397,15 @@ begin
     and ( Self.efekt__trafienie__alternatywny_gl_thor_fx_manager = nil ) then
     begin
 
-      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager := GLThorFX.TGLThorFXManager.Create( Self );
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager := GLS.ThorFX.TGLThorFXManager.Create( Self );
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Cadencer := gl_cadencer_f;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Core := false;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Disabled := true;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.GlowSize := 0.2;
-      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.InnerColor.Color := GLColor.clrOrange;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.InnerColor.Color := GLS.Color.clrOrange;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.InnerColor.Alpha := 0.91;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Maxpoints := efekt__trafienie__alternatywny_gl_thor_fx_manager__maxpoints__disabled_c;
-      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.OuterColor.Color := GLColor.clrRed;
+      Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.OuterColor.Color := GLS.Color.clrRed;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.OuterColor.Alpha := 0.91;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Target.X := 2;
       Self.efekt__trafienie__alternatywny_gl_thor_fx_manager.Target.Y := 1;
@@ -1445,7 +1446,7 @@ var
   kierunek_kopia,
   góra_kopia,
   pozycja_kopia
-    : TVector;
+    : GLS.VectorTypes.TVector4f;
 begin
 
   // Nie mo¿na wyjechaæ poza pewien obszar.
@@ -1573,10 +1574,10 @@ begin
 end;//---//Funkcja JedŸ().
 
 //Funkcja Kolor_Ustaw().
-procedure TCzo³g.Kolor_Ustaw( const vector_f : GLVectorGeometry.TVector );
+procedure TCzo³g.Kolor_Ustaw( const vector_f : GLS.VectorTypes.TVector4f );
 
   //Funkcja Kolor_Ustaw_Sk³adowe().
-  procedure Kolor_Ustaw_Sk³adowe( const gl_material_f : TGLMaterial );
+  procedure Kolor_Ustaw_Sk³adowe( const gl_material_f : GLS.Material.TGLMaterial );
   begin
 
     //gl_material_f.FrontProperties.Ambient.Color := vector_f;
@@ -1610,13 +1611,13 @@ begin//Funkcja Kolor_Ustaw().
 
   // S³abo widaæ kolor linii wiêc wzmacnia jadn¹ sk³adow¹.
   if vector_f.X <> 0 then
-    Self.celownicza_linia.LineColor.Color := GLVectorGeometry.VectorMake( 1, 0, 0, 1 )
+    Self.celownicza_linia.LineColor.Color := GLS.VectorGeometry.VectorMake( 1, 0, 0, 1 )
   else
   if vector_f.Y <> 0 then
-    Self.celownicza_linia.LineColor.Color := GLVectorGeometry.VectorMake( 0, 1, 0, 1 )
+    Self.celownicza_linia.LineColor.Color := GLS.VectorGeometry.VectorMake( 0, 1, 0, 1 )
   else
   if vector_f.Z <> 0 then
-    Self.celownicza_linia.LineColor.Color := GLVectorGeometry.VectorMake( 0, 0, 1, 1 );
+    Self.celownicza_linia.LineColor.Color := GLS.VectorGeometry.VectorMake( 0, 0, 1, 1 );
 
 end;//---//Funkcja Kolor_Ustaw().
 
@@ -1676,8 +1677,8 @@ begin
         1,
         0,
         0.1,
-        GLVectorGeometry.AffineVectorMake( 0, 1, 1 ),
-        GLVectorGeometry.AffineVectorMake( 0, 1, -1 ),
+        GLS.VectorGeometry.AffineVectorMake( 0, 1, 1 ),
+        GLS.VectorGeometry.AffineVectorMake( 0, 1, -1 ),
         Round( 1000 )
       );
 
@@ -1687,7 +1688,7 @@ end;//---//Funkcja Strza³().
 constructor TKrater.Create( AParent : TGLBaseSceneObject; const delta_czas_f : double; const czy_woda_f : boolean = false );
 var
   i : integer;
-  zt_vector : TVector;
+  zt_vector : GLS.VectorTypes.TVector4f;
 begin
 
   inherited Create( Application );
@@ -1700,16 +1701,16 @@ begin
   Self.dym_efekt_gl_dummy_cube.Parent := Self;
   Self.dym_efekt_gl_dummy_cube.Position.Y := 2;
 
-  Self.lej := GLGeomObjects.TGLCylinder.Create( Self );
+  Self.lej := GLS.GeomObjects.TGLCylinder.Create( Self );
   Self.lej.Parent := Self;
   Self.lej.Scale.Y := 0.25;
   Self.lej.Scale.X := 1;
   Self.lej.Scale.Z := 1;
 
   if not Self.czy_wodny then
-    Self.lej.Material.FrontProperties.Diffuse.Color := GLColor.clrCopper
+    Self.lej.Material.FrontProperties.Diffuse.Color := GLS.Color.clrCopper
   else//if not Self.czy_wodny then
-    Self.lej.Material.FrontProperties.Diffuse.Color := GLColor.clrWhite;
+    Self.lej.Material.FrontProperties.Diffuse.Color := GLS.Color.clrWhite;
 
   Self.lej.Material.FrontProperties.Ambient.RandomColor();
 
@@ -1721,7 +1722,7 @@ begin
   for i := 0 to Length( Self.grudy_t ) - 1 do
     begin
 
-      Self.grudy_t[ i ] := GLPolyhedron.TGLIcosahedron.Create( Self );
+      Self.grudy_t[ i ] := GLS.GeomObjects.TGLIcosahedron.Create( Self );
       Self.grudy_t[ i ].Parent := Self;
       Self.grudy_t[ i ].Material.FrontProperties.Diffuse.Color := Self.lej.Material.FrontProperties.Diffuse.Color;
       Self.grudy_t[ i ].Material.FrontProperties.Ambient.RandomColor();
@@ -1730,13 +1731,13 @@ begin
       //Self.grudy_t[ i ].Turn(  Random( 381 )  );
       //Self.grudy_t[ i ].Slide( 5 );
 
-      GetOrCreateInertia( Self.grudy_t[ i ] ).Mass := 1 + Self.grudy_t[ i ].Scale.X * 10;
+      GLS.Behaviours.GetOrCreateInertia( Self.grudy_t[ i ] ).Mass := 1 + Self.grudy_t[ i ].Scale.X * 10;
 
-      GetOrCreateInertia( Self.grudy_t[ i ] ).RotationDamping.SetDamping( 0, 1 + Self.grudy_t[ i ].Scale.X, 0.001 );
-      GetOrCreateInertia( Self.grudy_t[ i ] ).TranslationDamping.SetDamping( 1, 1, 0.3 );
+      GLS.Behaviours.GetOrCreateInertia( Self.grudy_t[ i ] ).RotationDamping.SetDamping( 0, 1 + Self.grudy_t[ i ].Scale.X, 0.001 );
+      GLS.Behaviours.GetOrCreateInertia( Self.grudy_t[ i ] ).TranslationDamping.SetDamping( 1, 1, 0.3 );
 
-      //GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTorque( delta_czas_f, 0, 100000, 0 );
-      //GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTranslationAcceleration(  delta_czas_f, VectorMake( 10000, 0, 0 )  );
+      //GLS.Behaviours.GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTorque( delta_czas_f, 0, 100000, 0 );
+      //GLS.Behaviours.GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTranslationAcceleration(  delta_czas_f, VectorMake( 10000, 0, 0 )  );
 
       zt_vector.X := 10 + Random( 3591 );
       zt_vector.Z := 10 + Random( 3591 );
@@ -1747,8 +1748,8 @@ begin
       if Random( 2 ) = 0 then
         zt_vector.Z := -zt_vector.Z;
 
-      GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTorque( delta_czas_f, 0, -zt_vector.X * 300, -zt_vector.Z * 300 );
-      GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTranslationAcceleration( delta_czas_f, zt_vector );
+      GLS.Behaviours.GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTorque( delta_czas_f, 0, -zt_vector.X * 300, -zt_vector.Z * 300 );
+      GLS.Behaviours.GetOrCreateInertia( Self.grudy_t[ i ] ).ApplyTranslationAcceleration( delta_czas_f, zt_vector );
 
     end;
   //---//for i := 0 to Length( Self.grudy_t ) - 1 do
@@ -1863,7 +1864,7 @@ begin
   if efekt__zebranie_f then
     begin
 
-      Self.efekt__zebranie_gl_fire_fx_manager := GLFireFX.TGLFireFXManager.Create( Self );
+      Self.efekt__zebranie_gl_fire_fx_manager := GLS.FireFX.TGLFireFXManager.Create( Self );
       Self.efekt__zebranie_gl_fire_fx_manager.Cadencer := cadencer_f;
       Self.efekt__zebranie_gl_fire_fx_manager.Disabled := true;
       Self.efekt__zebranie_gl_fire_fx_manager.FireRadius := 0.75;
@@ -1930,8 +1931,8 @@ begin
           1,
           0,
           1,
-          GLVectorGeometry.AffineVectorMake( 2, 0, 1 ),
-          GLVectorGeometry.AffineVectorMake( 2, 0, 1 ),
+          GLS.VectorGeometry.AffineVectorMake( 2, 0, 1 ),
+          GLS.VectorGeometry.AffineVectorMake( 2, 0, 1 ),
           50
         );
 
@@ -1959,17 +1960,17 @@ begin
   Self.ko³ysanie_siê__dummy_cube := TGLDummyCube.Create( Self );
   Self.ko³ysanie_siê__dummy_cube.Parent := Self;
 
-  Self.korona := GLGeomObjects.TGLFrustrum.Create( Self );
+  Self.korona := GLS.GeomObjects.TGLFrustrum.Create( Self );
   Self.korona.Parent := Self.ko³ysanie_siê__dummy_cube;
   Self.korona.Height := 1;
   Self.korona.Scale.Scale( 4 );
   Self.korona.Scale.Y := 15;
   Self.korona.Position.Y := 11.5;
-  Self.korona.Material.FrontProperties.Diffuse.Color := GLColor.clrDkGreenCopper;
+  Self.korona.Material.FrontProperties.Diffuse.Color := GLS.Color.clrDkGreenCopper;
 
-  Self.pieñ := GLGeomObjects.TGLCylinder.Create( Self );
+  Self.pieñ := GLS.GeomObjects.TGLCylinder.Create( Self );
   Self.pieñ.Parent := Self.ko³ysanie_siê__dummy_cube;
-  Self.pieñ.Material.FrontProperties.Emission.Color := GLColor.clrBrown;
+  Self.pieñ.Material.FrontProperties.Emission.Color := GLS.Color.clrBrown;
   Self.pieñ.Scale.Y := 5;
   Self.pieñ.Position.Y := 1.75;
 
@@ -2006,37 +2007,37 @@ const
   ruch_c_l : single = 5;
 begin
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Przód_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Przód_Edit.Tag ) then
     Gra_GLCamera.Move( ruch_c_l * delta_czasu_f );
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Ty³_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Ty³_Edit.Tag ) then
     Gra_GLCamera.Move( -ruch_c_l * delta_czasu_f );
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Lewo_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Lewo_Edit.Tag ) then
     Gra_GLCamera.Slide( -ruch_c_l * delta_czasu_f );
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Prawo_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Prawo_Edit.Tag ) then
     Gra_GLCamera.Slide( ruch_c_l * delta_czasu_f );
 
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Góra_Edit.Tag ) then // Góra.
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Góra_Edit.Tag ) then // Góra.
     Gra_GLCamera.Lift( ruch_c_l * delta_czasu_f );
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Dó³_Edit.Tag ) then // Dó³.
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Dó³_Edit.Tag ) then // Dó³.
     Gra_GLCamera.Lift( -ruch_c_l * delta_czasu_f );
 
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Przechy³_Lewo_Edit.Tag ) then // Beczka w lewo.
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Przechy³_Lewo_Edit.Tag ) then // Beczka w lewo.
     Gra_GLCamera.Roll( ruch_c_l * delta_czasu_f * 10 );
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Przechy³_Prawo_Edit.Tag ) then // Beczka w prawo.
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Przechy³_Prawo_Edit.Tag ) then // Beczka w prawo.
     Gra_GLCamera.Roll( -ruch_c_l * delta_czasu_f * 10 );
 
 
-  //if GLKeyboard.IsKeyDown( 'Z' ) then
+  //if GLS.Keyboard.IsKeyDown( 'Z' ) then
   //  Lewo_GLCube.Slide( ruch_c_l * delta_czasu_f );
   //
-  //if GLKeyboard.IsKeyDown( 'X' ) then
+  //if GLS.Keyboard.IsKeyDown( 'X' ) then
   //  Lewo_GLCube.Slide( -ruch_c_l * delta_czasu_f );
 
 end;//---//Funkcja Kamera_Ruch().
@@ -2177,42 +2178,42 @@ begin
   if zti <> -99 then
     begin
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Strza³_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__Strza³_Edit.Tag ) then
         czo³gi_t[ zti ].Strza³();
 
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f, true );
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Prawo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__JedŸ_Lewo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f );
 
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Lufa_Dó³_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__Lufa_Dó³_Edit.Tag ) then
         czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Lufa_Góra_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__Lufa_Góra_Edit.Tag ) then
         czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__1__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
     end;
@@ -2224,42 +2225,42 @@ begin
   if zti <> -99 then
     begin
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Strza³_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__Strza³_Edit.Tag ) then
         czo³gi_t[ zti ].Strza³();
 
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f, true );
 
       if   (
                  ( zti mod 2 <> 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Prawo_Edit.Tag )  )
            )
         or (
                  ( zti mod 2 = 0 )
-             and (  GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
+             and (  GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__JedŸ_Lewo_Edit.Tag )  )
            ) then
         czo³gi_t[ zti ].JedŸ( delta_czasu_f );
 
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Lufa_Dó³_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__Lufa_Dó³_Edit.Tag ) then
         czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Lufa_Góra_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__Lufa_Góra_Edit.Tag ) then
         czo³gi_t[ zti ].Lufa__Unoœ( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Minus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value, true );
 
-      if GLKeyboard.IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
+      if GLS.Keyboard.IsKeyDown( Klawiatura__Gracz__2__Amunicja_Prêdkoœæ__Plus_Edit.Tag ) then
         czo³gi_t[ zti ].Amunicja_Prêdkoœæ_Ustaw( delta_czasu_f, Wiatr_Si³a_Modyfikacja_O_Ko³ysanie(), Celownicza_Linia_Wysokoœæ_SpinEdit.Value );
 
     end;
@@ -2362,7 +2363,7 @@ begin
 
   // Dodaje efekt smugi za amunicj¹.
   if Efekty__Smuga_CheckBox.Checked then
-    with GLParticleFX.GetOrCreateSourcePFX( zt_amunicja.korpus ) do
+    with GLS.ParticleFX.GetOrCreateSourcePFX( zt_amunicja.korpus ) do
       begin
 
         Manager := Efekt__Smuga_GLPerlinPFXManager;
@@ -2370,7 +2371,7 @@ begin
         //MoveUp();
 
       end;
-    //---//with GLParticleFX.GetOrCreateSourcePFX( zt_amunicja.korpus ) do
+    //---//with GLS.ParticleFX.GetOrCreateSourcePFX( zt_amunicja.korpus ) do
 
 
   zt_amunicja.wystrza³_milisekundy__czas_i := Czas_Teraz_W_Milisekundach();
@@ -2620,14 +2621,14 @@ begin
   // Dodaje efekt dymu nad kraterem.
   if    ( not zt_krater.czy_wodny )
     and ( Efekty__Dym_CheckBox.Checked ) then
-    with GLParticleFX.GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
+    with GLS.ParticleFX.GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
       begin
 
         Manager := Efekt__Dym_GLPerlinPFXManager;
         ParticleInterval := 0.01;
 
       end;
-    //---//with GLParticleFX.GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
+    //---//with GLS.ParticleFX.GetOrCreateSourcePFX( zt_krater.dym_efekt_gl_dummy_cube ) do
 
 end;//---//Funkcja Kratery_Utwórz_Jeden().
 
@@ -3079,7 +3080,7 @@ procedure TCzolgi_Form.Interfejs_WskaŸniki_Ustaw( const oczekiwanie_pomiñ_f : bo
 
 
     if    ( czo³gi_t[ czo³g_indeks_f ] <> nil )
-      and (  not GLVectorGeometry.VectorEquals( gl_hud_sprite_f.Material.FrontProperties.Diffuse.Color, czo³gi_t[ czo³g_indeks_f ].kad³ub.Material.FrontProperties.Emission.Color )  ) then
+      and (  not GLS.VectorGeometry.VectorEquals( gl_hud_sprite_f.Material.FrontProperties.Diffuse.Color, czo³gi_t[ czo³g_indeks_f ].kad³ub.Material.FrontProperties.Emission.Color )  ) then
       gl_hud_sprite_f.Material.FrontProperties.Diffuse.Color := czo³gi_t[ czo³g_indeks_f ].kad³ub.Material.FrontProperties.Emission.Color;
 
 
@@ -3502,8 +3503,8 @@ begin
         begin
 
           S³oñce_Ksiê¿yc_GLSphere.Scale.SetVector( 200, 200, 200 );
-          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Diffuse.Color := GLColor.clrYellow;
-          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Emission.Color := GLColor.clrCoral;
+          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Diffuse.Color := GLS.Color.clrYellow;
+          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Emission.Color := GLS.Color.clrCoral;
 
         end;
       //---//if S³oñce_Ksiê¿yc_GLSphere.Scale.X <> 200 then
@@ -3520,8 +3521,8 @@ begin
         begin
 
           S³oñce_Ksiê¿yc_GLSphere.Scale.SetVector( 100, 100, 100 );
-          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Diffuse.Color := GLColor.clrWhite;
-          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Emission.Color := GLColor.clrDarkTurquoise;
+          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Diffuse.Color := GLS.Color.clrWhite;
+          S³oñce_Ksiê¿yc_GLSphere.Material.FrontProperties.Emission.Color := GLS.Color.clrDarkTurquoise;
 
         end;
       //---//if S³oñce_Ksiê¿yc_GLSphere.Scale.X <> 100 then
@@ -4708,7 +4709,7 @@ begin
           cel_x := 0;
 
 
-        czo³g_celownik_x := czo³gi_t[ i ].LocalToAbsolute(  GLVectorGeometry.AffineVectorMake(  czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].X, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Y, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Z  )  ).X;
+        czo³g_celownik_x := czo³gi_t[ i ].LocalToAbsolute(  GLS.VectorGeometry.AffineVectorMake(  czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].X, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Y, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Z  )  ).X;
 
 
         {$region 'Obs³uga jako cel prezentów.'}
@@ -5037,7 +5038,7 @@ begin
         {$endregion 'Celowanie.'}
 
 
-        czo³g_celownik_x := czo³gi_t[ i ].LocalToAbsolute(  GLVectorGeometry.AffineVectorMake(  czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].X, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Y, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Z  )  ).X;
+        czo³g_celownik_x := czo³gi_t[ i ].LocalToAbsolute(  GLS.VectorGeometry.AffineVectorMake(  czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].X, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Y, czo³gi_t[ i ].celownicza_linia.Nodes[ 1 ].Z  )  ).X;
 
 
         if    (  Abs( czo³g_celownik_x - cel_x ) <= 0.1  )
@@ -5067,7 +5068,7 @@ var
 begin
 
   if Chmury_GLDummyCube.Effects.Count <= 0 then
-    with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
+    with GLS.ParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
       begin
 
         Manager := Efekt__Chmury_GLPerlinPFXManager;
@@ -5075,7 +5076,7 @@ begin
         EffectScale := 5;
 
       end;
-    //---//with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
+    //---//with GLS.ParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube ) do
 
 
   if Chmury_GLDummyCube.Count <= 0 then
@@ -5086,7 +5087,7 @@ begin
           Parent := Chmury_GLDummyCube;
           //VisibleAtRunTime := true; //???
 
-          with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
+          with GLS.ParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
             begin
 
               Manager := Efekt__Chmury_GLPerlinPFXManager;
@@ -5094,7 +5095,7 @@ begin
               EffectScale := 5;
 
             end;
-          //---//with GLParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
+          //---//with GLS.ParticleFX.GetOrCreateSourcePFX( Chmury_GLDummyCube.Children[ Chmury_GLDummyCube.Count - 1 ] ) do
 
         end;
       //---//with TGLDummyCube.Create( Chmury_GLDummyCube ) do
@@ -5829,10 +5830,10 @@ procedure TCzolgi_Form.FormShow( Sender: TObject );
   //Funkcja Wa³_Dekoracja_Utwórz() w FormShow().
   procedure Wa³_Dekoracja_Utwórz( const i_f : integer; gl_cube_f : TGLCube );
   var
-    zt_gl_icosahedron : GLPolyhedron.TGLIcosahedron;
+    zt_gl_icosahedron : GLS.GeomObjects.TGLIcosahedron;
   begin
 
-    zt_gl_icosahedron := GLPolyhedron.TGLIcosahedron.Create( Gra_GLScene.Objects ); // Zwolni siê razem ze scen¹.
+    zt_gl_icosahedron := GLS.GeomObjects.TGLIcosahedron.Create( Gra_GLScene.Objects ); // Zwolni siê razem ze scen¹.
     zt_gl_icosahedron.Parent := Gra_GLScene.Objects;
     zt_gl_icosahedron.MoveFirst();
 
@@ -5858,7 +5859,7 @@ procedure TCzolgi_Form.FormShow( Sender: TObject );
     zt_gl_icosahedron.Material.FrontProperties.Ambient.RandomColor();
 
     if Random( 2 ) = 0 then
-      zt_gl_icosahedron.Material.FrontProperties.Diffuse.Color := GLColor.clrGreen;
+      zt_gl_icosahedron.Material.FrontProperties.Diffuse.Color := GLS.Color.clrGreen;
 
   end;//---//Funkcja Wa³_Dekoracja_Utwórz() w FormShow().
 
@@ -5939,11 +5940,11 @@ begin//FormShow().
           czo³gi_t[ i ].TurnAngle := 180;
           czo³gi_t[ i ].amunicja_lot_w_lewo := true;
 
-          czo³gi_t[ i ].Kolor_Ustaw(  GLVectorGeometry.VectorMake( 0.25, 0, 0 )  );
+          czo³gi_t[ i ].Kolor_Ustaw(  GLS.VectorGeometry.VectorMake( 0.25, 0, 0 )  );
 
         end
       else//if i mod 2 = 0 then
-        czo³gi_t[ i ].Kolor_Ustaw(  GLVectorGeometry.VectorMake( 0, 0, 0.4 )  );
+        czo³gi_t[ i ].Kolor_Ustaw(  GLS.VectorGeometry.VectorMake( 0, 0, 0.4 )  );
 
 
       //if i > 2 then
@@ -6166,15 +6167,15 @@ end;//---//Gra_GLSceneViewerMouseMove().
 procedure TCzolgi_Form.Gra_GLSceneViewerKeyDown( Sender: TObject; var Key: Word; Shift: TShiftState );
 begin
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wyjœcie_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Wyjœcie_Edit.Tag ) then
     Close();
 
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Obracanie_Mysz¹_Prze³¹cz_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Obracanie_Mysz¹_Prze³¹cz_Edit.Tag ) then
     GLUserInterface1.MouseLookActive := not GLUserInterface1.MouseLookActive;
 
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then // W GLCadencer1Progress() nie dzia³a podczas pauzy.
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then // W GLCadencer1Progress() nie dzia³a podczas pauzy.
     begin
 
       // Pe³ny ekran.
@@ -6208,23 +6209,23 @@ begin
       //---//if Czolgi_Form.BorderStyle <> bsNone then
 
     end;
-  //---//if GLKeyboard.IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then
+  //---//if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Pe³ny_Ekran_Edit.Tag ) then
 
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Pauza_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Pauza_Edit.Tag ) then
     Pauza_ButtonClick( Sender );
 
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Plus_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Plus_Edit.Tag ) then
     Gra_Wspó³czynnik_Prêdkoœci_Zmieñ( 1 )
   else
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Minus_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__Minus_Edit.Tag ) then
     Gra_Wspó³czynnik_Prêdkoœci_Zmieñ( -1 )
   else
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__1_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Wspó³czynnik_Prêdkoœci_Gry__1_Edit.Tag ) then
     Gra_Wspó³czynnik_Prêdkoœci_Zmieñ( 0 )
   else
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
     begin
 
       if PageControl1.Height <> page_control_1_height_pocz¹tkowe then
@@ -6236,8 +6237,8 @@ begin
         Opcje_Splitter.Visible := true;
 
     end
-  else//if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
-  if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
+  else//if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Opcje__Zwiñ_Rozwiñ_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
     begin
 
       if PageControl1.Height <> page_control_1_height_pocz¹tkowe then
@@ -6248,10 +6249,10 @@ begin
       Opcje_Splitter.Visible := PageControl1.Height > 0;
 
     end;
-  //---//if GLKeyboard.IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
+  //---//if GLS.Keyboard.IsKeyDown( Klawiatura__Gra__Opcje__Wyœwietl_Ukryj_Edit.Tag ) then
 
 
-  if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Reset_Edit.Tag ) then
+  if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Reset_Edit.Tag ) then
     begin
 
       Gra_GLCamera.ResetRotations();
@@ -6260,7 +6261,7 @@ begin
       Gra_GLCamera.AbsolutePosition := kamera_kopia__position_g;
 
     end;
-  //---//if GLKeyboard.IsKeyDown( Klawiatura__Kamera__Reset_Edit.Tag ) then
+  //---//if GLS.Keyboard.IsKeyDown( Klawiatura__Kamera__Reset_Edit.Tag ) then
 
 
   if Pauza__SprawdŸ() then // Gdy pauza jest aktywna.

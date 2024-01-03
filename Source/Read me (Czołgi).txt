@@ -1,6 +1,6 @@
 Czo³gi z Eris Kallisti Dyskordia
-wydanie 1.1.0.0
-wersja 2023.12.04.
+wydanie 2.0.0.0
+wersja 2024.01.02.
 
 MIT License
 

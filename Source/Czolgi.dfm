@@ -36,6 +36,7 @@
     Camera = Gra_GLCamera
     Buffer.BackgroundColor = clGreen
     FieldOfView = 90.000000000000000000
+    PenAsTouch = False
     OnClick = Gra_GLSceneViewerClick
     OnMouseMove = Gra_GLSceneViewerMouseMove
     OnKeyDown = Gra_GLSceneViewerKeyDown
@@ -1613,6 +1614,10 @@
     object O_Programie_TabSheet: TTabSheet
       Caption = 'O programie'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         976
         172)
@@ -1623,8 +1628,8 @@
         Height = 208
         Align = alTop
         Caption = 
-          'Czo'#322'gi z Eris Kallisti Dyskordia'#13#10'wydanie 1.1.0.0'#13#10'wersja 2023.1' +
-          '2.04.'#13#10#13#10'MIT License'#13#10#13#10'Copyright (c) 2022 Jacek Mulawka'#13#10#13#10'j.mu' +
+          'Czo'#322'gi z Eris Kallisti Dyskordia'#13#10'wydanie 2.0.0.0'#13#10'wersja 2024.0' +
+          '1.02.'#13#10#13#10'MIT License'#13#10#13#10'Copyright (c) 2022 Jacek Mulawka'#13#10#13#10'j.mu' +
           'lawka@interia.pl'#13#10#13#10'https://github.com/jacek-mulawka'#13#10#13#10#13#10#13#10'Prog' +
           'ram jest darmowy, udost'#281'pniony w postaci takiej jakiej jest wraz' +
           ' ze wszystkimi b'#322#281'dami. U'#380'ytkownik zyskuje dost'#281'p do programu, u' +
