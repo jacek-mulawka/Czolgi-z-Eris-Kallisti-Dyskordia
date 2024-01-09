@@ -3743,7 +3743,7 @@ begin//Funkcja Ustawienia_Plik().
 
   zts := ExtractFilePath( Application.ExeName ) + 'Czo³gi.ini';
 
-  plik_ini := TIniFile.Create( zts );
+  plik_ini := System.IniFiles.TIniFile.Create( zts );
 
 
   {$region 'GRA.'}
