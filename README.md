@@ -14,7 +14,7 @@ https://blog.myrank.co.in/projectile-motion-2/
 
 
 Znane błędy.
-* Na niektórych komputerach gra ulega 'zamrożeniu'. Najprawdopodobniej przyczyną jest jeden z efektów graficznych (GLFireFX.TGLFireFXManager.IsotropicExplosion). Jeżeli tak się dzieje należy w opcjach wyłączyć niektóre efekty graficzne.
+* Na niektórych komputerach gra ulega 'zamrożeniu'. Najprawdopodobniej przyczyną jest jeden z efektów graficznych (GLS.FireFX.TGLFireFXManager.IsotropicExplosion). Jeżeli tak się dzieje należy w opcjach wyłączyć niektóre efekty graficzne.
 
 
 ## English
@@ -32,7 +32,7 @@ Formulas for the current value of x and y of the projectile based on:
 https://blog.myrank.co.in/projectile-motion-2/
 
 Known issues.
-* On some computers the game gets 'frozen'. Most likely the cause is one of the graphic effects (GLFireFX.TGLFireFXManager.IsotropicExplosion). If this happens, turn off some graphic effects in the options.
+* On some computers the game gets 'frozen'. Most likely the cause is one of the graphic effects (GLS.FireFX.TGLFireFXManager.IsotropicExplosion). If this happens, turn off some graphic effects in the options.
 
 
 <a href="https://github.com/jacek-mulawka/Czolgi-z-Eris-Kallisti-Dyskordia/blob/main/Gallery/Czo%C5%82gi%20z%20Eris%20Kallisti%20Dyskordia%2001.jpg">
